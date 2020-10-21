@@ -1,11 +1,10 @@
 import React, { FC } from "react"
 import { Link, PageProps } from "gatsby"
 import styled from "styled-components"
-import DarkToggle from "../components/DarkToggle"
 
 const Div = styled.div`
   height: 50vh;
-  background-color: var(--color-background);
+  background-color: black;
 `
 
 const IndexPage: FC<PageProps> = () => {
@@ -14,7 +13,6 @@ const IndexPage: FC<PageProps> = () => {
       <Div>
         <h1>Hello</h1>
       </Div>
-      <DarkToggle />
     </div>
   )
 }
