@@ -6916,6 +6916,13 @@ gatsby-page-utils@^0.2.28:
     lodash "^4.17.20"
     micromatch "^4.0.2"
 
+gatsby-plugin-dark-mode@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-dark-mode/-/gatsby-plugin-dark-mode-1.1.2.tgz#9bab271da9f913cd64687a2b2d85b1d62a3605d8"
+  integrity sha512-kq/7/KSIgyYxolSqLxXfmcC/iBU98XpRGcIOaa3bjjl8Tb0WDYwfa45zABx1XNjB0YecWdgniss+kqmeAu04GA==
+  dependencies:
+    prop-types "^15.5.7"
+
 gatsby-plugin-manifest@^2.4.34:
   version "2.4.35"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.4.35.tgz#bd8a3ad7eb1649247d1a6fe871bc04f7a0ef15f1"
@@ -7533,7 +7540,7 @@ global-prefix@^1.0.1:
     is-windows "^1.0.1"
     which "^1.2.14"
 
-global@^4.3.0:
+global@^4.3.0, global@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/global/-/global-4.4.0.tgz#3e7b105179006a323ed71aafca3e9c57a5cc6406"
   integrity sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==
@@ -9700,6 +9707,26 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lottie-api@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/lottie-api/-/lottie-api-1.0.3.tgz#465cfc7a1d23220b8a8893d3fab8943237fe1d4b"
+  integrity sha512-TB8sytVs/o7/xrT76Gq1p49SpvV/KRz9g7wJpNXC6c0CjqowvQaBy+ynLR5R+cGu9ORwmNSwphC0Zy1r9QZtZQ==
+
+lottie-react-web@^2.1.4:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/lottie-react-web/-/lottie-react-web-2.2.2.tgz#4bcf799fa76cad06accb568370e01815c550bf27"
+  integrity sha512-0xCUysLcOsIHUy+PdHOXdCJb58XOYrWtUaZkIJwVS3E807/j6Rs9jt57YvqYgziFXquCjI2uP3hxBrOw528CZQ==
+  dependencies:
+    babel-runtime "^6.26.0"
+    global "^4.4.0"
+    lottie-api "^1.0.2"
+    lottie-web "^5.6.1"
+
+lottie-web@^5.6.1:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.7.3.tgz#dbe542270665be5dd5b32deae19e27de6e77728c"
+  integrity sha512-ftN4AdiNmtoVpCfN1doiUIUbhOrDSMikH1Yl64/xO5lzQ31AO0+G82bqrCNHIW5Ec2zE/g7y4iz7zBR1YJwDaA==
+
 loud-rejection@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/loud-rejection/-/loud-rejection-1.6.0.tgz#5b46f80147edee578870f086d04821cf998e551f"
@@ -11235,6 +11262,11 @@ parse-path@^4.0.0:
     is-ssh "^1.3.0"
     protocols "^1.4.0"
 
+parse-unit@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/parse-unit/-/parse-unit-1.0.1.tgz#7e1bb6d5bef3874c28e392526a2541170291eecf"
+  integrity sha1-fhu21b7zh0wo45JSaiVBFwKR7s8=
+
 parse-url@^5.0.0:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-5.0.2.tgz#856a3be1fcdf78dc93fc8b3791f169072d898b59"
@@ -12014,7 +12046,7 @@ prompts@^2.3.2:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -12285,12 +12317,13 @@ react-clientside-effect@^1.2.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-react-darkmode-toggler@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-darkmode-toggler/-/react-darkmode-toggler-1.2.1.tgz#76d2e66b52601a2fad5fc39f2e57baf59357720a"
-  integrity sha512-fVeHcZnT+v0rqvBq1u5Y+8J+zzA8VQnDwOIIHwryOCa+35l9WpWF9vP4GKCf0VlPmX5LUKKcdVpvAgXmZz1avg==
+react-dark-mode-toggle@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/react-dark-mode-toggle/-/react-dark-mode-toggle-0.0.10.tgz#992cf80ab07f65b19a5a39318700402eb891b370"
+  integrity sha512-iVcd87TPgKnm+qYfeqFqgb0TLSXTM0hCKjI7ekVfUC5R/wkqbhCU/CdHQSoCEKDyx6zKEOOWTIJ8uNK2M8k2AA==
   dependencies:
-    react-icons "^3.10.0"
+    lottie-react-web "^2.1.4"
+    parse-unit "^1.0.1"
 
 react-dev-utils@^4.2.3:
   version "4.2.3"
@@ -12382,7 +12415,7 @@ react-hot-loader@^4.12.21:
     shallowequal "^1.1.0"
     source-map "^0.7.3"
 
-react-icons@^3.0.1, react-icons@^3.10.0:
+react-icons@^3.0.1:
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.11.0.tgz#2ca2903dfab8268ca18ebd8cc2e879921ec3b254"
   integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
