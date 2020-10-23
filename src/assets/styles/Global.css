@@ -13,3 +13,7 @@ body.dark {
   --text-primary: #000;
   --primary: #c43d34;
 }
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

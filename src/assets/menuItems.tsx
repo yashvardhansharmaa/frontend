@@ -2,6 +2,20 @@ export const menuItems: item[] = [
   {
     name: "About",
     link: "/about",
+    subItems: [
+      {
+        name: "Our Work",
+        href: "our-work",
+      },
+      {
+        name: "Our Team",
+        href: "our-team",
+      },
+      {
+        name: "Our Partners",
+        href: "our-partners",
+      },
+    ],
   },
   {
     name: "Blog",
@@ -24,4 +38,10 @@ export const menuItems: item[] = [
 export interface item {
   link: string;
   name: string;
+  subItems?: subItem[];
+}
+
+export interface subItem {
+  name: string;
+  href: string;
 }
