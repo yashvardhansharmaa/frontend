@@ -1,11 +1,15 @@
 body {
-  --bg: #fff;
+  --bg: #fcf7f8;
   --text: #000;
+  --text-primary: #fff;
   background-color: var(--bg);
   color: var(--text);
+  --primary: #800000;
 }
 
 body.dark {
-  --bg: #000;
+  --bg: #121212;
   --text: #fff;
+  --text-primary: #000;
+  --primary: #c43d34;
 }

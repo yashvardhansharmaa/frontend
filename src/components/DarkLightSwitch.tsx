@@ -21,8 +21,8 @@ const DarkLightSwitch: FC = () => {
           <DarkModeToggle
             onChange={() => toggleTheme(theme === "dark" ? "light" : "dark")}
             checked={isDark}
-            size={50}
-            speed={2.5}
+            size={40}
+            speed={3}
           />
         );
       }}

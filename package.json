@@ -12,6 +12,7 @@
     "gatsby-plugin-dark-mode": "^1.1.2",
     "gatsby-plugin-manifest": "^2.4.34",
     "gatsby-plugin-offline": "^3.2.33",
+    "gatsby-plugin-postcss": "^3.0.3",
     "gatsby-plugin-react-helmet": "^3.3.14",
     "gatsby-plugin-sass": "^2.3.18",
     "gatsby-plugin-sharp": "^2.6.42",
@@ -26,7 +27,8 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-markdown": "^5.0.0",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.0",
+    "tailwindcss": "^1.9.5"
   },
   "devDependencies": {
     "prettier": "2.1.2"
