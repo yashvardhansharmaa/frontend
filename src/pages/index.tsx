@@ -1,22 +1,20 @@
-import React, { FC } from "react"
-import { Link, PageProps } from "gatsby"
-import styled from "styled-components"
-import DarkToggle from "../components/DarkToggle"
+import React, { FC } from "react";
+import { Link, PageProps } from "gatsby";
+import styled from "styled-components";
+import DarkLightSwitch from "../components/DarkLightSwitch";
+import Navbar from "../components/Navbar";
 
 const Div = styled.div`
   height: 50vh;
-  background-color: var(--color-background);
-`
+  background-color: black;
+`;
 
 const IndexPage: FC<PageProps> = () => {
   return (
-    <div>
-      <Div>
-        <h1>Hello</h1>
-      </Div>
-      <DarkToggle />
-    </div>
-  )
-}
+    <>
+      <Navbar />
+    </>
+  );
+};
 
-export default IndexPage
+export default IndexPage;

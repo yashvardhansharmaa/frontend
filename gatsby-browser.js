@@ -5,10 +5,5 @@
  */
 
 // You can delete this file if you're not using it
-import React from "react"
-
-import App from "./src/components/App"
-
-export const wrapRootElement = ({ element }) => {
-  return <App>{element}</App>
-}
+import "./src/assets/styles/index.css";
+import "./src/assets/styles/Global.css";
