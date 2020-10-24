@@ -5,6 +5,8 @@ body {
   background-color: var(--bg);
   color: var(--text);
   --primary: #800000;
+  --dropdown-shadow: 0px 10px 13px -3px rgba(232, 232, 232, 1);
+  --dropdown-bg: var(--bg);
 }
 
 body.dark {
@@ -12,8 +14,6 @@ body.dark {
   --text: #fff;
   --text-primary: #000;
   --primary: #c43d34;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+  --dropdown-shadow: none;
+  --dropdown-bg: #1e1e1e;
 }

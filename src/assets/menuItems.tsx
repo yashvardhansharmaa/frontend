@@ -20,6 +20,16 @@ export const menuItems: item[] = [
   {
     name: "Blog",
     link: "/blog",
+    subItems: [
+      {
+        name: "Economics",
+        href: "/eco",
+      },
+      {
+        name: "History",
+        href: "history",
+      },
+    ],
   },
   {
     name: "Podcast",

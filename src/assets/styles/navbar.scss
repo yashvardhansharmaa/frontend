@@ -1,0 +1,8 @@
+.dropdown:hover .dropdown-content {
+  display: block;
+  -webkit-box-shadow: var(--dropdown-shadow);
+  -moz-box-shadow: var(--dropdown-shadow);
+  box-shadow: var(--dropdown-shadow);
+  background-color: var(--dropdown-bg);
+  border-radius: 10px;
+}
