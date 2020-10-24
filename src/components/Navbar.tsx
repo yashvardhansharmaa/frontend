@@ -49,7 +49,7 @@ const Navbar: FC = () => {
         className={!isOpen ? `dropdown mr-5` : `dropdown mr-5 mb-5 text-xl`}
         key={i}
       >
-        <button className="dropbtn">{menuItem.name}</button>
+        <button className="dropbtn focus:outline-none">{menuItem.name}</button>
         <div
           className="dropdown-content hidden z-10 absolute"
           style={{ minWidth: "160px" }}
