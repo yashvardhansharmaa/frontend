@@ -1,10 +1,12 @@
 import React, { FC, useState } from "react";
+import { Link } from "gatsby";
 import styled from "styled-components";
 import DarkLightSwitch from "./DarkLightSwitch";
 import { menuItems, item, subItem } from "../assets/menuItems";
 import logo from "../assets/logo.png";
 import Hamburger from "hamburger-react";
 import "../assets/styles/navbar.scss";
+import NavLink from "./NavLink";
 
 const Logo = styled.img`
   height: 50px;
@@ -49,16 +51,22 @@ const Navbar: FC = () => {
         className={!isOpen ? `dropdown mr-5` : `dropdown mr-5 mb-5 text-xl`}
         key={i}
       >
-        <button className="dropbtn focus:outline-none">{menuItem.name}</button>
+        <NavLink to={menuItem.link} className="dropbtn focus:outline-none">
+          {menuItem.name}
+        </NavLink>
         <div
           className="dropdown-content hidden z-10 absolute"
           style={{ minWidth: "160px" }}
         >
           {menuItem.subItems?.map((subMenuItem: subItem, i2) => {
             return (
-              <a href={subMenuItem.href} className="block px-4 py-2" key={i2}>
+              <NavLink
+                to={subMenuItem.href}
+                className="block px-4 py-2"
+                key={i2}
+              >
                 {subMenuItem.name}
-              </a>
+              </NavLink>
             );
           })}
         </div>
@@ -68,13 +76,13 @@ const Navbar: FC = () => {
 
   const NavItem = ({ menuItem, i }: NavItemProps) => {
     return (
-      <a
-        href={menuItem.link}
+      <NavLink
+        to={menuItem.link}
         key={i}
         className={!isOpen ? `mr-5` : `mb-5 mr-5 text-xl`}
       >
         {menuItem.name}
-      </a>
+      </NavLink>
     );
   };
 
@@ -147,6 +155,10 @@ const Navbar: FC = () => {
           ? `text-main bg-bgc body-font`
           : `text-main bg-bgc body-font h-screen`
       }
+      // TODO: The below code doesn't seem to work, check it
+      // style={{
+      //   transition: "all 2s ease",
+      // }}
     >
       <div className="container relative justify-between md:justify-start mx-auto flex p-5 flex-row items-center">
         <BrandLogo />

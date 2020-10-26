@@ -1,5 +1,5 @@
 body {
-  --bg: #fcf7f8;
+  --bg: #fff;
   --text: #000;
   --text-primary: #fff;
   background-color: var(--bg);
@@ -7,13 +7,19 @@ body {
   --primary: #800000;
   --dropdown-shadow: 0px 10px 13px -3px rgba(232, 232, 232, 1);
   --dropdown-bg: var(--bg);
+  --footer-bg: #11151c;
+  --footer-secondary: #11151c;
 }
 
 body.dark {
   --bg: #121212;
+  --fg1: #1e1e1e;
+  --fg2: #2a2a2a;
   --text: #fff;
   --text-primary: #000;
   --primary: #c43d34;
   --dropdown-shadow: none;
   --dropdown-bg: #1e1e1e;
+  --footer-bg: #31353c;
+  --footer-secondary: #11151c;
 }

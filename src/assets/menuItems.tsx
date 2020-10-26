@@ -23,7 +23,7 @@ export const menuItems: item[] = [
     subItems: [
       {
         name: "Economics",
-        href: "/eco",
+        href: "/blog/economics",
       },
       {
         name: "History",
