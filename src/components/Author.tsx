@@ -4,6 +4,7 @@ const Author = () => {
   return (
     <div>
       <h1>Author</h1>
+      <p>Age</p>
     </div>
   );
 };
