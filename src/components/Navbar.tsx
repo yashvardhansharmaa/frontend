@@ -152,13 +152,12 @@ const Navbar: FC = () => {
     <header
       className={
         !isOpen
-          ? `text-main bg-bgc body-font md:fixed md:top-0 md:left-0 w-full`
+          ? `text-main bg-bgc body-font h-10vh md:fixed md:top-0 md:left-0 w-full`
           : `text-main bg-bgc body-font h-screen md:fixed md:top-0 md:left-0 w-full`
       }
-      // TODO: The below code doesn't seem to work, check it
-      // style={{
-      //   transition: "all 2s ease",
-      // }}
+      style={{
+        transition: "all 0.5s ease",
+      }}
     >
       <div className="container relative justify-between md:justify-start mx-auto flex p-5 flex-row items-center">
         <BrandLogo />

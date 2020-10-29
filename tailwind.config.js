@@ -24,6 +24,9 @@ module.exports = {
         heading: ["Bebas Neue", "cursive"],
         body: ["Lato", "sans-serif"],
       },
+      height: {
+        "10vh": "10vh"
+      }
     },
   },
   variants: {},

@@ -26,3 +26,13 @@ body.dark {
   --footer-bg: #31353c;
   --footer-secondary: #11151c;
 }
+
+.maindiv {
+  margin-top: 10vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .maindiv {
+    margin-top: 0;
+  }
+}
