@@ -44,15 +44,18 @@ const intro = () => {
               person to challenge the segregation of buses by refusing to give
               up her seat. Colvin was eventually arrested for her refusal and
               screamed, “It’s my constitutional right,” as the police dragged
-              her out of the bus. The Black representatives planned to protest
-              using Colvin as their leading figure. However, it was discovered
-              that she was pregnant and deemed an inappropriate symbol for their
-              cause. Claudette is not a much-celebrated figure in the
-              African-American Civil Rights Movement but was a pioneer and
-              instrumental along with three other women (Aurelia S. Browder,
-              Susie McDonald, and Mary Louise Smith). In Browder v. Gayle’s
-              case, which ultimately defined segregation on buses as
-              unconstitutional across the states.
+              her out of the bus.
+            </p>
+            <br />
+            <p className="md:px-0 px-6">
+              The Black representatives planned to protest using Colvin as their
+              leading figure. However, it was discovered that she was pregnant
+              and deemed an inappropriate symbol for their cause. Claudette is
+              not a much-celebrated figure in the African-American Civil Rights
+              Movement but was a pioneer and instrumental along with three other
+              women (Aurelia S. Browder, Susie McDonald, and Mary Louise Smith).
+              In Browder v. Gayle’s case, which ultimately defined segregation
+              on buses as unconstitutional across the states.
             </p>
           </div>
           <div className="md:px-0 px-6 py-8">
