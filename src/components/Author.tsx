@@ -5,7 +5,7 @@ const Author = () => {
     <div
       className="w-full py-5 flex md:flex-row flex-col"
       style={{
-        borderColor: "rgba(0,0,0,0.2)",
+        borderColor: "var(--author-border)",
         borderBottom: "1px solid",
         borderTop: "1px solid",
       }}

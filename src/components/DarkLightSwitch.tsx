@@ -8,11 +8,6 @@ interface ThemeProps {
 }
 
 const DarkLightSwitch: FC = () => {
-  const handleSwitch = (theme, toggleTheme) => () => {
-    const nextTheme = theme === "dark" ? "dark" : "light";
-    toggleTheme(nextTheme);
-  };
-
   return (
     <ThemeToggler>
       {({ theme, toggleTheme }: ThemeProps) => {
@@ -21,7 +16,7 @@ const DarkLightSwitch: FC = () => {
           <DarkModeToggle
             onChange={() => toggleTheme(theme === "dark" ? "light" : "dark")}
             checked={isDark}
-            size={40}
+            size={50}
             speed={3}
           />
         );

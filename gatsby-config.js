@@ -17,7 +17,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-dark-mode`,
-	`gatsby-plugin-postcss`,
+    `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -28,6 +28,21 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `http://localhost:1337`,
+        queryLimit: 1000, // Default to 100
+        contentTypes: [`footer-item`],
+        //If using single types place them in this array.
+        singleTypes: [`footer`],
+        // Possibility to login with a strapi user, when content types are not publically available (optional).
+        // loginData: {
+        //   identifier: "mihirgupta0900@gmail.com",
+        //   password: "Mirvi12042019",
+        // },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

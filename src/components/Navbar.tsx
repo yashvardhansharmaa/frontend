@@ -93,9 +93,9 @@ const Navbar: FC = () => {
           return (
             <>
               {menuItem.subItems ? (
-                <NavItemWithDropdown menuItem={menuItem} i={i} />
+                <NavItemWithDropdown menuItem={menuItem} key={i} />
               ) : (
-                <NavItem menuItem={menuItem} i={i} />
+                <NavItem menuItem={menuItem} key={i} />
               )}
             </>
           );
@@ -114,7 +114,6 @@ const Navbar: FC = () => {
   };
 
   const FullHeightNav = ({ menuItems }: NavProps) => {
-    // md:ml-auto md:flex hidden items-center text-base justify-center
     return (
       <nav
         className="md:ml-auto absolute flex flex-col items-center text-base justify-center"

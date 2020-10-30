@@ -1,112 +1,99 @@
 import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import logo from "../assets/logo.png";
+// import { footerItems, item, subItem } from "../assets/footerItems";
+
+interface FooterData {
+  allStrapiFooterItem: {
+    edges: {
+      node: {
+        heading: string;
+        sub_item: {
+          link: string;
+          name: string;
+        }[];
+      };
+    }[];
+  };
+  allStrapiFooter: {
+    edges: {
+      node: {
+        company: string;
+        description: string;
+      };
+    }[];
+  };
+}
 
 const Footer = () => {
+  const data: FooterData = useStaticQuery(graphql`
+    query Footer {
+      allStrapiFooterItem {
+        edges {
+          node {
+            heading
+            sub_item {
+              link
+              name
+            }
+          }
+        }
+      }
+      allStrapiFooter {
+        edges {
+          node {
+            company
+            description
+          }
+        }
+      }
+    }
+  `);
+
+  const footerItems = data.allStrapiFooterItem.edges;
+  const { company, description } = data.allStrapiFooter.edges[0].node;
+
+  const FooterItems = () => (
+    <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+      {console.log(data.allStrapiFooter)}
+      {footerItems.map((edge, i: number) => {
+        const { heading, sub_item } = edge.node;
+        return (
+          <div key={i} className="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 className="title-font font-medium tracking-widest text-sm mb-3">
+              {heading}
+            </h2>
+            <nav className="list-none mb-10">
+              {sub_item.map((footerSubItem, i2: number) => (
+                <li key={i2}>
+                  <a href={footerSubItem.link} className="">
+                    {footerSubItem.name}
+                  </a>
+                </li>
+              ))}
+            </nav>
+          </div>
+        );
+      })}
+    </div>
+  );
+
   return (
     <footer className="text-main body-font bg-fg1 shadow-1dp">
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex title-font font-medium items-center md:justify-start justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              className="w-10 h-10 p-2 bg-indigo-500 rounded-full"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span className="ml-3 text-xl">tailblocks</span>
+            <img src={logo} style={{ height: "25px", width: "25px" }} alt="" />
+            <span className="ml-3 text-xl">{company}</span>
           </a>
-          <p className="mt-2 text-sm">
-            Air plant banjo lyft occupy retro adaptogen indego
-          </p>
+          <p className="mt-2 text-sm">{description}</p>
         </div>
-        <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="">First Link</a>
-              </li>
-              <li>
-                <a className="">Second Link</a>
-              </li>
-              <li>
-                <a className="">Third Link</a>
-              </li>
-              <li>
-                <a className="">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="">First Link</a>
-              </li>
-              <li>
-                <a className="">Second Link</a>
-              </li>
-              <li>
-                <a className="">Third Link</a>
-              </li>
-              <li>
-                <a className="">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="">First Link</a>
-              </li>
-              <li>
-                <a className="">Second Link</a>
-              </li>
-              <li>
-                <a className="">Third Link</a>
-              </li>
-              <li>
-                <a className="">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="">First Link</a>
-              </li>
-              <li>
-                <a className="">Second Link</a>
-              </li>
-              <li>
-                <a className="">Third Link</a>
-              </li>
-              <li>
-                <a className="">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
-        </div>
+        {FooterItems()}
       </div>
       <div className="bg-fg2 shadow-2dp">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-500 text-sm text-center sm:text-left">
-            © 2020 tailblocks —
+            © {new Date().getFullYear()} tidingsmedia —
             <a
               href="https://twitter.com/knyttneve"
               rel="noopener noreferrer"
@@ -120,9 +107,9 @@ const Footer = () => {
             <a className="text-gray-500">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -132,9 +119,9 @@ const Footer = () => {
             <a className="ml-3 text-gray-500">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -145,9 +132,9 @@ const Footer = () => {
               <svg
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -159,9 +146,9 @@ const Footer = () => {
               <svg
                 fill="currentColor"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="0"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="0"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >

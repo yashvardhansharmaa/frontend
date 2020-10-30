@@ -12,6 +12,7 @@ body {
   --dropdown-bg: var(--bg);
   --footer-bg: #11151c;
   --footer-secondary: #11151c;
+  --author-border: rgba(0, 0, 0, 0.2);
 }
 
 body.dark {
@@ -25,6 +26,7 @@ body.dark {
   --dropdown-bg: #1e1e1e;
   --footer-bg: #31353c;
   --footer-secondary: #11151c;
+  --author-border: rgba(255, 255, 255, 0.2);
 }
 
 .maindiv {
