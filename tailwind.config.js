@@ -25,8 +25,12 @@ module.exports = {
         body: ["Lato", "sans-serif"],
       },
       height: {
-        "10vh": "10vh"
-      }
+        "10vh": "10vh",
+      },
+      gridTemplateColumns: {
+        "3/2": "3fr 2fr",
+        "2/1": "2fr 1fr",
+      },
     },
   },
   variants: {},

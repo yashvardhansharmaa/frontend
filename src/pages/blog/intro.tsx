@@ -7,7 +7,7 @@ const intro = () => {
     <Layout>
       <div className="flex flex-col items-center maindiv">
         <div className="container">
-          <div className="py-5 flex justify-center items-center">
+          <div className="pt-10 flex justify-center items-center">
             <img
               src="https://source.unsplash.com/N9UuFddi7hs"
               alt=""
@@ -16,7 +16,12 @@ const intro = () => {
             />
           </div>
           <div className="flex flex-col justify-center items-center my-10">
-            <div className="flex justify-start opacity-75 text-sm items-start w-full md:px-0 px-5">
+            <div
+              className="flex justify-start opacity-75 text-sm items-start w-full md:px-0 px-5"
+              style={{
+                zIndex: -1,
+              }}
+            >
               October 26, 2020
             </div>
             <h1 className="md:text-6xl text-5xl my-5 font-heading">
@@ -58,9 +63,15 @@ const intro = () => {
               on buses as unconstitutional across the states.
             </p>
           </div>
-          <div className="md:px-0 px-6 py-8">
-            <Author />
-          </div>
+          <div className="md:px-0 px-6"></div>
+          <Author
+            pic="https://source.unsplash.com/rDEOVtE7vOs/500x500"
+            name="Arielle Pardes"
+            about="Arielle Pardes is a senior writer at WIRED, where she works on stories
+          about our relationship to our technology. Previously she was a senior
+          editor for VICE. She is an alumna of the University of Pennsylvania
+          and lives in San Francisco."
+          />
         </div>
       </div>
     </Layout>

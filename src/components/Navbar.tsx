@@ -1,101 +1,117 @@
 import React, { FC, useState } from "react";
-import { Link } from "gatsby";
-import styled from "styled-components";
+import { graphql, useStaticQuery } from "gatsby";
 import DarkLightSwitch from "./DarkLightSwitch";
-import { menuItems, item, subItem } from "../assets/menuItems";
-import logo from "../assets/logo.png";
 import Hamburger from "hamburger-react";
 import "../assets/styles/navbar.scss";
 import NavLink from "./NavLink";
 
-const Logo = styled.img`
-  height: 50px;
-  width: 50px;
-`;
-
-/*
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #555;
-  color: white;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-*/
-
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const data: NavbarData = useStaticQuery(graphql`
+    query NavbarQuery {
+      allStrapiNavbarItems {
+        edges {
+          node {
+            name
+            link
+            nav_sub_item {
+              link
+              name
+            }
+            order
+          }
+        }
+      }
+      allStrapiNavbar {
+        edges {
+          node {
+            company
+            logo {
+              childImageSharp {
+                fixed(height: 50, width: 50) {
+                  src
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
 
   const handleMenuClick = () => {
     setIsOpen(!isOpen);
   };
 
-  const NavItemWithDropdown = ({ menuItem, i }: NavItemProps) => {
-    return (
-      <div
-        className={!isOpen ? `dropdown mr-5` : `dropdown mr-5 mb-5 text-xl`}
-        key={i}
-      >
-        <NavLink to={menuItem.link} className="dropbtn focus:outline-none">
-          {menuItem.name}
-        </NavLink>
-        <div
-          className="dropdown-content hidden z-10 absolute"
-          style={{ minWidth: "160px" }}
-        >
-          {menuItem.subItems?.map((subMenuItem: subItem, i2) => {
-            return (
-              <NavLink
-                to={subMenuItem.href}
-                className="block px-4 py-2"
-                key={i2}
-              >
-                {subMenuItem.name}
-              </NavLink>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
-
-  const NavItem = ({ menuItem, i }: NavItemProps) => {
-    return (
-      <NavLink
-        to={menuItem.link}
-        key={i}
-        className={!isOpen ? `mr-5` : `mb-5 mr-5 text-xl`}
-      >
-        {menuItem.name}
-      </NavLink>
-    );
-  };
-
-  const RenderNavItems = ({ menuItems }: NavProps) => {
+  const RenderNavItems = ({ menuItems }: NavItemsProp) => {
+    menuItems.sort((a, b) => {
+      return a.node.order - b.node.order;
+    });
     return (
       <>
-        {menuItems.map((menuItem: item, i: number) => {
+        {menuItems.map((edge, i: number) => {
+          const menuItem = edge.node;
           return (
             <>
-              {menuItem.subItems ? (
-                <NavItemWithDropdown menuItem={menuItem} key={i} />
+              {menuItem.nav_sub_item ? (
+                <div
+                  className={
+                    !isOpen ? `dropdown mr-5` : `dropdown mr-5 mb-5 text-xl`
+                  }
+                  key={i}
+                >
+                  {menuItem.link ? (
+                    <NavLink
+                      to={menuItem.link}
+                      className="dropbtn focus:outline-none"
+                    >
+                      {menuItem.name}
+                    </NavLink>
+                  ) : (
+                    <p className="dropbtn focus:outline-none">
+                      {menuItem.name}
+                    </p>
+                  )}
+                  <div
+                    className="dropdown-content hidden z-10 absolute"
+                    style={{ minWidth: "160px" }}
+                  >
+                    {menuItem.nav_sub_item?.map((subMenuItem, i2) => {
+                      return (
+                        <NavLink
+                          to={subMenuItem.link}
+                          className="block px-4 py-2"
+                          key={i2}
+                        >
+                          {subMenuItem.name}
+                        </NavLink>
+                      );
+                    })}
+                  </div>
+                </div>
               ) : (
-                <NavItem menuItem={menuItem} key={i} />
+                <>
+                  {menuItem.link ? (
+                    <NavLink
+                      to={menuItem.link}
+                      key={i}
+                      className={!isOpen ? `mr-5` : `mb-5 mr-5 text-xl`}
+                    >
+                      {menuItem.name}
+                    </NavLink>
+                  ) : (
+                    <p
+                      className={
+                        !isOpen
+                          ? `mr-5 cursor-pointer`
+                          : `mb-5 mr-5 cursor-pointer text-xl`
+                      }
+                    >
+                      {menuItem.name}
+                    </p>
+                  )}
+                </>
               )}
             </>
           );
@@ -104,7 +120,7 @@ const Navbar: FC = () => {
     );
   };
 
-  const Nav = ({ menuItems }: NavProps) => {
+  const Nav = ({ menuItems }: NavItemsProp) => {
     return (
       <nav className="md:ml-auto md:flex hidden items-center text-base justify-center">
         <RenderNavItems menuItems={menuItems} />
@@ -113,7 +129,7 @@ const Navbar: FC = () => {
     );
   };
 
-  const FullHeightNav = ({ menuItems }: NavProps) => {
+  const FullHeightNav = ({ menuItems }: NavItemsProp) => {
     return (
       <nav
         className="md:ml-auto absolute flex flex-col items-center text-base justify-center"
@@ -132,7 +148,11 @@ const Navbar: FC = () => {
 
   const BrandLogo = () => (
     <a href="/">
-      <Logo src={logo} alt="" className="mx-3 " />
+      {/* <Logo src={logo} alt="" className="mx-3 " /> */}
+      <img
+        src={data.allStrapiNavbar.edges[0].node.logo.childImageSharp.fixed.src}
+        alt=""
+      />
       <div className="md:flex hidden justify-center mx-3">
         <span className="bg-primary h-100" style={{ width: "2px" }}></span>
       </div>
@@ -142,7 +162,7 @@ const Navbar: FC = () => {
   const BrandTitle = () => (
     <a href="/">
       <div className="mx-3 flex text-lg justify-center items-center">
-        The Tidings Blog
+        {data.allStrapiNavbar.edges[0].node.company}
       </div>
     </a>
   );
@@ -151,20 +171,21 @@ const Navbar: FC = () => {
     <header
       className={
         !isOpen
-          ? `text-main bg-bgc body-font h-10vh md:fixed md:top-0 md:left-0 w-full`
+          ? `text-main bg-bgc body-font min-h-10vh md:fixed md:top-0 md:left-0 w-full`
           : `text-main bg-bgc body-font h-screen md:fixed md:top-0 md:left-0 w-full`
       }
       style={{
-        transition: "all 0.5s ease",
+        transition: "height 0.5s ease",
       }}
     >
+      {/* {console.log(data)} */}
       <div className="container relative justify-between md:justify-start mx-auto flex p-5 flex-row items-center">
         <BrandLogo />
         <BrandTitle />
         {!isOpen ? (
-          <Nav menuItems={menuItems} />
+          <Nav menuItems={data.allStrapiNavbarItems.edges} />
         ) : (
-          <FullHeightNav menuItems={menuItems} />
+          <FullHeightNav menuItems={data.allStrapiNavbarItems.edges} />
         )}
         <span className="md:hidden block">
           <Hamburger
@@ -179,13 +200,47 @@ const Navbar: FC = () => {
   );
 };
 
-interface NavItemProps {
-  menuItem: item;
+interface NavbarData {
+  allStrapiNavbarItems: {
+    edges: {
+      node: allStrapiNavbarItemsNode;
+    }[];
+  };
+  allStrapiNavbar: {
+    edges: {
+      node: {
+        company: string;
+        logo: {
+          childImageSharp: {
+            fixed: {
+              src: string;
+            };
+          };
+        };
+      };
+    }[];
+  };
+}
+
+interface allStrapiNavbarItemsNode {
+  name: string;
+  link?: string | null;
+  nav_sub_item?: {
+    link: string;
+    name: string;
+  }[];
+  order: number;
+}
+
+interface NavItemProp {
+  menuItem: allStrapiNavbarItemsNode;
   i: number;
 }
 
-interface NavProps {
-  menuItems: item[];
+interface NavItemsProp {
+  menuItems: {
+    node: allStrapiNavbarItemsNode;
+  }[];
 }
 
 export default Navbar;
