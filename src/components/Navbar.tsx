@@ -171,8 +171,8 @@ const Navbar: FC = () => {
     <header
       className={
         !isOpen
-          ? `text-main bg-bgc body-font min-h-10vh md:fixed md:top-0 md:left-0 w-full`
-          : `text-main bg-bgc body-font h-screen md:fixed md:top-0 md:left-0 w-full`
+          ? `text-main bg-bgc z-10 body-font min-h-10vh md:fixed md:top-0 md:left-0 w-full`
+          : `text-main bg-bgc z-10 body-font h-screen md:fixed md:top-0 md:left-0 w-full`
       }
       style={{
         transition: "height 0.5s ease",

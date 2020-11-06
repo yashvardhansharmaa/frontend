@@ -1,10 +1,3 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -19,6 +12,16 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        blogList: allStrapiBlogs(
+          filter: { status: { eq: "published" } }
+          sort: { fields: published_date, order: DESC }
+        ) {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
       }
     `
   );
@@ -27,16 +30,35 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
+  // Create page for each blog
   const blogs = result.data.blogs.edges;
-
   const BlogTemplate = require.resolve("./src/templates/blog_template.tsx");
-
   blogs.forEach((blog, index) => {
     createPage({
       path: `/blog/${blog.node.slug}`,
       component: BlogTemplate,
       context: {
         slug: blog.node.slug,
+      },
+    });
+  });
+
+  // Create blog-list pages
+  const posts = result.data.blogList.edges;
+  const BlogListTemplate = require.resolve(
+    "./src/templates/blog_list_template.tsx"
+  );
+  const postsPerPage = 9;
+  const numPages = Math.ceil(posts.length / postsPerPage);
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+      component: BlogListTemplate,
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
       },
     });
   });
@@ -68,31 +90,13 @@ module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   }
 };
 
-// exports.createResolvers = ({
-//   actions,
-//   cache,
-//   createNodeId,
-//   createResolvers,
-//   createRemoteFileNode,
-//   store,
-//   reporter,
-// }) => {
-//   const { createNode } = actions;
-//   createResolvers({
-//     StrapiBlogsAuthorPic: {
-//       imageFile: {
-//         type: `File`,
-//         resolve(source, args, context, info) {
-//           return createRemoteFileNode({
-//             url: `${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
-//             store,
-//             cache,
-//             createNode,
-//             createNodeId,
-//             reporter,
-//           });
-//         },
-//       },
-//     },
-//   });
-// };
+// https://github.com/strapi/gatsby-source-strapi/issues/98#issuecomment-696518882
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type StrapiBlogsAuthor implements Node {
+      pic: File
+    }
+  `;
+  createTypes(typeDefs);
+};

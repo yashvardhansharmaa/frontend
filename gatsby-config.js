@@ -34,7 +34,7 @@ module.exports = {
       resolve: "gatsby-plugin-page-progress",
       options: {
         includePaths: [{ regex: "^/blog" }],
-        // excludePaths: ["/blog/beep-beep-lettuce"],
+        excludePaths: ["/blog"],
         height: 3,
         prependToBody: false,
         color: `var(--primary)`,
@@ -58,27 +58,27 @@ module.exports = {
         singleTypes: [`footer`, `navbar`],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
         // loginData: {
-        //   identifier: "mihirgupta0900@gmail.com",
-        //   password: "Mirvi12042019",
+        //   identifier: "m",
+        //   password: "",
         // },
       },
     },
-    {
-      resolve: `gatsby-transformer-remark`,
-      options: {
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 1300,
-            },
-          },
-        ],
-      },
-    },
+    // {
+    //   resolve: `gatsby-transformer-remark`,
+    //   options: {
+    //     plugins: [
+    //       {
+    //         resolve: `gatsby-remark-images`,
+    //         options: {
+    //           // It's important to specify the maxWidth (in pixels) of
+    //           // the content container as this plugin uses this as the
+    //           // base for generating different widths of each image.
+    //           maxWidth: 1300,
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

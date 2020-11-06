@@ -30,9 +30,13 @@ export const query = graphql`
         name
         about
         pic {
-          formats {
-            small {
-              url
+          childImageSharp {
+            fluid {
+              aspectRatio
+              base64
+              sizes
+              src
+              srcSet
             }
           }
         }
@@ -58,10 +62,8 @@ interface BlogData {
       name: string;
       about: string;
       pic: {
-        formats: {
-          small: {
-            url: string;
-          };
+        childImageSharp: {
+          fluid: FluidObject;
         };
       };
     };
@@ -87,15 +89,9 @@ const Blog = ({ data }: { data: BlogData }) => {
   return (
     <Layout>
       <div className="flex flex-col items-center maindiv">
-        <div className="container">
+        <div className="container md:px-20 lg:px-48">
           <div className="pt-10 flex justify-center items-center">
-            {/* <img
-              // src="https://source.unsplash.com/N9UuFddi7hs"
-              src={blog.cover.childImageSharp.fluid.src}
-              alt=""
-              // md:w-9/12
-              className="md:w-1/2 w-full h-auto"
-            /> */}
+            {/* Gatsby Image */}
             <Img
               fluid={blog.cover.childImageSharp.fluid}
               className="md:w-1/2 w-full h-auto"
@@ -109,8 +105,7 @@ const Blog = ({ data }: { data: BlogData }) => {
                 zIndex: -1,
               }}
             >
-              {/* {blog.published_date} */}
-              {format(Date.parse(blog.published_date), "do MMM, Y")}
+              {format(Date.parse(blog.published_date), "MMM d, Y")}
             </div>
             <h1 className="md:text-6xl text-5xl mx-6 text-center md:mx-0 my-5 font-heading">
               {blog.title}
@@ -126,7 +121,8 @@ const Blog = ({ data }: { data: BlogData }) => {
           <div className="md:px-0 px-6 py-8">
             <Author
               name={blog.author.name}
-              pic={blog.author.pic.formats.small.url}
+              // pic={blog.author.pic.formats.small.url}
+              pic={blog.author.pic.childImageSharp.fluid}
               about={blog.author.about}
             />
           </div>
