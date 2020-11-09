@@ -12,6 +12,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+
         blogList: allStrapiBlogs(
           filter: { status: { eq: "published" } }
           sort: { fields: published_date, order: DESC }
@@ -19,6 +20,14 @@ exports.createPages = async ({ graphql, actions }) => {
           edges {
             node {
               slug
+            }
+          }
+        }
+
+        tags: allStrapiTags {
+          edges {
+            node {
+              name
             }
           }
         }
@@ -48,7 +57,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const BlogListTemplate = require.resolve(
     "./src/templates/blog_list_template.tsx"
   );
-  const postsPerPage = 9;
+  const postsPerPage = 1;
   const numPages = Math.ceil(posts.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
@@ -59,6 +68,19 @@ exports.createPages = async ({ graphql, actions }) => {
         skip: i * postsPerPage,
         numPages,
         currentPage: i + 1,
+      },
+    });
+  });
+
+  // Create pages for tags
+  const tags = result.data.tags.edges;
+  const TagTemplate = require.resolve("./src/templates/tag.tsx");
+  tags.forEach((tag, index) => {
+    createPage({
+      path: `/tag/${tag.node.name}`,
+      component: TagTemplate,
+      context: {
+        name: tag.node.name,
       },
     });
   });

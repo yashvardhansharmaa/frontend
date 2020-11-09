@@ -5,77 +5,16 @@ import Author from "../components/Author";
 import Layout from "../components/Layout";
 import { format } from "date-fns";
 import Img, { FluidObject } from "gatsby-image";
-
-export const query = graphql`
-  query BlogQuery($slug: String!) {
-    strapiBlogs(slug: { eq: $slug }, status: { eq: "published" }) {
-      title
-      cover {
-        childImageSharp {
-          fluid {
-            aspectRatio
-            base64
-            src
-            srcSet
-            sizes
-          }
-        }
-      }
-      body
-      published_date
-      category {
-        name
-      }
-      author {
-        name
-        about
-        pic {
-          childImageSharp {
-            fluid {
-              aspectRatio
-              base64
-              sizes
-              src
-              srcSet
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-interface BlogData {
-  strapiBlogs: {
-    title: string;
-    cover: {
-      childImageSharp: {
-        fluid: FluidObject;
-      };
-    };
-    body: string;
-    published_date: string;
-    category: {
-      name: string;
-    };
-    author: {
-      name: string;
-      about: string;
-      pic: {
-        childImageSharp: {
-          fluid: FluidObject;
-        };
-      };
-    };
-  };
-}
+import Tag from "../components/Tag";
 
 const Paragraph = ({ children }: { children: string }) => {
-  return <p className="md:px-0 py-4 px-6">{children}</p>;
+  return <p className="md:px-0 px-6 py-4">{children}</p>;
 };
 
 const Image = ({ src, alt }: { src: string; alt: string }) => {
-  return <img src={src} className="mx-auto" loading="lazy" alt={alt} />;
+  return (
+    <img src={src} className="mx-auto medium-zoom" loading="lazy" alt={alt} />
+  );
 };
 
 const Blog = ({ data }: { data: BlogData }) => {
@@ -119,6 +58,18 @@ const Blog = ({ data }: { data: BlogData }) => {
             />
           </div>
           <div className="md:px-0 px-6 py-8">
+            {/* TAGS */}
+            <div className="px-2 md:px-6">
+              <h2 className="text-3xl mb-2 font-heading">Tags:</h2>
+              {blog.tags && (
+                <>
+                  {blog.tags.map((tag, i) => {
+                    return <Tag tagName={tag.name} />;
+                  })}
+                </>
+              )}
+            </div>
+            {/* AUTHOR */}
             <Author
               name={blog.author.name}
               // pic={blog.author.pic.formats.small.url}
@@ -133,3 +84,73 @@ const Blog = ({ data }: { data: BlogData }) => {
 };
 
 export default Blog;
+
+export const query = graphql`
+  query BlogQuery($slug: String!) {
+    strapiBlogs(slug: { eq: $slug }, status: { eq: "published" }) {
+      title
+      cover {
+        childImageSharp {
+          fluid {
+            aspectRatio
+            base64
+            src
+            srcSet
+            sizes
+          }
+        }
+      }
+      body
+      published_date
+      category {
+        name
+      }
+      author {
+        name
+        about
+        pic {
+          childImageSharp {
+            fluid {
+              aspectRatio
+              base64
+              sizes
+              src
+              srcSet
+            }
+          }
+        }
+      }
+      tags {
+        name
+      }
+    }
+  }
+`;
+
+interface BlogData {
+  strapiBlogs: {
+    title: string;
+    cover: {
+      childImageSharp: {
+        fluid: FluidObject;
+      };
+    };
+    body: string;
+    published_date: string;
+    category: {
+      name: string;
+    };
+    author: {
+      name: string;
+      about: string;
+      pic: {
+        childImageSharp: {
+          fluid: FluidObject;
+        };
+      };
+    };
+    tags: {
+      name: string;
+    }[];
+  };
+}
