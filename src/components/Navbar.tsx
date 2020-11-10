@@ -4,6 +4,7 @@ import DarkLightSwitch from "./DarkLightSwitch";
 import Hamburger from "hamburger-react";
 import "../assets/styles/navbar.scss";
 import NavLink from "./NavLink";
+import { FluidObject } from "gatsby-image";
 
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +53,19 @@ const Navbar: FC = () => {
           }
           order
         }
+        navbar {
+          logo {
+            url
+            imageFile {
+              childImageSharp {
+                fixed(width: 10, height: 10) {
+                  src
+                }
+              }
+            }
+          }
+          company
+        }
       }
     }
   `);
@@ -62,12 +76,11 @@ const Navbar: FC = () => {
 
   const RenderNavItems = ({ menuItems }: NavItemsProp) => {
     menuItems.sort((a, b) => {
-      return a.node.order - b.node.order;
+      return a.order - b.order;
     });
     return (
       <>
-        {menuItems.map((edge, i: number) => {
-          const menuItem = edge.node;
+        {menuItems.map((menuItem, i: number) => {
           return (
             <>
               {menuItem.nav_sub_item ? (
@@ -166,7 +179,7 @@ const Navbar: FC = () => {
     <a href="/">
       {/* <Logo src={logo} alt="" className="mx-3 " /> */}
       <img
-        src={data.allStrapiNavbar.edges[0].node.logo.childImageSharp.fixed.src}
+        src={data.strapi.navbar.logo.imageFile.childImageSharp.fixed.src}
         alt=""
       />
       <div className="md:flex hidden justify-center mx-3">
@@ -178,7 +191,7 @@ const Navbar: FC = () => {
   const BrandTitle = () => (
     <a href="/">
       <div className="mx-3 flex text-lg justify-center items-center">
-        {data.allStrapiNavbar.edges[0].node.company}
+        {data.strapi.navbar.company}
       </div>
     </a>
   );
@@ -199,9 +212,9 @@ const Navbar: FC = () => {
         <BrandLogo />
         <BrandTitle />
         {!isOpen ? (
-          <Nav menuItems={data.allStrapiNavbarItems.edges} />
+          <Nav menuItems={data.strapi.navbarItems} />
         ) : (
-          <FullHeightNav menuItems={data.allStrapiNavbarItems.edges} />
+          <FullHeightNav menuItems={data.strapi.navbarItems} />
         )}
         <span className="md:hidden block">
           <Hamburger
@@ -217,16 +230,20 @@ const Navbar: FC = () => {
 };
 
 interface NavbarData {
-  allStrapiNavbarItems: {
-    edges: {
-      node: allStrapiNavbarItemsNode;
+  strapi: {
+    navbarItems: {
+      name: string;
+      link?: string | null;
+      nav_sub_item?: {
+        link: string;
+        name: string;
+      }[];
+      order: number;
     }[];
-  };
-  allStrapiNavbar: {
-    edges: {
-      node: {
-        company: string;
-        logo: {
+    navbar: {
+      logo: {
+        url: string;
+        imageFile: {
           childImageSharp: {
             fixed: {
               src: string;
@@ -234,11 +251,12 @@ interface NavbarData {
           };
         };
       };
-    }[];
+      company: string;
+    };
   };
 }
 
-interface allStrapiNavbarItemsNode {
+interface strapiNavbarItem {
   name: string;
   link?: string | null;
   nav_sub_item?: {
@@ -249,14 +267,12 @@ interface allStrapiNavbarItemsNode {
 }
 
 interface NavItemProp {
-  menuItem: allStrapiNavbarItemsNode;
+  menuItem: strapiNavbarItem;
   i: number;
 }
 
 interface NavItemsProp {
-  menuItems: {
-    node: allStrapiNavbarItemsNode;
-  }[];
+  menuItems: strapiNavbarItem[];
 }
 
 export default Navbar;

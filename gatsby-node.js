@@ -4,31 +4,16 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        blogs: allStrapiBlogs {
-          edges {
-            node {
-              id
-              slug
-            }
+        blogs: strapi {
+          blogs(where: { status: "published" }, sort: "publsihed_date") {
+            slug
+            id
           }
         }
 
-        blogList: allStrapiBlogs(
-          filter: { status: { eq: "published" } }
-          sort: { fields: published_date, order: DESC }
-        ) {
-          edges {
-            node {
-              slug
-            }
-          }
-        }
-
-        tags: allStrapiTags {
-          edges {
-            node {
-              name
-            }
+        tags: strapi {
+          tags {
+            name
           }
         }
       }
@@ -40,25 +25,24 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Create page for each blog
-  const blogs = result.data.blogs.edges;
+  const blogs = result.data.blogs.blogs;
   const BlogTemplate = require.resolve("./src/templates/blog_template.tsx");
   blogs.forEach((blog, index) => {
     createPage({
-      path: `/blog/${blog.node.slug}`,
+      path: `/blog/${blog.slug}`,
       component: BlogTemplate,
       context: {
-        slug: blog.node.slug,
+        slug: blog.slug,
       },
     });
   });
 
   // Create blog-list pages
-  const posts = result.data.blogList.edges;
   const BlogListTemplate = require.resolve(
     "./src/templates/blog_list_template.tsx"
   );
   const postsPerPage = 1;
-  const numPages = Math.ceil(posts.length / postsPerPage);
+  const numPages = Math.ceil(blogs.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/blog` : `/blog/${i + 1}`,
@@ -73,14 +57,14 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   // Create pages for tags
-  const tags = result.data.tags.edges;
+  const tags = result.data.tags.tags;
   const TagTemplate = require.resolve("./src/templates/tag.tsx");
   tags.forEach((tag, index) => {
     createPage({
-      path: `/tag/${tag.node.name}`,
+      path: `/tag/${tag.name}`,
       component: TagTemplate,
       context: {
-        name: tag.node.name,
+        name: tag.name,
       },
     });
   });
