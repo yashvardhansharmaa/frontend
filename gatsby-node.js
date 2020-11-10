@@ -112,13 +112,32 @@ module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   }
 };
 
-// https://github.com/strapi/gatsby-source-strapi/issues/98#issuecomment-696518882
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions;
-  const typeDefs = `
-    type StrapiBlogsAuthor implements Node {
-      pic: File
-    }
-  `;
-  createTypes(typeDefs);
+// https://github.com/strapi/gatsby-source-strapi/issues/127#issuecomment-631442189
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+exports.createResolvers = ({
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+}) => {
+  const { createNode } = actions;
+  createResolvers({
+    strapi_UploadFile: {
+      imageFile: {
+        type: `File`,
+        resolve(source, args, context, info) {
+          return createRemoteFileNode({
+            url: `${source.url}`,
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          });
+        },
+      },
+    },
+  });
 };

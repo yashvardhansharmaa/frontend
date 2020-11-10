@@ -8,33 +8,49 @@ import NavLink from "./NavLink";
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // const data: NavbarData = useStaticQuery(graphql`
+  //   query NavbarQuery {
+  //     allStrapiNavbarItems {
+  //       edges {
+  //         node {
+  //           name
+  //           link
+  //           nav_sub_item {
+  //             link
+  //             name
+  //           }
+  //           order
+  //         }
+  //       }
+  //     }
+  //     allStrapiNavbar {
+  //       edges {
+  //         node {
+  //           company
+  //           logo {
+  //             childImageSharp {
+  //               fixed(height: 50, width: 50) {
+  //                 src
+  //               }
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
+
   const data: NavbarData = useStaticQuery(graphql`
     query NavbarQuery {
-      allStrapiNavbarItems {
-        edges {
-          node {
-            name
+      strapi {
+        navbarItems {
+          name
+          link
+          nav_sub_item {
             link
-            nav_sub_item {
-              link
-              name
-            }
-            order
+            name
           }
-        }
-      }
-      allStrapiNavbar {
-        edges {
-          node {
-            company
-            logo {
-              childImageSharp {
-                fixed(height: 50, width: 50) {
-                  src
-                }
-              }
-            }
-          }
+          order
         }
       }
     }
