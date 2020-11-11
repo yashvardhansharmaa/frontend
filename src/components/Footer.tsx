@@ -3,67 +3,65 @@ import { graphql, useStaticQuery } from "gatsby";
 import logo from "../assets/logo.png";
 
 interface FooterData {
-  allStrapiFooterItem: {
-    edges: {
-      node: {
-        heading: string;
-        sub_item: {
-          link: string;
-          name: string;
-        }[];
-      };
+  strapi: {
+    footerItems: {
+      heading: string;
+      sub_item: {
+        link: string;
+        name: string;
+      }[];
     }[];
-  };
-  allStrapiFooter: {
-    edges: {
-      node: {
-        company: string;
-        description: string;
-        facebook_link: string;
-        linkedin_link: string;
-        instagram_link: string;
-      };
-    }[];
+    footer: {
+      company: string;
+      description: string;
+      facebook_link: string;
+      instagram_link: string;
+      linkedin_link: string;
+    };
   };
 }
 
 const Footer = () => {
   const data: FooterData = useStaticQuery(graphql`
     query Footer {
-      allStrapiFooterItem {
-        edges {
-          node {
-            heading
-            sub_item {
-              link
-              name
-            }
+      strapi {
+        footerItems {
+          heading
+          sub_item {
+            link
+            name
           }
         }
-      }
-      allStrapiFooter {
-        edges {
-          node {
-            company
-            description
-            facebook_link
-            linkedin_link
-            instagram_link
-          }
+        footer {
+          company
+          description
+          facebook_link
+          instagram_link
+          linkedin_link
         }
       }
     }
   `);
 
-  const footerItems = data.allStrapiFooterItem.edges;
-  const { company, description } = data.allStrapiFooter.edges[0].node;
-  const footer = data.allStrapiFooter.edges[0].node;
+  // const footerItems = data.allStrapiFooterItem.edges;
+  // const { company, description } = data.allStrapiFooter.edges[0].node;
+  // const footer = data.allStrapiFooter.edges[0].node;
+  const {
+    footer: {
+      company,
+      description,
+      facebook_link,
+      instagram_link,
+      linkedin_link,
+    },
+    footerItems,
+  } = data.strapi;
 
   const FooterItems = () => (
     <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
       {/* {console.log(data.allStrapiFooter)} */}
-      {footerItems.map((edge, i: number) => {
-        const { heading, sub_item } = edge.node;
+      {footerItems.map((item, i: number) => {
+        const { heading, sub_item } = item;
         return (
           <div key={i} className="lg:w-1/4 md:w-1/2 w-full px-4">
             <h2 className="title-font font-medium tracking-widest text-sm mb-3">
@@ -103,7 +101,7 @@ const Footer = () => {
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             {/* FACEBOOK */}
-            <a href={footer.facebook_link} className="text-gray-500">
+            <a href={facebook_link} className="text-gray-500">
               <svg
                 fill="currentColor"
                 strokeLinecap="round"
@@ -129,7 +127,7 @@ const Footer = () => {
               </svg>
             </a> */}
             {/* INSTAGRAM */}
-            <a href={footer.instagram_link} className="ml-3 text-gray-500">
+            <a href={instagram_link} className="ml-3 text-gray-500">
               <svg
                 fill="none"
                 stroke="currentColor"
@@ -144,7 +142,7 @@ const Footer = () => {
               </svg>
             </a>
             {/* LINKEDIN */}
-            <a href={footer.linkedin_link} className="ml-3 text-gray-500">
+            <a href={linkedin_link} className="ml-3 text-gray-500">
               <svg
                 fill="currentColor"
                 stroke="currentColor"

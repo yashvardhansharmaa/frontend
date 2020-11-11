@@ -4,10 +4,9 @@ import Container from "../components/Container";
 import Layout from "../components/Layout";
 import PostListContainer from "../components/PostListContainer";
 import { capitalize } from "../utils";
-// import {} from
 
 const Tags = ({ data }: { data: tagData }) => {
-  const { name } = data.strapiTags;
+  const { name } = data.strapi.tag;
   return (
     <Layout>
       <Container>
@@ -21,16 +20,61 @@ const Tags = ({ data }: { data: tagData }) => {
 };
 
 export const query = graphql`
-  query TagQuery($name: String!) {
-    strapiTags(name: { eq: $name }) {
-      name
+  query tagQuery($id: ID!) {
+    strapi {
+      tag(id: $id) {
+        name
+        blogs {
+          slug
+          body
+          title
+          author {
+            name
+            pic {
+              url
+              imageFile {
+                childImageSharp {
+                  fixed(height: 80, width: 80) {
+                    aspectRatio
+                    base64
+                    src
+                    srcSet
+                    height
+                    width
+                  }
+                }
+              }
+            }
+          }
+          category {
+            name
+          }
+          published_date
+          cover {
+            url
+            imageFile {
+              childImageSharp {
+                fluid {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;
 
 interface tagData {
-  strapiTags: {
-    name: string;
+  strapi: {
+    tag: {
+      name: string;
+    };
   };
 }
 export default Tags;

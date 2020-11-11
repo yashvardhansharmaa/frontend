@@ -13,7 +13,7 @@ const BlogCard = ({
   <div className="flex my-5 border border-white w-full md:w-2/5 flex-col">
     <Link to={`/blog/${slug}`}>
       <Img
-        fluid={cover.childImageSharp.fluid}
+        fluid={cover.imageFile.childImageSharp.fluid}
         className="rounded-lg w-full"
         alt={title}
       />
@@ -30,7 +30,7 @@ const BlogCard = ({
       <div className="flex mt-2">
         <Img
           className="h-8 w-8 rounded-full"
-          fluid={author.pic.childImageSharp.fluid}
+          fixed={author.pic.imageFile.childImageSharp.fixed}
           alt={author.name}
         />
         <span className="mx-2 mt-1 font-semibold">{author.name}</span>

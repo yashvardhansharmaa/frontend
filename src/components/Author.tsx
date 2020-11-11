@@ -1,5 +1,5 @@
 import React from "react";
-import Img, { FluidObject } from "gatsby-image";
+import Img, { FixedObject } from "gatsby-image";
 
 const Author = ({
   name,
@@ -7,7 +7,7 @@ const Author = ({
   about,
 }: {
   name: string;
-  pic: FluidObject;
+  pic: FixedObject;
   about: string;
 }) => {
   return (
@@ -21,7 +21,7 @@ const Author = ({
       }}
     >
       <Img
-        fluid={pic}
+        fixed={pic}
         className="rounded-full w-12 h-12 md:w-16 md:h-16"
         alt={name}
       />

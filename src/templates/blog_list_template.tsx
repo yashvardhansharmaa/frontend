@@ -1,7 +1,7 @@
 import { graphql, PageProps, Link } from "gatsby";
 import React, { FC, Fragment } from "react";
 import Layout from "../components/Layout";
-import { FluidObject } from "gatsby-image";
+import { FluidObject, FixedObject } from "gatsby-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleRight as regularRightIcon,
@@ -17,7 +17,7 @@ const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
   pageContext,
 }) => {
   // List of all blogs
-  const posts = data.allStrapiBlogs.edges;
+  const posts = data.strapi.blogs;
 
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;
@@ -35,10 +35,10 @@ const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
           <BigBlogCard />
           {/* Consequent posts */}
           {/* {console.log(posts)} */}
-          {posts.map(({ node }) => {
+          {posts.map((post) => {
             return (
-              <Fragment key={node.slug}>
-                <BlogCard content={node} />
+              <Fragment key={post.slug}>
+                <BlogCard content={post} />
               </Fragment>
             );
           })}
@@ -100,36 +100,37 @@ const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
 };
 
 export const blogListQuery = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!) {
-    allStrapiBlogs(
-      limit: $limit
-      skip: $skip
-      sort: { fields: published_date, order: DESC }
-    ) {
-      edges {
-        node {
-          slug
-          author {
-            name
-            pic {
+  query BlogListQuery($skip: Int!, $limit: Int!) {
+    strapi {
+      blogs(limit: $limit, start: $skip, sort: "published_date") {
+        slug
+        body
+        title
+        author {
+          name
+          pic {
+            url
+            imageFile {
               childImageSharp {
-                fluid {
+                fixed(height: 80, width: 80) {
                   aspectRatio
                   base64
-                  sizes
                   src
                   srcSet
+                  height
+                  width
                 }
               }
             }
           }
-          body
-          category {
-            name
-          }
-          title
-          published_date
-          cover {
+        }
+        category {
+          name
+        }
+        published_date
+        cover {
+          url
+          imageFile {
             childImageSharp {
               fluid {
                 aspectRatio
@@ -147,10 +148,8 @@ export const blogListQuery = graphql`
 `;
 
 interface BlogListData {
-  allStrapiBlogs: {
-    edges: {
-      node: BlogListDataNode;
-    }[];
+  strapi: {
+    blogs: BlogListDataNode[];
   };
 }
 
@@ -159,8 +158,10 @@ export interface BlogListDataNode {
   author: {
     name: string;
     pic: {
-      childImageSharp: {
-        fluid: FluidObject;
+      imageFile: {
+        childImageSharp: {
+          fixed: FixedObject;
+        };
       };
     };
   };
@@ -171,8 +172,10 @@ export interface BlogListDataNode {
   title: string;
   published_date: string;
   cover: {
-    childImageSharp: {
-      fluid: FluidObject;
+    imageFile: {
+      childImageSharp: {
+        fluid: FluidObject;
+      };
     };
   };
 }

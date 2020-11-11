@@ -14,6 +14,7 @@ exports.createPages = async ({ graphql, actions }) => {
         tags: strapi {
           tags {
             name
+            id
           }
         }
       }
@@ -32,7 +33,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/blog/${blog.slug}`,
       component: BlogTemplate,
       context: {
-        slug: blog.slug,
+        id: blog.id,
       },
     });
   });
@@ -64,7 +65,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/tag/${tag.name}`,
       component: TagTemplate,
       context: {
-        name: tag.name,
+        id: tag.id,
       },
     });
   });

@@ -4,7 +4,7 @@ import ReactMarkdown, { ReactMarkdownProps } from "react-markdown";
 import Author from "../components/Author";
 import Layout from "../components/Layout";
 import { format } from "date-fns";
-import Img, { FluidObject } from "gatsby-image";
+import Img, { FluidObject, FixedObject } from "gatsby-image";
 import Tag from "../components/Tag";
 
 const Paragraph = ({ children }: { children: string }) => {
@@ -18,7 +18,7 @@ const Image = ({ src, alt }: { src: string; alt: string }) => {
 };
 
 const Blog = ({ data }: { data: BlogData }) => {
-  const blog = data.strapiBlogs;
+  const blog = data.strapi.blog;
 
   // Custom Elements for React Markdown
   const customRenderers = {
@@ -32,7 +32,7 @@ const Blog = ({ data }: { data: BlogData }) => {
           <div className="pt-10 flex justify-center items-center">
             {/* Gatsby Image */}
             <Img
-              fluid={blog.cover.childImageSharp.fluid}
+              fluid={blog.cover.imageFile.childImageSharp.fluid}
               className="md:w-1/2 w-full h-auto"
               alt="Cover Image"
             />
@@ -72,8 +72,7 @@ const Blog = ({ data }: { data: BlogData }) => {
             {/* AUTHOR */}
             <Author
               name={blog.author.name}
-              // pic={blog.author.pic.formats.small.url}
-              pic={blog.author.pic.childImageSharp.fluid}
+              pic={blog.author.pic.imageFile.childImageSharp.fixed}
               about={blog.author.about}
             />
           </div>
@@ -86,71 +85,84 @@ const Blog = ({ data }: { data: BlogData }) => {
 export default Blog;
 
 export const query = graphql`
-  query BlogQuery($slug: String!) {
-    strapiBlogs(slug: { eq: $slug }, status: { eq: "published" }) {
-      title
-      cover {
-        childImageSharp {
-          fluid {
-            aspectRatio
-            base64
-            src
-            srcSet
-            sizes
-          }
+  query BlogQuery($id: ID!) {
+    strapi {
+      blog(id: $id) {
+        title
+        tags {
+          name
         }
-      }
-      body
-      published_date
-      category {
-        name
-      }
-      author {
-        name
-        about
-        pic {
-          childImageSharp {
-            fluid {
-              aspectRatio
-              base64
-              sizes
-              src
-              srcSet
+        cover {
+          url
+          imageFile {
+            childImageSharp {
+              fluid {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
+              }
             }
           }
         }
-      }
-      tags {
-        name
+        category {
+          name
+        }
+        body
+        published_date
+        author {
+          name
+          about
+          pic {
+            url
+            imageFile {
+              childImageSharp {
+                fixed(height: 80, width: 80) {
+                  aspectRatio
+                  base64
+                  src
+                  srcSet
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 `;
 
 interface BlogData {
-  strapiBlogs: {
-    title: string;
-    cover: {
-      childImageSharp: {
-        fluid: FluidObject;
-      };
-    };
-    body: string;
-    published_date: string;
-    category: {
-      name: string;
-    };
-    author: {
-      name: string;
-      about: string;
-      pic: {
-        childImageSharp: {
-          fluid: FluidObject;
+  strapi: {
+    blog: {
+      title: string;
+      cover: {
+        imageFile: {
+          childImageSharp: {
+            fluid: FluidObject;
+          };
         };
       };
+      body: string;
+      published_date: string;
+      category: {
+        name: string;
+      };
+      author: {
+        name: string;
+        about: string;
+        pic: {
+          imageFile: {
+            childImageSharp: {
+              fixed: FixedObject;
+            };
+          };
+        };
+      };
+      tags: {
+        name: string;
+      }[];
     };
-    tags: {
-      name: string;
-    }[];
   };
 }
