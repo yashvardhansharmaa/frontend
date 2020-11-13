@@ -4,6 +4,7 @@ import DarkLightSwitch from "./DarkLightSwitch";
 import Hamburger from "hamburger-react";
 import "../assets/styles/navbar.scss";
 import NavLink from "./NavLink";
+import Img, { FixedObject } from "gatsby-image";
 
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const Navbar: FC = () => {
             logo {
               childImageSharp {
                 fixed(height: 50, width: 50) {
-                  src
+                  ...GatsbyImageSharpFixed
                 }
               }
             }
@@ -148,10 +149,9 @@ const Navbar: FC = () => {
 
   const BrandLogo = () => (
     <a href="/">
-      {/* <Logo src={logo} alt="" className="mx-3 " /> */}
-      <img
-        src={data.allStrapiNavbar.edges[0].node.logo.childImageSharp.fixed.src}
-        alt=""
+      <Img
+        fixed={data.allStrapiNavbar.edges[0].node.logo.childImageSharp.fixed}
+        alt="logo"
       />
       <div className="md:flex hidden justify-center mx-3">
         <span className="bg-primary h-100" style={{ width: "2px" }}></span>
@@ -212,9 +212,7 @@ interface NavbarData {
         company: string;
         logo: {
           childImageSharp: {
-            fixed: {
-              src: string;
-            };
+            fixed: FixedObject;
           };
         };
       };

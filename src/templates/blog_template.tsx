@@ -6,6 +6,8 @@ import Layout from "../components/Layout";
 import { format } from "date-fns";
 import Img, { FluidObject } from "gatsby-image";
 import Tag from "../components/Tag";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import BlogCard from "../components/BlogCard";
 
 const Paragraph = ({ children }: { children: string }) => {
   return <p className="md:px-0 px-6 py-4">{children}</p>;
@@ -19,6 +21,7 @@ const Image = ({ src, alt }: { src: string; alt: string }) => {
 
 const Blog = ({ data }: { data: BlogData }) => {
   const blog = data.strapiBlogs;
+  const lastestBlogLost = data.allStrapiBlogs;
 
   // Custom Elements for React Markdown
   const customRenderers = {
@@ -79,6 +82,40 @@ const Blog = ({ data }: { data: BlogData }) => {
           </div>
         </div>
       </div>
+      <div className="container mx-auto">
+        <Splide
+          options={{
+            type: "loop",
+            gap: "1rem",
+            autoplay: true,
+            pauseOnHover: false,
+            resetProgress: false,
+            arrows: "slider",
+          }}
+          hasSliderWrapper
+          hasAutoplayControls
+          hasAutoplayProgress
+        >
+          {console.log(lastestBlogLost.edges.length)}
+          {lastestBlogLost.edges.map(({ node }, i) => {
+            const {
+              author,
+              body,
+              category,
+              cover,
+              published_date,
+              slug,
+              title,
+            } = node;
+            return (
+              <SplideSlide>
+                {/* <Img fluid={cover.childImageSharp.fluid} /> */}
+                <BlogCard content={node} />
+              </SplideSlide>
+            );
+          })}
+        </Splide>
+      </div>
     </Layout>
   );
 };
@@ -124,6 +161,48 @@ export const query = graphql`
         name
       }
     }
+    allStrapiBlogs(
+      limit: 5
+      sort: { fields: published_date, order: DESC }
+      filter: { status: { eq: "published" } }
+    ) {
+      edges {
+        node {
+          body
+          slug
+          title
+          published_date
+          category {
+            name
+          }
+          cover {
+            childImageSharp {
+              fluid {
+                aspectRatio
+                base64
+                sizes
+                srcSet
+                src
+              }
+            }
+          }
+          author {
+            name
+            pic {
+              childImageSharp {
+                fluid(maxWidth: 80, maxHeight: 80) {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -151,6 +230,32 @@ interface BlogData {
     };
     tags: {
       name: string;
+    }[];
+  };
+  allStrapiBlogs: {
+    edges: {
+      node: {
+        body: string;
+        slug: string;
+        title: string;
+        published_date: string;
+        category: {
+          name: string;
+        };
+        cover: {
+          childImageSharp: {
+            fluid: FluidObject;
+          };
+        };
+        author: {
+          name: string;
+          pic: {
+            childImageSharp: {
+              fluid: FluidObject;
+            };
+          };
+        };
+      };
     }[];
   };
 }

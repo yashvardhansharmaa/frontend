@@ -7,6 +7,7 @@
 // You can delete this file if you're not using it
 import "./src/assets/styles/index.css";
 import "./src/assets/styles/Global.css";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import "lazysizes";
 
 import mediumZoom from "medium-zoom";

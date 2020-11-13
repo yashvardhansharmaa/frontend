@@ -131,12 +131,8 @@ export const blogListQuery = graphql`
           published_date
           cover {
             childImageSharp {
-              fluid {
-                aspectRatio
-                base64
-                sizes
-                src
-                srcSet
+              fluid(maxHeight: 80, maxWidth: 80) {
+                ...GatsbyImageSharpFluid
               }
             }
           }

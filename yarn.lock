@@ -1963,6 +1963,18 @@
     escape-string-regexp "^2.0.0"
     lodash.deburr "^4.1.0"
 
+"@splidejs/react-splide@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@splidejs/react-splide/-/react-splide-0.4.4.tgz#78a7b97ba7340200fd6dfac3d275b96b9cb29134"
+  integrity sha512-o3WYE7Dt0Kzx9tRM7mnYW2QN+uajJPwIQ2fN0DoYs4hKql+pjwuA18M6u3iy39Rc8nVUk+m1Utn2XgfmX07rNQ==
+  dependencies:
+    "@splidejs/splide" "^2.4.13"
+
+"@splidejs/splide@^2.4.13":
+  version "2.4.14"
+  resolved "https://registry.yarnpkg.com/@splidejs/splide/-/splide-2.4.14.tgz#5b94cbe28a5428850c20865e946ea85c6183b48e"
+  integrity sha512-TSw8lH0iuWYbcRbOx2J9CMXmKIjbQMBTMkIufUdDqV2q4/7cgcOwy0EkCfKst72SN1jnsj/LurGoOPFocUTq4Q==
+
 "@styled-system/css@^5.0.16":
   version "5.1.5"
   resolved "https://registry.yarnpkg.com/@styled-system/css/-/css-5.1.5.tgz#0460d5f3ff962fa649ea128ef58d9584f403bbbc"
