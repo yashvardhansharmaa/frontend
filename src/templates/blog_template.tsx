@@ -1,5 +1,5 @@
 import { graphql } from "gatsby";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown, { ReactMarkdownProps } from "react-markdown";
 import Author from "../components/Author";
 import Layout from "../components/Layout";
@@ -22,6 +22,11 @@ const Image = ({ src, alt }: { src: string; alt: string }) => {
 const Blog = ({ data }: { data: BlogData }) => {
   const blog = data.strapiBlogs;
   const lastestBlogLost = data.allStrapiBlogs;
+
+  const [shouldRender, setShouldRender] = useState(false);
+  useEffect(() => {
+    setShouldRender(true);
+  }, []);
 
   // Custom Elements for React Markdown
   const customRenderers = {
@@ -83,38 +88,37 @@ const Blog = ({ data }: { data: BlogData }) => {
         </div>
       </div>
       <div className="container mx-auto">
-        <Splide
-          options={{
-            type: "loop",
-            gap: "1rem",
-            autoplay: true,
-            pauseOnHover: false,
-            resetProgress: false,
-            arrows: "slider",
-          }}
-          hasSliderWrapper
-          hasAutoplayControls
-          hasAutoplayProgress
-        >
-          {console.log(lastestBlogLost.edges.length)}
-          {lastestBlogLost.edges.map(({ node }, i) => {
-            const {
-              author,
-              body,
-              category,
-              cover,
-              published_date,
-              slug,
-              title,
-            } = node;
-            return (
-              <SplideSlide>
-                {/* <Img fluid={cover.childImageSharp.fluid} /> */}
-                <BlogCard content={node} />
-              </SplideSlide>
-            );
-          })}
-        </Splide>
+        {!shouldRender ? (
+          ""
+        ) : (
+          <Splide
+            options={{
+              type: "loop",
+              gap: "1rem",
+              autoplay: false,
+              pauseOnHover: false,
+              resetProgress: false,
+              arrows: "slider",
+              perPage: 3,
+              drag: true,
+              breakpoints: {
+                768: {
+                  perPage: 2,
+                },
+              },
+            }}
+          >
+            {console.log(lastestBlogLost.edges.length)}
+            {lastestBlogLost.edges.map(({ node }, i) => {
+              return (
+                <SplideSlide>
+                  <Img fluid={node.cover.childImageSharp.fluid} />
+                </SplideSlide>
+              );
+            })}
+          </Splide>
+        )}
+        {/* TODO: below code gives error */}
       </div>
     </Layout>
   );

@@ -28,13 +28,9 @@ const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
 
   return (
     <Layout>
-      {/* <div className="md:mt-24 px-12 md:px-24 mx-auto container"> */}
       <Container>
+        <h1 className="font-heading text-6xl">Our Articles</h1>
         <PostListContainer>
-          {/* First big post */}
-          <BigBlogCard />
-          {/* Consequent posts */}
-          {/* {console.log(posts)} */}
           {posts.map(({ node }) => {
             return (
               <Fragment key={node.slug}>
@@ -131,8 +127,12 @@ export const blogListQuery = graphql`
           published_date
           cover {
             childImageSharp {
-              fluid(maxHeight: 80, maxWidth: 80) {
-                ...GatsbyImageSharpFluid
+              fluid(maxHeight: 80, maxWidth: 80, quality: 100) {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
               }
             }
           }

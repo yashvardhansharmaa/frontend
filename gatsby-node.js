@@ -57,7 +57,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const BlogListTemplate = require.resolve(
     "./src/templates/blog_list_template.tsx"
   );
-  const postsPerPage = 1;
+  const postsPerPage = 2;
   const numPages = Math.ceil(posts.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
@@ -112,13 +112,59 @@ module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   }
 };
 
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+
+// exports.createResolvers = ({
+//   actions,
+//   cache,
+//   createNodeId,
+//   createResolvers,
+//   store,
+//   reporter,
+// }) => {
+//   const { createNode } = actions;
+//   createResolvers({
+//     StrapiTagsBlogsAuthorPic: {
+//       imageFile: {
+//         type: `File`,
+//         resolve(source, args, context, info) {
+//           return createRemoteFileNode({
+//             url: `${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
+//             store,
+//             cache,
+//             createNode,
+//             createNodeId,
+//             reporter,
+//           });
+//         },
+//       },
+//     },
+//   });
+// };
+
 // https://github.com/strapi/gatsby-source-strapi/issues/98#issuecomment-696518882
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
-    type StrapiBlogsAuthor implements Node {
+    type StrapiTagsBlogsAuthor implements Node {
       pic: File
     }
   `;
   createTypes(typeDefs);
+};
+
+// debug splide window undefined
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /splide/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
 };
