@@ -13,14 +13,16 @@ body {
   --footer-bg: #11151c;
   --footer-secondary: #11151c;
   --author-border: rgba(0, 0, 0, 0.2);
-  --fg1: #1e1e1e;
-  --fg2: #2a2a2a;
+  --ft1: #1e1e1e;
+  --ft2: #2a2a2a;
+  --fg1: #edf2f7;
 }
 
 body.dark {
   --bg: #121212;
+  --ft1: #1e1e1e;
+  --ft2: #2a2a2a;
   --fg1: #1e1e1e;
-  --fg2: #2a2a2a;
   --text: #fff;
   --text-primary: #000;
   --primary: #c43d34;

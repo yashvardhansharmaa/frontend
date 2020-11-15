@@ -17,6 +17,16 @@ exports.createPages = async ({ graphql, actions }) => {
             id
           }
         }
+
+        categories: strapi {
+          categories {
+            name
+            id
+            blogs {
+              id
+            }
+          }
+        }
       }
     `
   );
@@ -26,7 +36,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Create page for each blog
-  const blogs = result.data.blogs.blogs;
+  const blogs = result.data.blogs.blogs.reverse();
   const BlogTemplate = require.resolve("./src/templates/blog_template.tsx");
   blogs.forEach((blog, index) => {
     createPage({
@@ -42,15 +52,17 @@ exports.createPages = async ({ graphql, actions }) => {
   const BlogListTemplate = require.resolve(
     "./src/templates/blog_list_template.tsx"
   );
-  const postsPerPage = 1;
+  const postsPerPage = 2;
   const numPages = Math.ceil(blogs.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
+    let start = blogs.length - (i + 1) * postsPerPage;
+    start = start >= 0 ? start : 0;
     createPage({
       path: i === 0 ? `/blog` : `/blog/${i + 1}`,
       component: BlogListTemplate,
       context: {
         limit: postsPerPage,
-        skip: i * postsPerPage,
+        start,
         numPages,
         currentPage: i + 1,
       },
@@ -67,6 +79,28 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         id: tag.id,
       },
+    });
+  });
+
+  // Create pages for category
+  const categories = result.data.categories.categories;
+  const CategoryTemplate = require.resolve("./src/templates/category.tsx");
+  categories.forEach((category, index) => {
+    const { name, blogs: categoryBlogs, id } = category;
+    Array.from({ length: categoryBlogs.length }).forEach((_, i) => {
+      let start = categoryBlogs.length - (i + 1) * postsPerPage;
+      start = start >= 0 ? start : 0;
+      createPage({
+        path: i === 0 ? `/${name}` : `/${name}/${i + 1}`,
+        component: CategoryTemplate,
+        context: {
+          id,
+          start,
+          limit: postsPerPage,
+          numPages: Math.ceil(categoryBlogs.length / postsPerPage),
+          currentPage: i + 1,
+        },
+      });
     });
   });
 };

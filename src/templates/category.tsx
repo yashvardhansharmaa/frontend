@@ -1,33 +1,47 @@
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import { FluidObject } from "gatsby-image";
-import React from "react";
+import React, { FC } from "react";
 import BlogCard from "../components/BlogCard";
+import BlogListLayout from "../components/BlogListLayout";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
 import PostListContainer from "../components/PostListContainer";
+import { PageContextType } from "./blog_list_template";
 
-const Tags = ({ data }: { data: tagData }) => {
-  const { name, blogs } = data.strapi.tag;
-  return (
-    <Layout>
-      <Container>
-        <h1 className="md:text-6xl text-5xl font-heading">{name}</h1>
-        <PostListContainer>
-          {blogs.map((blog, i: number) => {
-            return <BlogCard key={i} content={blog} />;
-          })}
-        </PostListContainer>
-      </Container>
-    </Layout>
-  );
+const category: FC<PageProps<categoryData, PageContextType>> = ({
+  data,
+  pageContext,
+}) => {
+  const { blogs, name } = data.strapi.category;
+  const { currentPage, numPages } = pageContext;
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === numPages;
+  const prevPage =
+    currentPage - 1 === 1
+      ? `/${name}`
+      : `/${name}/${(currentPage - 1).toString()}`;
+  const nextPage = `/${name}/${(currentPage + 1).toString()}`;
+  const paginateData = {
+    isFirst,
+    isLast,
+    prevPage,
+    numPages,
+    currentPage,
+    nextPage,
+    isBlog: false,
+    categoryName: name,
+  };
+  return <BlogListLayout posts={blogs.reverse()} paginateData={paginateData} />;
 };
 
+export default category;
+
 export const query = graphql`
-  query tagQuery($id: ID!) {
+  query CategoryQuery($id: ID!, $start: Int!, $limit: Int!) {
     strapi {
-      tag(id: $id) {
+      category(id: $id) {
         name
-        blogs {
+        blogs(limit: $limit, start: $start, sort: "published_date") {
           slug
           body
           title
@@ -72,9 +86,9 @@ export const query = graphql`
   }
 `;
 
-interface tagData {
+interface categoryData {
   strapi: {
-    tag: {
+    category: {
       name: string;
       blogs: {
         slug: string;
@@ -107,4 +121,3 @@ interface tagData {
     };
   };
 }
-export default Tags;

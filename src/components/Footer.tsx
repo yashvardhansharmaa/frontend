@@ -83,7 +83,7 @@ const Footer = () => {
   );
 
   return (
-    <footer className="text-white body-font bg-fg2 shadow-1dp">
+    <footer className="text-white body-font bg-ft2 shadow-1dp">
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex title-font font-medium items-center md:justify-start justify-center">
@@ -94,7 +94,7 @@ const Footer = () => {
         </div>
         {FooterItems()}
       </div>
-      <div className="bg-fg1 shadow-2dp">
+      <div className="bg-ft1 shadow-2dp">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-500 text-sm text-center sm:text-left">
             © {new Date().getFullYear()} tidingsmedia

@@ -8,8 +8,9 @@ module.exports = {
     extend: {
       colors: {
         bgc: "var(--bg)",
+        ft1: "var(--ft1)",
+        ft2: "var(--ft2)",
         fg1: "var(--fg1)",
-        fg2: "var(--fg2)",
         primary: "var(--primary)",
         onPrimary: "var(--text-primary)",
         main: "var(--text)",
@@ -31,6 +32,9 @@ module.exports = {
         "3/2": "3fr 2fr",
         "2/1": "2fr 1fr",
         "1/7": "1fr 12fr",
+      },
+      fontSize: {
+        "7xl": "5rem",
       },
     },
   },
