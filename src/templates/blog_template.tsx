@@ -1,11 +1,12 @@
 import { graphql } from "gatsby";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown, { ReactMarkdownProps } from "react-markdown";
 import Author from "../components/Author";
 import Layout from "../components/Layout";
 import { format } from "date-fns";
 import Img, { FluidObject, FixedObject } from "gatsby-image";
 import Tag from "../components/Tag";
+import ImageSlider from "../components/ImageSlider";
 
 const Paragraph = ({ children }: { children: string }) => {
   return <p className="md:px-0 px-6 py-4">{children}</p>;
@@ -19,6 +20,11 @@ const Image = ({ src, alt }: { src: string; alt: string }) => {
 
 const Blog = ({ data }: { data: BlogData }) => {
   const blog = data.strapi.blog;
+
+  const [shouldRender, setShouldRender] = useState(false);
+  useEffect(() => {
+    setShouldRender(true);
+  }, []);
 
   // Custom Elements for React Markdown
   const customRenderers = {
@@ -77,6 +83,7 @@ const Blog = ({ data }: { data: BlogData }) => {
             />
           </div>
         </div>
+        <ImageSlider shouldRender={shouldRender} />
       </div>
     </Layout>
   );

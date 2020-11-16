@@ -8,6 +8,7 @@
 import "./src/assets/styles/index.css";
 import "./src/assets/styles/Global.css";
 import "lazysizes";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 import mediumZoom from "medium-zoom";
 

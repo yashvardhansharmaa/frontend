@@ -160,3 +160,19 @@ exports.createResolvers = ({
     },
   });
 };
+
+// debug splide window undefined
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /splide/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+};
