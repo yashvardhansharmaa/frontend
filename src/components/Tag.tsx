@@ -7,7 +7,7 @@ const Tag = ({ tagName }: { tagName: string }) => {
     <Link to={`/tag/${tagName}`}>
       <span
         style={{ paddingTop: "1px", paddingBottom: "1px" }}
-        className="px-2 bg-gray-300 rounded-lg"
+        className="px-2 bg-fg1 shadow-1dp rounded-lg"
       >
         {capitalize(tagName)}
       </span>

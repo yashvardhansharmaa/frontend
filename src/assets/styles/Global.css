@@ -3,11 +3,15 @@
 
 body {
   --bg: #fff;
+  --ibg: #121212;
   --text: #000;
   --text-primary: #fff;
   background-color: var(--bg);
   color: var(--text);
   --primary: #800000;
+  --primary-75: #ca655e;
+  --primary-50: #d18d89;
+  --primary-25: #d7b5b3;
   --dropdown-shadow: 0px 10px 13px -3px rgba(232, 232, 232, 1);
   --dropdown-bg: var(--bg);
   --footer-bg: #11151c;
@@ -16,10 +20,15 @@ body {
   --ft1: #1e1e1e;
   --ft2: #2a2a2a;
   --fg1: #edf2f7;
+  --p100: #757575; /* 600 */
+  --p75: #9e9e9e; /* 500 */
+  --p50: #bdbdbd; /* 400 */
+  --p25: #e0e0e0; /* 300 */
 }
 
 body.dark {
   --bg: #121212;
+  --ibg: rgba(255, 255, 255, 0.5);
   --ft1: #1e1e1e;
   --ft2: #2a2a2a;
   --fg1: #1e1e1e;
@@ -31,6 +40,10 @@ body.dark {
   --footer-bg: #31353c;
   --footer-secondary: #11151c;
   --author-border: rgba(255, 255, 255, 0.2);
+  --p100: #212121; /* 900 */
+  --p75: #424242; /* 800 */
+  --p50: #616161; /* 700 */
+  --p25: #757575; /* 600 */
 }
 
 .maindiv {
@@ -41,4 +54,21 @@ body.dark {
   .maindiv {
     margin-top: 0;
   }
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  /* border: 1px solid green; */
+  -webkit-text-fill-color: var(--text);
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg) inset;
+  box-shadow: 0 0 0px 1000px var(--bg) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }

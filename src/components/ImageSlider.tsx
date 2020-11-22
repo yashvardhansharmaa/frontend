@@ -1,6 +1,6 @@
 import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import { BlogListDataNode } from "../templates/blog_list_template";
 import Img from "gatsby-image";
 
@@ -14,7 +14,8 @@ const ImageSlider = ({
   const data = useStaticQuery<SliderData>(graphql`
     query MyQuery {
       strapi {
-        blogs(limit: 5) {
+        blogs(limit: 6) {
+          slug
           title
           published_at
           cover {
@@ -61,7 +62,7 @@ const ImageSlider = ({
 
   return (
     <div className={`${className} px-5 md:px-0 pb-20 container mx-auto`}>
-      <h1 className="font-heading md:text-6xl text-4xl text-center">
+      <h1 className="font-heading md:text-6xl mb-2 text-4xl text-center">
         Our Latest Articles
       </h1>
       {!shouldRender ? (
@@ -85,10 +86,14 @@ const ImageSlider = ({
             },
           }}
         >
-          {blogs.map((blog, i) => {
+          {blogs.reverse().map((blog, i) => {
             return (
               <SplideSlide>
-                <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
+                <Link to={`/blog/${blog.slug}`}>
+                  <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
+                  <h3 className="font-bold text-lg">{blog.title}</h3>
+                  <p className="text-xs py-1">{blog.body.slice(0, 100)}...</p>
+                </Link>
               </SplideSlide>
             );
           })}

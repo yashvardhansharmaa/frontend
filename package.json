@@ -10,7 +10,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@splidejs/react-splide": "^0.4.4",
+    "@types/react-select": "^3.0.26",
     "@types/styled-components": "^5.1.4",
+    "axios": "^0.21.0",
     "date-fns": "^2.16.1",
     "gatsby": "^2.24.79",
     "gatsby-image": "^2.4.21",
@@ -29,6 +31,7 @@
     "gatsby-source-strapi": "^0.0.12",
     "gatsby-transformer-remark": "^2.9.1",
     "gatsby-transformer-sharp": "^2.5.21",
+    "graphql-type-json": "^0.3.2",
     "gsap": "^3.5.1",
     "hamburger-react": "^2.2.0",
     "lazysizes": "^5.2.2",
@@ -41,6 +44,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-markdown": "^5.0.0",
+    "react-select": "^3.1.0",
     "react-transition-group": "^4.4.1",
     "styled-components": "^5.2.0",
     "tailwindcss": "^1.9.5"
@@ -59,6 +63,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "prod": "gatsby build && gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {

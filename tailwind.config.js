@@ -8,12 +8,17 @@ module.exports = {
     extend: {
       colors: {
         bgc: "var(--bg)",
+        ibgc: "var(--ibg)",
         ft1: "var(--ft1)",
         ft2: "var(--ft2)",
         fg1: "var(--fg1)",
         primary: "var(--primary)",
         onPrimary: "var(--text-primary)",
         main: "var(--text)",
+        p100: "var(--p100)",
+        p75: "var(--p75)",
+        p50: "var(--p50)",
+        p25: "var(--p25)",
       },
       boxShadow: {
         "1dp":

@@ -18,6 +18,13 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
 
+        authors: strapi {
+          authors {
+            id
+            name
+          }
+        }
+
         categories: strapi {
           categories {
             name
@@ -82,6 +89,19 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
+  // Create pages for author
+  const authors = result.data.authors.authors;
+  const AuthorTemplate = require.resolve("./src/templates/author.tsx");
+  authors.forEach((author, index) => {
+    createPage({
+      path: `/author/${author.name.toLowerCase()}`,
+      component: AuthorTemplate,
+      context: {
+        id: author.id,
+      },
+    });
+  });
+
   // Create pages for category
   const categories = result.data.categories.categories;
   const CategoryTemplate = require.resolve("./src/templates/category.tsx");
@@ -105,7 +125,7 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 };
 
-module.exports.onCreateNode = async ({ node, actions, createNodeId }) => {
+exports.onCreateNode = async ({ node, actions, createNodeId }) => {
   const crypto = require(`crypto`);
 
   if (node.internal.type === "StrapiBlog") {

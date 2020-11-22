@@ -1,45 +1,15 @@
 import React, { FC, useState } from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import DarkLightSwitch from "./DarkLightSwitch";
 import Hamburger from "hamburger-react";
 import "../assets/styles/navbar.scss";
 import NavLink from "./NavLink";
 import { FluidObject } from "gatsby-image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  // const data: NavbarData = useStaticQuery(graphql`
-  //   query NavbarQuery {
-  //     allStrapiNavbarItems {
-  //       edges {
-  //         node {
-  //           name
-  //           link
-  //           nav_sub_item {
-  //             link
-  //             name
-  //           }
-  //           order
-  //         }
-  //       }
-  //     }
-  //     allStrapiNavbar {
-  //       edges {
-  //         node {
-  //           company
-  //           logo {
-  //             childImageSharp {
-  //               fixed(height: 50, width: 50) {
-  //                 src
-  //               }
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // `);
 
   const data: NavbarData = useStaticQuery(graphql`
     query NavbarQuery {
@@ -58,7 +28,7 @@ const Navbar: FC = () => {
             url
             imageFile {
               childImageSharp {
-                fixed(width: 10, height: 10) {
+                fixed(width: 50, height: 50) {
                   src
                 }
               }
@@ -153,6 +123,9 @@ const Navbar: FC = () => {
     return (
       <nav className="md:ml-auto md:flex hidden items-center text-base justify-center">
         <RenderNavItems menuItems={menuItems} />
+        <Link to="/search">
+          <FontAwesomeIcon fillOpacity={0.7} className="mr-4" icon={faSearch} />
+        </Link>
         <DarkLightSwitch />
       </nav>
     );
@@ -216,7 +189,10 @@ const Navbar: FC = () => {
         ) : (
           <FullHeightNav menuItems={data.strapi.navbarItems} />
         )}
-        <span className="md:hidden block">
+        <span className="md:hidden flex items-center block">
+          <Link to="/search">
+            <FontAwesomeIcon className="mr-2" icon={faSearch} />
+          </Link>
           <Hamburger
             toggled={isOpen}
             toggle={handleMenuClick}
