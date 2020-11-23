@@ -1,36 +1,50 @@
+import { format } from "date-fns";
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import { BlogListDataNode } from "../templates/blog_list_template";
+import { capitalize } from "../utils";
+import Img from "gatsby-image";
+import { Link } from "gatsby";
 
-const BigBlogCard = () => (
-  <div className="md:grid my-5 flex flex-col md:grid-cols-2">
-    <img
-      src="https://source.unsplash.com/bli6Z7xsPGE"
-      className="w-full rounded-lg"
-      alt=""
-    />
-    <div className="md:px-5 py-2 flex flex-col justify-between">
-      <div className="">
-        <div className="text-sm">
-          <span className="font-semibold">Economics </span>|{" "}
-          <span className="opacity-75"> November 2, 2020 </span>
-        </div>
-        <h1 className="text-4xl py-2 font-heading">
-          History of the Nuremberg Laws
-        </h1>
-        <p className="leading-loose">
-          The creation of the Nazi Party in 1920, after Germany’s loss in World
-          War I, was a monumental period in history.
-        </p>
-      </div>
-      <div className="mt-1 md:mt-0 flex">
-        <img
-          className="md:h-12 md:w-12 h-8 w-8 rounded-full"
-          src="https://res.cloudinary.com/mihirgupta22/image/upload/v1604430975/small_Mihir_Gupta_square_718b30e40b.jpg"
-          alt=""
+const BigBlogCard = ({
+  content: { author, category, cover, published_date, title, body, slug },
+}: {
+  content: BlogListDataNode;
+}) => (
+  <Link to={`/blog/${slug}`}>
+    <div className="md:grid my-5 flex flex-col md:grid-cols-2">
+      <div className="overflow-hidden rounded-lg">
+        <Img
+          fluid={cover.imageFile.childImageSharp.fluid}
+          className="w-full bloghover"
+          alt={title}
         />
-        <span className="mx-2 mt-1 font-semibold">Mihir Gupta</span>
+      </div>
+      <div className="md:px-5 py-2 flex flex-col justify-between">
+        <div className="">
+          <div className="text-sm">
+            <span className="font-semibold">{capitalize(category.name)} </span>|{" "}
+            <span className="opacity-75">
+              {" "}
+              {format(Date.parse(published_date), "MMM d, Y")}{" "}
+            </span>
+          </div>
+          <h1 className="text-4xl py-2 font-heading">{title}</h1>
+          <p className="leading-loose">
+            <ReactMarkdown children={body.substring(0, 300)} />
+          </p>
+        </div>
+        <div className="mt-1 md:mt-0 flex">
+          <Img
+            className="md:h-12 md:w-12 h-8 w-8 rounded-full"
+            fluid={author.pic.imageFile.childImageSharp.fluid}
+            alt={author.name}
+          />
+          <span className="mx-2 mt-1 font-semibold">{author.name}</span>
+        </div>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 export default BigBlogCard;

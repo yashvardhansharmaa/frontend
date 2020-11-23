@@ -13,12 +13,18 @@ module.exports = {
         ft2: "var(--ft2)",
         fg1: "var(--fg1)",
         primary: "var(--primary)",
+        primary25: "var(--primary-25)",
+        primary50: "var(--primary-50)",
+        primary75: "var(--primary-75)",
+        section: "var(--section)",
         onPrimary: "var(--text-primary)",
         main: "var(--text)",
         p100: "var(--p100)",
         p75: "var(--p75)",
         p50: "var(--p50)",
         p25: "var(--p25)",
+        gbtn: "var(--gray-btn)",
+        gbtnh: "var(--gray-btn-hover)",
       },
       boxShadow: {
         "1dp":

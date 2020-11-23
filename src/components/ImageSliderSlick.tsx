@@ -3,8 +3,15 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import { BlogListDataNode } from "../templates/blog_list_template";
 import Img from "gatsby-image";
+import Slider, { ResponsiveObject } from "react-slick";
 
-const ImageSlider = ({
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+import "../assets/slick/slick.css";
+import "../assets/slick/slick-theme.css";
+import ReactMarkdown from "react-markdown";
+
+const ImageSliderSlick = ({
   shouldRender,
   className,
 }: {
@@ -12,9 +19,9 @@ const ImageSlider = ({
   className?: string;
 }) => {
   const data = useStaticQuery<SliderData>(graphql`
-    query MyQuery {
+    query SlickQuery {
       strapi {
-        blogs(limit: 6) {
+        blogs(where: { status: "published" }) {
           slug
           title
           published_at
@@ -59,6 +66,23 @@ const ImageSlider = ({
   `);
 
   const blogs = data.strapi.blogs;
+  blogs.length = 6;
+
+  const responsiveSettings: ResponsiveObject[] = [
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        arrows: false,
+      },
+    },
+  ];
 
   return (
     <div className={`${className} px-5 md:px-0 pb-20 container mx-auto`}>
@@ -68,36 +92,30 @@ const ImageSlider = ({
       {!shouldRender ? (
         ""
       ) : (
-        <Splide
-          options={{
-            type: "loop",
-            gap: "1rem",
-            autoplay: false,
-            pauseOnHover: false,
-            resetProgress: false,
-            arrows: "slider",
-            perPage: 3,
-            drag: true,
-            rewind: false,
-            breakpoints: {
-              768: {
-                perPage: 2,
-              },
-            },
-          }}
+        <Slider
+          dots={true}
+          draggable={true}
+          infinite={true}
+          responsive={responsiveSettings}
+          slidesToShow={3}
+          slidesPerRow={1}
+          centerMode={true}
+          centerPadding="60px"
         >
           {blogs.reverse().map((blog, i) => {
             return (
-              <SplideSlide>
-                <Link to={`/blog/${blog.slug}`}>
+              <div className="md:px-5 px-2">
+                <Link className="" to={`/blog/${blog.slug}`}>
                   <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
                   <h3 className="font-bold text-lg">{blog.title}</h3>
-                  <p className="text-xs py-1">{blog.body.slice(0, 100)}...</p>
+                  <p className="text-xs py-1">
+                    <ReactMarkdown children={`${blog.body.slice(0, 100)}...`} />
+                  </p>
                 </Link>
-              </SplideSlide>
+              </div>
             );
           })}
-        </Splide>
+        </Slider>
       )}
     </div>
   );
@@ -109,4 +127,4 @@ interface SliderData {
   };
 }
 
-export default ImageSlider;
+export default ImageSliderSlick;

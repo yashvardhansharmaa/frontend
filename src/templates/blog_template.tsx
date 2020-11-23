@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import Img, { FluidObject, FixedObject } from "gatsby-image";
 import Tag from "../components/Tag";
 import ImageSlider from "../components/ImageSlider";
+import ImageSliderSlick from "../components/ImageSliderSlick";
 
 const Paragraph = ({ children }: { children: string }) => {
   return <p className="md:px-0 px-6 py-4">{children}</p>;
@@ -83,7 +84,8 @@ const Blog = ({ data }: { data: BlogData }) => {
             />
           </div>
         </div>
-        <ImageSlider shouldRender={shouldRender} />
+        {/* <ImageSlider shouldRender={shouldRender} /> */}
+        <ImageSliderSlick shouldRender={shouldRender} />
       </div>
     </Layout>
   );

@@ -191,6 +191,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
             test: /splide/,
             use: loaders.null(),
           },
+          {
+            test: /slick/,
+            use: loaders.null(),
+          },
         ],
       },
     });
