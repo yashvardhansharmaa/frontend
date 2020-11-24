@@ -6,14 +6,15 @@ import { Link } from "gatsby";
 import { BlogListDataNode } from "../templates/blog_list_template";
 import { capitalize } from "../utils";
 const Fade = require("react-reveal/Fade");
+import MainFade from "./MainFade";
 
 const BlogCard = ({
   content: { author, category, cover, published_date, title, body, slug },
 }: {
   content: BlogListDataNode;
 }) => (
-  <div className="flex my-5 w-full md:w-2/5 flex-col">
-    <Fade duration={2500}>
+  <div className="flex my-5 w-full md:w-3/10 flex-col">
+    <MainFade>
       <Link to={`/blog/${slug}`}>
         <div className="overflow-hidden rounded-lg">
           <Img
@@ -41,7 +42,7 @@ const BlogCard = ({
           <span className="mx-2 mt-1 font-semibold">{author.name}</span>
         </div>
       </Link>
-    </Fade>
+    </MainFade>
   </div>
 );
 

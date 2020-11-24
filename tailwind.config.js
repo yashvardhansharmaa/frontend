@@ -39,6 +39,9 @@ module.exports = {
       height: {
         "10vh": "10vh",
       },
+      width: {
+        "3/10": "30%",
+      },
       gridTemplateColumns: {
         "3/2": "3fr 2fr",
         "2/1": "2fr 1fr",
@@ -46,6 +49,12 @@ module.exports = {
       },
       fontSize: {
         "7xl": "5rem",
+      },
+      flex: {
+        2: 2,
+      },
+      borderWidth: {
+        3: "3px",
       },
     },
   },

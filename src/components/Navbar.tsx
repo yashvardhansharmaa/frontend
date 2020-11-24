@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, Fragment, useState } from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import DarkLightSwitch from "./DarkLightSwitch";
 import Hamburger from "hamburger-react";
@@ -52,13 +52,12 @@ const Navbar: FC = () => {
       <>
         {menuItems.map((menuItem, i: number) => {
           return (
-            <>
+            <Fragment key={i}>
               {menuItem.nav_sub_item ? (
                 <div
                   className={
                     !isOpen ? `dropdown mr-5` : `dropdown mr-5 mb-5 text-xl`
                   }
-                  key={i}
                 >
                   {menuItem.link ? (
                     <NavLink
@@ -68,7 +67,7 @@ const Navbar: FC = () => {
                       {menuItem.name}
                     </NavLink>
                   ) : (
-                    <p className="dropbtn focus:outline-none">
+                    <p className="dropbtn focus:outline-none cursor-pointer">
                       {menuItem.name}
                     </p>
                   )}
@@ -112,7 +111,7 @@ const Navbar: FC = () => {
                   )}
                 </>
               )}
-            </>
+            </Fragment>
           );
         })}
       </>
