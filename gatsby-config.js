@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -87,6 +91,9 @@ module.exports = {
         fieldName: "strapi",
         // Url to query from
         url: "http://localhost:1337/graphql",
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+        },
       },
     },
     // {

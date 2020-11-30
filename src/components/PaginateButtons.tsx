@@ -5,17 +5,8 @@ import {
   faArrowAltCircleLeft as regularLeftIcon,
 } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "gatsby";
+import _ from "lodash";
 
-/*
-{
-  isFirst,
-  isLast,
-  prevPage,
-  numPages,
-  currentPage,
-  nextPage,
-}
-*/
 const PaginateButtons = ({ data }: { data: PaginateData }) => {
   const {
     isFirst,
@@ -27,6 +18,22 @@ const PaginateButtons = ({ data }: { data: PaginateData }) => {
     isBlog,
     categoryName,
   } = data;
+
+  const numButtons = 5;
+  var startPage =
+    currentPage < numButtons ? 1 : currentPage - (numButtons - 1) / 2;
+  const endPage =
+    startPage + (numButtons - 1) > numPages
+      ? numPages
+      : startPage + (numButtons - 1);
+  if (startPage + (numButtons - 1) > numPages) {
+    if (numPages - (numButtons - 1) > 0) {
+      startPage = numPages - (numButtons - 1);
+    }
+  }
+
+  const numArr = _.range(startPage, endPage + 1);
+
   return (
     <div className="flex items-center">
       {!isFirst && (
@@ -35,35 +42,60 @@ const PaginateButtons = ({ data }: { data: PaginateData }) => {
         </Link>
       )}
       <ul className="flex items-center">
-        {Array.from({ length: numPages }, (_, i) => {
+        {console.log(numArr, startPage, endPage, currentPage)}
+        {numArr.map((num, i) => {
           const to = isBlog
-            ? `/blog/${i === 0 ? "" : i + 1}`
-            : `/${categoryName}/${i === 0 ? "" : i + 1}`;
+            ? `/blog/${num === 1 ? "" : num}`
+            : `/${categoryName}/${num === 1 ? "" : num}`;
 
           return (
             <>
-              {currentPage === i + 1 ? (
-                <Link
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    lineHeight: "30px",
-                  }}
-                  key={`pagination-number${i + 1}`}
-                  to={to}
-                  className="flex justify-center items-center mx-1 border-2 border-primary p-0 rounded-full"
-                >
-                  <li>{i + 1}</li>
-                </Link>
+              {currentPage === num ? (
+                <>
+                  {num === numArr[0] ? (
+                    <>{num !== 1 ? <span>. . .</span> : ""}</>
+                  ) : (
+                    ""
+                  )}
+                  <Link
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      lineHeight: "30px",
+                    }}
+                    key={`pagination-number${num}`}
+                    to={to}
+                    className="flex justify-center items-center mx-1 border-2 border-primary p-0 rounded-full"
+                  >
+                    <li>{num}</li>
+                  </Link>
+                  {num === numArr[numButtons - 1] ? (
+                    <>{num !== numPages ? <span>. . .</span> : ""}</>
+                  ) : (
+                    ""
+                  )}
+                </>
               ) : (
-                <Link
-                  key={`pagination-number${i + 1}`}
-                  style={{ width: "25px", height: "25px" }}
-                  to={to}
-                  className="mx-1 flex justify-center"
-                >
-                  <li>{i + 1}</li>
-                </Link>
+                <>
+                  {num === numArr[0] ? (
+                    <>{num !== 1 ? <span>. . .</span> : ""}</>
+                  ) : (
+                    ""
+                  )}
+                  <Link
+                    key={`pagination-number${num}`}
+                    style={{ width: "25px", height: "25px" }}
+                    to={to}
+                    className="mx-1 flex justify-center"
+                  >
+                    <li>{num}</li>
+                  </Link>
+                  {num === numArr[numButtons - 1] ? (
+                    <>{num !== numPages ? <span>. . .</span> : ""}</>
+                  ) : (
+                    ""
+                  )}
+                </>
               )}
             </>
           );
