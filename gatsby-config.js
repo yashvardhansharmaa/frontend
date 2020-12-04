@@ -91,9 +91,9 @@ module.exports = {
         fieldName: "strapi",
         // Url to query from
         url: "http://localhost:1337/graphql",
-        headers: {
-          Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
+        // },
       },
     },
     // {

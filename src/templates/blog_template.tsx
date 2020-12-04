@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 import { format } from "date-fns";
 import Img, { FluidObject, FixedObject } from "gatsby-image";
 import Tag from "../components/Tag";
-import ImageSlider from "../components/ImageSlider";
+// import ImageSlider from "../components/ImageSlider";
 import ImageSliderSlick from "../components/ImageSliderSlick";
 
 const Paragraph = ({ children }: { children: string }) => {
@@ -58,11 +58,12 @@ const Blog = ({ data }: { data: BlogData }) => {
             </h1>
           </div>
           <div className="text-lg leading-relaxed font-body">
-            <ReactMarkdown
+            {/* <ReactMarkdown
               children={blog.body}
               allowDangerousHtml={true}
               renderers={customRenderers}
-            />
+            /> */}
+            <div dangerouslySetInnerHTML={{ __html: blog.body }}></div>
           </div>
           <div className="md:px-0 px-6 py-8">
             {/* TAGS */}

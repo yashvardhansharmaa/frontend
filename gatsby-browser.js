@@ -14,6 +14,7 @@ import "lazysizes";
 import "./src/assets/styles/splide.css";
 
 import mediumZoom from "medium-zoom";
+import ThemeProvider from "./src/components/ThemeProvider";
 
 // Add z-index to images when zoomed,
 // need to do this as it's not available as an option in the medium zoom plugin
@@ -40,3 +41,5 @@ export const onRouteUpdate = () => {
     background: "var(--bg)",
   });
 };
+
+export const wrapRootElement = ThemeProvider;

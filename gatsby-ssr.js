@@ -5,3 +5,6 @@
  */
 
 // You can delete this file if you're not using it
+import ThemeProvider from "./src/components/ThemeProvider";
+
+export const wrapRootElement = ThemeProvider;

@@ -31,7 +31,10 @@ const BigBlogCard = ({
           </div>
           <h1 className="text-4xl py-2 font-heading">{title}</h1>
           <p className="leading-loose">
-            <ReactMarkdown children={body.substring(0, 300)} />
+            {/* <ReactMarkdown children={body.substring(0, 100)} /> */}
+            <div
+              dangerouslySetInnerHTML={{ __html: body.substring(0, 140) }}
+            ></div>
           </p>
         </div>
         <div className="mt-1 md:mt-0 flex">

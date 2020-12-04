@@ -1,5 +1,6 @@
 import React, { FC, Fragment, useState } from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
+import Img, { FixedObject } from "gatsby-image";
 import DarkLightSwitch from "./DarkLightSwitch";
 import Hamburger from "hamburger-react";
 import "../assets/styles/navbar.scss";
@@ -7,6 +8,8 @@ import NavLink from "./NavLink";
 import { FluidObject } from "gatsby-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import ThemeToggler from "./ThemeToggler";
+import { useTheme } from "./ThemeProvider";
 
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +32,27 @@ const Navbar: FC = () => {
             imageFile {
               childImageSharp {
                 fixed(width: 50, height: 50) {
+                  aspectRatio
+                  base64
                   src
+                  srcSet
+                  width
+                  height
+                }
+              }
+            }
+          }
+          logo_black {
+            url
+            imageFile {
+              childImageSharp {
+                fixed(width: 50, height: 50) {
+                  aspectRatio
+                  base64
+                  src
+                  srcSet
+                  width
+                  height
                 }
               }
             }
@@ -125,7 +148,8 @@ const Navbar: FC = () => {
         <Link to="/search">
           <FontAwesomeIcon fillOpacity={0.7} className="mr-4" icon={faSearch} />
         </Link>
-        <DarkLightSwitch />
+        {/* <DarkLightSwitch /> */}
+        <ThemeToggler />
       </nav>
     );
   };
@@ -142,23 +166,32 @@ const Navbar: FC = () => {
         }}
       >
         <RenderNavItems menuItems={menuItems} />
-        <DarkLightSwitch />
+        <ThemeToggler />
       </nav>
     );
   };
 
-  const BrandLogo = () => (
-    <a href="/">
-      {/* <Logo src={logo} alt="" className="mx-3 " /> */}
-      <img
-        src={data.strapi.navbar.logo.imageFile.childImageSharp.fixed.src}
-        alt=""
-      />
-      <div className="md:flex hidden justify-center mx-3">
-        <span className="bg-primary h-100" style={{ width: "2px" }}></span>
-      </div>
-    </a>
-  );
+  const BrandLogo = () => {
+    const { theme } = useTheme();
+    return (
+      <a href="/">
+        {theme ? (
+          <Img
+            fixed={
+              data.strapi.navbar.logo_black.imageFile.childImageSharp.fixed
+            }
+          />
+        ) : (
+          <Img
+            fixed={data.strapi.navbar.logo.imageFile.childImageSharp.fixed}
+          />
+        )}
+        <div className="md:flex hidden justify-center mx-3">
+          <span className="bg-primary h-100" style={{ width: "2px" }}></span>
+        </div>
+      </a>
+    );
+  };
 
   const BrandTitle = () => (
     <a href="/">
@@ -220,9 +253,15 @@ interface NavbarData {
         url: string;
         imageFile: {
           childImageSharp: {
-            fixed: {
-              src: string;
-            };
+            fixed: FixedObject;
+          };
+        };
+      };
+      logo_black: {
+        url: string;
+        imageFile: {
+          childImageSharp: {
+            fixed: FixedObject;
           };
         };
       };

@@ -19,7 +19,7 @@ const PaginateButtons = ({ data }: { data: PaginateData }) => {
     categoryName,
   } = data;
 
-  const numButtons = 5;
+  const numButtons = 3;
   var startPage =
     currentPage < numButtons ? 1 : currentPage - (numButtons - 1) / 2;
   const endPage =

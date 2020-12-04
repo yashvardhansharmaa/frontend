@@ -31,7 +31,10 @@ const BlogCard = ({
         </div>
         <h1 className="text-3xl py-2 font-heading">{title}</h1>
         <p className="leading-relaxed">
-          <ReactMarkdown children={body.substring(0, 140)} />
+          {/* <ReactMarkdown children={body.substring(0, 140)} /> */}
+          <div
+            dangerouslySetInnerHTML={{ __html: body.substring(0, 140) }}
+          ></div>
         </p>
         <div className="flex mt-2">
           <Img
