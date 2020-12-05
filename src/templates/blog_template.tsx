@@ -1,23 +1,19 @@
 import { graphql } from "gatsby";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactMarkdown, { ReactMarkdownProps } from "react-markdown";
 import Author from "../components/Author";
 import Layout from "../components/Layout";
 import { format } from "date-fns";
 import Img, { FluidObject, FixedObject } from "gatsby-image";
 import Tag from "../components/Tag";
-// import ImageSlider from "../components/ImageSlider";
 import ImageSliderSlick from "../components/ImageSliderSlick";
-
-const Paragraph = ({ children }: { children: string }) => {
-  return <p className="md:px-0 px-6 py-4">{children}</p>;
-};
-
-const Image = ({ src, alt }: { src: string; alt: string }) => {
-  return (
-    <img src={src} className="mx-auto medium-zoom" loading="lazy" alt={alt} />
-  );
-};
+import {
+  Image,
+  Paragraph,
+  Heading,
+  HorizontalRule,
+  Blockquote,
+} from "../components/Markdown";
 
 const Blog = ({ data }: { data: BlogData }) => {
   const blog = data.strapi.blog;
@@ -31,7 +27,11 @@ const Blog = ({ data }: { data: BlogData }) => {
   const customRenderers = {
     paragraph: Paragraph,
     image: Image,
+    heading: Heading,
+    thematicBreak: HorizontalRule,
+    blockquote: Blockquote,
   };
+
   return (
     <Layout>
       <div className="flex flex-col items-center maindiv">
@@ -58,12 +58,12 @@ const Blog = ({ data }: { data: BlogData }) => {
             </h1>
           </div>
           <div className="text-lg leading-relaxed font-body">
-            {/* <ReactMarkdown
+            <ReactMarkdown
               children={blog.body}
               allowDangerousHtml={true}
               renderers={customRenderers}
-            /> */}
-            <div dangerouslySetInnerHTML={{ __html: blog.body }}></div>
+            />
+            {/* <div dangerouslySetInnerHTML={{ __html: blog.body }}></div> */}
           </div>
           <div className="md:px-0 px-6 py-8">
             {/* TAGS */}
@@ -85,7 +85,6 @@ const Blog = ({ data }: { data: BlogData }) => {
             />
           </div>
         </div>
-        {/* <ImageSlider shouldRender={shouldRender} /> */}
         <ImageSliderSlick shouldRender={shouldRender} />
       </div>
     </Layout>

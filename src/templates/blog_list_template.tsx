@@ -8,7 +8,12 @@ const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
   pageContext,
 }) => {
   // List of all blogs
-  const posts = data.strapi.blogs.reverse();
+  const posts = data.strapi.blogs.sort(function (a, b) {
+    return (
+      new Date(b.published_date).getDate() -
+      new Date(a.published_date).getDate()
+    );
+  });
 
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;

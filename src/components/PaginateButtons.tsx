@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleRight as regularRightIcon,
@@ -42,14 +42,13 @@ const PaginateButtons = ({ data }: { data: PaginateData }) => {
         </Link>
       )}
       <ul className="flex items-center">
-        {console.log(numArr, startPage, endPage, currentPage)}
         {numArr.map((num, i) => {
           const to = isBlog
             ? `/blog/${num === 1 ? "" : num}`
             : `/${categoryName}/${num === 1 ? "" : num}`;
 
           return (
-            <>
+            <Fragment key={i}>
               {currentPage === num ? (
                 <>
                   {num === numArr[0] ? (
@@ -97,7 +96,7 @@ const PaginateButtons = ({ data }: { data: PaginateData }) => {
                   )}
                 </>
               )}
-            </>
+            </Fragment>
           );
         })}
       </ul>

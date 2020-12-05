@@ -104,7 +104,7 @@ const ImageSliderSlick = ({
         >
           {blogs.reverse().map((blog, i) => {
             return (
-              <div className="md:px-5 px-2">
+              <div key={i} className="md:px-5 px-2">
                 <Link className="" to={`/blog/${blog.slug}`}>
                   <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
                   <h3 className="font-bold text-lg">{blog.title}</h3>

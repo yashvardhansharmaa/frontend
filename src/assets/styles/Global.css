@@ -88,3 +88,24 @@ select:-webkit-autofill:focus {
 .bloghover {
   transition: all 0.5s ease;
 }
+
+blockquote::before {
+  font-family: Arial;
+  content: "\201C";
+  color: var(--primary);
+  font-size: 15em;
+  position: absolute;
+  left: 0;
+  top: -100px;
+  opacity: 0.2;
+}
+
+blockquote {
+  border-left: 6px var(--primary) solid;
+  background-color: var(--fg1);
+}
+
+blockquote p {
+  margin-left: 2rem;
+  font-style: italic;
+}

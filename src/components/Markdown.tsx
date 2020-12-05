@@ -1,0 +1,54 @@
+import React, { ReactNode } from "react";
+
+export const Paragraph = ({ children }: ParaProps) => {
+  return <p className="md:px-0 px-6 py-4">{children}</p>;
+};
+
+export const Image = ({ src, alt }: { src: string; alt: string }) => {
+  return (
+    <img src={src} className="mx-auto medium-zoom" loading="lazy" alt={alt} />
+  );
+};
+
+export const Heading = ({ children, level }: HeadingProps) => (
+  <h1
+    className={`font-heading md:px-0 px-6 pt-4 ${
+      headings[level as keyof HeadingTypes]
+    }`}
+  >
+    {children}
+  </h1>
+);
+
+export const HorizontalRule = () => <hr className="my-5" />;
+
+export const Blockquote = ({ children }: ParaProps) => (
+  <blockquote className="relative my-5">{children}</blockquote>
+);
+
+interface HeadingTypes {
+  1: string;
+  2: string;
+  3: string;
+  4: string;
+  5: string;
+  6: string;
+}
+
+const headings: HeadingTypes = {
+  1: "text-6xl",
+  2: "text-5xl",
+  3: "text-4xl",
+  4: "text-3xl",
+  5: "text-2xl",
+  6: "text-xl",
+};
+
+interface ParaProps {
+  children: string | ReactNode;
+}
+
+interface HeadingProps {
+  children: string | ReactNode;
+  level: number | string;
+}

@@ -37,7 +37,7 @@ const BlogBanner = () => {
       </li>
       {/* List all categories */}
       {categories.map((category, i) => (
-        <li className="md:px-10">
+        <li key={i} className="md:px-10">
           <Link
             activeClassName="opacity-100"
             className="opacity-75 hover:opacity-100"
