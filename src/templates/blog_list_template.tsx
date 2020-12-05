@@ -2,18 +2,14 @@ import { graphql, PageProps } from "gatsby";
 import React, { FC } from "react";
 import { FluidObject } from "gatsby-image";
 import BlogListLayout from "../components/BlogListLayout";
+import compareDates from "../utils/compareDates";
 
 const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
   data,
   pageContext,
 }) => {
   // List of all blogs
-  const posts = data.strapi.blogs.sort(function (a, b) {
-    return (
-      new Date(b.published_date).getDate() -
-      new Date(a.published_date).getDate()
-    );
-  });
+  const posts = data.strapi.blogs.sort((a, b) => compareDates(a, b));
 
   const { currentPage, numPages } = pageContext;
   const isFirst = currentPage === 1;

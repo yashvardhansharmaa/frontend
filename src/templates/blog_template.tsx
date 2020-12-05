@@ -62,8 +62,8 @@ const Blog = ({ data }: { data: BlogData }) => {
               children={blog.body}
               allowDangerousHtml={true}
               renderers={customRenderers}
+              className="blog"
             />
-            {/* <div dangerouslySetInnerHTML={{ __html: blog.body }}></div> */}
           </div>
           <div className="md:px-0 px-6 py-8">
             {/* TAGS */}
@@ -83,6 +83,21 @@ const Blog = ({ data }: { data: BlogData }) => {
               pic={blog.author.pic.imageFile.childImageSharp.fixed}
               about={blog.author.about}
             />
+            <div
+              className="mx-5 mt-2 blog"
+              style={{ borderBottom: "1px solid var(--author-border)" }}
+            >
+              <h1 className="font-heading text-4xl text-center">References</h1>
+              <div className="w-1/2 p-2 flex flex-row justify-center mx-auto">
+                <ul className="list-disc">
+                  {blog.References.map(({ display_text, url }) => (
+                    <li className="py-2">
+                      <a href={url}>{display_text}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         <ImageSliderSlick shouldRender={shouldRender} />
@@ -120,6 +135,10 @@ export const query = graphql`
         }
         body
         published_date
+        References {
+          display_text
+          url
+        }
         author {
           name
           about
@@ -171,6 +190,10 @@ interface BlogData {
       };
       tags: {
         name: string;
+      }[];
+      References: {
+        display_text: string;
+        url: string;
       }[];
     };
   };

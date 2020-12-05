@@ -109,3 +109,26 @@ blockquote p {
   margin-left: 2rem;
   font-style: italic;
 }
+
+.blog a {
+  border: 3px var(--bg) solid;
+  border-bottom: 3px var(--primary-75) solid;
+  transition: background-color 0.4s, border 0.4s, color 0.4s;
+}
+
+.blog a:hover {
+  border: 3px var(--primary-75) solid;
+  background-color: var(--primary-75);
+  color: var(--text-primary);
+}
+/* 
+.box {
+  width: 200px; height: 100px;
+  background-size: 100% 200%;
+  background-image: linear-gradient(to bottom, red 50%, black 50%);
+  transition: background-position 1s;
+}
+
+.box:hover {
+  background-position: 0 -100%;
+} */

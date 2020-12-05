@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import logo from "../assets/logo.png";
+import Img, { FixedObject } from "gatsby-image";
+import { useTheme } from "./ThemeProvider";
 
 interface FooterData {
   strapi: {
@@ -17,6 +18,24 @@ interface FooterData {
       facebook_link: string;
       instagram_link: string;
       linkedin_link: string;
+    };
+    navbar: {
+      logo: {
+        url: string;
+        imageFile: {
+          childImageSharp: {
+            fixed: FixedObject;
+          };
+        };
+      };
+      logo_black: {
+        url: string;
+        imageFile: {
+          childImageSharp: {
+            fixed: FixedObject;
+          };
+        };
+      };
     };
   };
 }
@@ -39,6 +58,38 @@ const Footer = () => {
           instagram_link
           linkedin_link
         }
+        navbar {
+          logo {
+            url
+            imageFile {
+              childImageSharp {
+                fixed(width: 25, height: 25) {
+                  aspectRatio
+                  base64
+                  src
+                  srcSet
+                  width
+                  height
+                }
+              }
+            }
+          }
+          logo_black {
+            url
+            imageFile {
+              childImageSharp {
+                fixed(width: 25, height: 25) {
+                  aspectRatio
+                  base64
+                  src
+                  srcSet
+                  width
+                  height
+                }
+              }
+            }
+          }
+        }
       }
     }
   `);
@@ -55,11 +106,11 @@ const Footer = () => {
       linkedin_link,
     },
     footerItems,
+    navbar: { logo, logo_black },
   } = data.strapi;
 
   const FooterItems = () => (
     <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-      {/* {console.log(data.allStrapiFooter)} */}
       {footerItems.map((item, i: number) => {
         const { heading, sub_item } = item;
         return (
@@ -82,12 +133,25 @@ const Footer = () => {
     </div>
   );
 
+  const { theme } = useTheme();
+
   return (
     <footer className="text-white body-font bg-ft2 shadow-1dp">
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <a className="flex title-font font-medium items-center md:justify-start justify-center">
-            <img src={logo} style={{ height: "25px", width: "25px" }} alt="" />
+            {/* <img src={logo} style={{ height: "25px", width: "25px" }} alt="" /> */}
+            {theme ? (
+              <Img
+                fixed={
+                  data.strapi.navbar.logo_black.imageFile.childImageSharp.fixed
+                }
+              />
+            ) : (
+              <Img
+                fixed={data.strapi.navbar.logo.imageFile.childImageSharp.fixed}
+              />
+            )}
             <span className="ml-3 text-xl">{company}</span>
           </a>
           <p className="mt-2 text-sm">{description}</p>

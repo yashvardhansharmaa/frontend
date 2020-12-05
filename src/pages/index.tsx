@@ -11,6 +11,8 @@ import MainFade from "../components/MainFade";
 import Img, { FluidObject } from "gatsby-image";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import compareDates from "../utils/compareDates";
+import { useTheme } from "../components/ThemeProvider";
 
 const IndexPage: FC<PageProps> = () => {
   const data = useStaticQuery<Data>(graphql`
@@ -23,6 +25,20 @@ const IndexPage: FC<PageProps> = () => {
           countries_reached
           articles_published
           logo {
+            url
+            imageFile {
+              childImageSharp {
+                fluid {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                }
+              }
+            }
+          }
+          logo_black {
             url
             imageFile {
               childImageSharp {
@@ -79,7 +95,7 @@ const IndexPage: FC<PageProps> = () => {
           }
         }
 
-        blogs(where: { status: "published" }, sort: "published_date") {
+        blogs(where: { status: "published" }) {
           slug
           title
           published_at
@@ -124,11 +140,12 @@ const IndexPage: FC<PageProps> = () => {
     }
   `);
 
-  var blogs = data.strapi.blogs;
-  var featuredBlogs = data.strapi.home.blogs;
-  blogs = blogs.slice(0, 4).reverse();
-  console.log(blogs);
-  const latestBlog = blogs[0];
+  const { theme } = useTheme();
+
+  var featuredBlogs = data.strapi.home.blogs.sort((a, b) => compareDates(a, b));
+  const sortedBlogs = data.strapi.blogs
+    .sort((a, b) => compareDates(a, b))
+    .slice(0, 4);
 
   return (
     <Layout>
@@ -137,10 +154,10 @@ const IndexPage: FC<PageProps> = () => {
         <div>
           <h1 className="font-heading text-5xl">Recent Articles</h1>
           <MainFade>
-            <BigBlogCard content={latestBlog} />
+            <BigBlogCard content={sortedBlogs[0]} />
           </MainFade>
           <PostListContainer>
-            {blogs.map((blog, i) => {
+            {sortedBlogs.map((blog, i) => {
               if (i === 0) return "";
               return <BlogCard key={i} content={blog} />;
             })}
@@ -160,10 +177,19 @@ const IndexPage: FC<PageProps> = () => {
         <Container className="flex flex-col items-center">
           <MainFade>
             <div className="md:w-1/5 w-1/4 mt-10">
-              <Img
-                fluid={data.strapi.home.logo.imageFile.childImageSharp.fluid}
-                className="w-full"
-              />
+              {theme ? (
+                <Img
+                  fluid={
+                    data.strapi.home.logo_black.imageFile.childImageSharp.fluid
+                  }
+                  className="w-full"
+                />
+              ) : (
+                <Img
+                  fluid={data.strapi.home.logo.imageFile.childImageSharp.fluid}
+                  className="w-full"
+                />
+              )}
             </div>
             <Heading className="">Tidings Media</Heading>
             <p className="text-lg text-center">
@@ -281,6 +307,13 @@ interface Data {
       articles_published: string;
       blogs: BlogListDataNode[];
       logo: {
+        imageFile: {
+          childImageSharp: {
+            fluid: FluidObject;
+          };
+        };
+      };
+      logo_black: {
         imageFile: {
           childImageSharp: {
             fluid: FluidObject;
