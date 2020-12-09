@@ -22,6 +22,18 @@ export const Heading = ({ children, level }: HeadingProps) => (
 
 export const HorizontalRule = () => <hr className="my-5" />;
 
+export const Link = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) => (
+  <a rel="noopener noreferrer" target="_blank" href={href}>
+    {children}
+  </a>
+);
+
 export const Blockquote = ({ children }: ParaProps) => (
   <blockquote className="relative my-5">{children}</blockquote>
 );

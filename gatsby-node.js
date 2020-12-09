@@ -1,3 +1,8 @@
+const comparesDates = (a, b) => {
+  // b - a, since I want descending
+  return +new Date(b.published_date) - +new Date(a.published_date);
+};
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -5,7 +10,7 @@ exports.createPages = async ({ graphql, actions }) => {
     `
       {
         blogs: strapi {
-          blogs(where: { status: "published" }, sort: "publsihed_date") {
+          blogs {
             slug
             id
           }
@@ -43,7 +48,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Create page for each blog
-  const blogs = result.data.blogs.blogs.reverse();
+  const blogs = result.data.blogs.blogs.sort((a, b) => comparesDates(a, b));
   const BlogTemplate = require.resolve("./src/templates/blog_template.tsx");
   blogs.forEach((blog, index) => {
     createPage({

@@ -12,7 +12,13 @@ import "./layout.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,13 +30,13 @@ const Layout = ({ children }: { children: ReactNode }) => {
   `);
 
   return (
-    <>
+    <div className={className}>
       <Navbar />
       <div>
         <main>{children}</main>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

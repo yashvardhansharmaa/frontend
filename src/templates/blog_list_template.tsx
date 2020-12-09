@@ -35,7 +35,7 @@ export const blogListQuery = graphql`
     strapi {
       blogs(limit: $limit, start: $start, sort: "published_date") {
         slug
-        body
+        excerpt
         title
         author {
           name
@@ -96,7 +96,7 @@ export interface BlogListDataNode {
       };
     };
   };
-  body: string;
+  excerpt: string;
   category: {
     name: string;
   };

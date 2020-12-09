@@ -13,6 +13,7 @@ import {
   Heading,
   HorizontalRule,
   Blockquote,
+  Link,
 } from "../components/Markdown";
 
 const Blog = ({ data }: { data: BlogData }) => {
@@ -30,10 +31,12 @@ const Blog = ({ data }: { data: BlogData }) => {
     heading: Heading,
     thematicBreak: HorizontalRule,
     blockquote: Blockquote,
+    link: Link,
   };
 
   return (
     <Layout>
+      {/* {console.log(ReactMarkdown.renderers)} */}
       <div className="flex flex-col items-center maindiv">
         <div className="container md:px-20 lg:px-48">
           <div className="pt-10 flex justify-center items-center">

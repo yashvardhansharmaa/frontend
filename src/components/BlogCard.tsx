@@ -5,11 +5,11 @@ import Img, { FluidObject } from "gatsby-image";
 import { Link } from "gatsby";
 import { BlogListDataNode } from "../templates/blog_list_template";
 import { capitalize } from "../utils";
-const Fade = require("react-reveal/Fade");
 import MainFade from "./MainFade";
+import { cardCustomRenderers } from "./BigBlogCard";
 
 const BlogCard = ({
-  content: { author, category, cover, published_date, title, body, slug },
+  content: { author, category, cover, published_date, title, excerpt, slug },
 }: {
   content: BlogListDataNode;
 }) => (
@@ -31,10 +31,7 @@ const BlogCard = ({
         </div>
         <h1 className="text-3xl py-2 font-heading">{title}</h1>
         <p className="leading-relaxed">
-          {/* <ReactMarkdown children={body.substring(0, 140)} /> */}
-          <div
-            dangerouslySetInnerHTML={{ __html: body.substring(0, 140) }}
-          ></div>
+          <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
         </p>
         <div className="flex mt-2">
           <Img

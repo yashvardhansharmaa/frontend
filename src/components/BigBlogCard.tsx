@@ -6,8 +6,12 @@ import { capitalize } from "../utils";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 
+export const cardCustomRenderers = {
+  image: () => null,
+};
+
 const BigBlogCard = ({
-  content: { author, category, cover, published_date, title, body, slug },
+  content: { author, category, cover, published_date, title, excerpt, slug },
 }: {
   content: BlogListDataNode;
 }) => (
@@ -31,10 +35,7 @@ const BigBlogCard = ({
           </div>
           <h1 className="text-4xl py-2 font-heading">{title}</h1>
           <p className="leading-loose">
-            {/* <ReactMarkdown children={body.substring(0, 100)} /> */}
-            <div
-              dangerouslySetInnerHTML={{ __html: body.substring(0, 140) }}
-            ></div>
+            <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
           </p>
         </div>
         <div className="mt-1 md:mt-0 flex">
