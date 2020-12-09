@@ -8,10 +8,7 @@ module.exports = {
   siteMetadata: {
     title: `Tidings Media`,
     description: `Where we discuss economics, history, and everything in between.`,
-    // author: ``,
     siteUrl: "http://localhost:8000",
-    image:
-      "https://images.unsplash.com/photo-1496989981497-27d69cdad83e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=844&q=80",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -54,7 +51,6 @@ module.exports = {
                 defaultTitle: title
                 description
                 siteUrl
-                defaultImage: image
               }
             }
           }
@@ -134,24 +130,5 @@ module.exports = {
         footerHeight: 500,
       },
     },
-    // {
-    //   resolve: `gatsby-transformer-remark`,
-    //   options: {
-    //     plugins: [
-    //       {
-    //         resolve: `gatsby-remark-images`,
-    //         options: {
-    //           // It's important to specify the maxWidth (in pixels) of
-    //           // the content container as this plugin uses this as the
-    //           // base for generating different widths of each image.
-    //           maxWidth: 1300,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 };

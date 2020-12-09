@@ -13,6 +13,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import compareDates from "../utils/compareDates";
 import { useTheme } from "../components/ThemeProvider";
+import SEO from "../components/seo";
 
 const IndexPage: FC<PageProps> = () => {
   const data = useStaticQuery<Data>(graphql`
@@ -26,6 +27,8 @@ const IndexPage: FC<PageProps> = () => {
           articles_published
           logo {
             url
+            height
+            width
             imageFile {
               childImageSharp {
                 fluid {
@@ -142,6 +145,7 @@ const IndexPage: FC<PageProps> = () => {
 
   const { theme } = useTheme();
 
+  const { url, height, width } = data.strapi.home.logo;
   var featuredBlogs = data.strapi.home.blogs.sort((a, b) => compareDates(a, b));
   const sortedBlogs = data.strapi.blogs
     .sort((a, b) => compareDates(a, b))
@@ -149,6 +153,7 @@ const IndexPage: FC<PageProps> = () => {
 
   return (
     <Layout>
+      <SEO title="Home" image={{ url, height, width }} />
       <Container>
         {/* RECENT */}
         <div>
@@ -307,6 +312,9 @@ interface Data {
       articles_published: string;
       blogs: BlogListDataNode[];
       logo: {
+        height: number;
+        width: number;
+        url: string;
         imageFile: {
           childImageSharp: {
             fluid: FluidObject;

@@ -148,7 +148,6 @@ const Navbar: FC = () => {
         <Link to="/search">
           <FontAwesomeIcon fillOpacity={0.7} className="mr-4" icon={faSearch} />
         </Link>
-        {/* <DarkLightSwitch /> */}
         <ThemeToggler />
       </nav>
     );
@@ -223,7 +222,7 @@ const Navbar: FC = () => {
         )}
         <span className="md:hidden flex items-center block">
           <Link to="/search">
-            <FontAwesomeIcon className="mr-2" icon={faSearch} />
+            <FontAwesomeIcon className="mr-4" icon={faSearch} />
           </Link>
           <Hamburger
             toggled={isOpen}

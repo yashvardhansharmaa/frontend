@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import Img, { FixedObject } from "gatsby-image";
 import { useTheme } from "./ThemeProvider";
 
@@ -139,7 +139,10 @@ const Footer = () => {
     <footer className="text-white body-font bg-ft2 shadow-1dp">
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-          <a className="flex title-font font-medium items-center md:justify-start justify-center">
+          <Link
+            to="/"
+            className="flex title-font font-medium items-center md:justify-start justify-center"
+          >
             {/* <img src={logo} style={{ height: "25px", width: "25px" }} alt="" /> */}
             {theme ? (
               <Img
@@ -153,7 +156,7 @@ const Footer = () => {
               />
             )}
             <span className="ml-3 text-xl">{company}</span>
-          </a>
+          </Link>
           <p className="mt-2 text-sm">{description}</p>
         </div>
         {FooterItems()}

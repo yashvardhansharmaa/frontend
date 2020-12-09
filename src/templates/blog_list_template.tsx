@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { FluidObject } from "gatsby-image";
 import BlogListLayout from "../components/BlogListLayout";
 import compareDates from "../utils/compareDates";
+import SEO from "../components/seo";
 
 const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
   data,
@@ -27,7 +28,13 @@ const blog_list: FC<PageProps<BlogListData, PageContextType>> = ({
     isBlog: true,
   };
 
-  return <BlogListLayout posts={posts} paginateData={paginateData} />;
+  return (
+    <>
+      {/* TODO */}
+      <SEO title="Blogs" />
+      <BlogListLayout posts={posts} paginateData={paginateData} />
+    </>
+  );
 };
 
 export const blogListQuery = graphql`

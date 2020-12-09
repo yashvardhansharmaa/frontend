@@ -1,11 +1,10 @@
 import { graphql, PageProps } from "gatsby";
 import { FluidObject } from "gatsby-image";
 import React, { FC } from "react";
-import BlogCard from "../components/BlogCard";
 import BlogListLayout from "../components/BlogListLayout";
-import Container from "../components/Container";
-import Layout from "../components/Layout";
-import PostListContainer from "../components/PostListContainer";
+import SEO from "../components/seo";
+import { capitalize } from "../utils";
+import compareDates from "../utils/compareDates";
 import { PageContextType } from "./blog_list_template";
 
 const category: FC<PageProps<categoryData, PageContextType>> = ({
@@ -31,7 +30,16 @@ const category: FC<PageProps<categoryData, PageContextType>> = ({
     isBlog: false,
     categoryName: name,
   };
-  return <BlogListLayout posts={blogs.reverse()} paginateData={paginateData} />;
+
+  const posts = blogs.sort((a, b) => compareDates(a, b));
+  const { url, height, width } = data.strapi.home.logo;
+
+  return (
+    <>
+      <SEO title={capitalize(name)} image={{ url, height, width }} />
+      <BlogListLayout posts={posts} paginateData={paginateData} />
+    </>
+  );
 };
 
 export default category;
@@ -39,11 +47,18 @@ export default category;
 export const query = graphql`
   query CategoryQuery($id: ID!, $start: Int!, $limit: Int!) {
     strapi {
+      home {
+        logo {
+          url
+          height
+          width
+        }
+      }
       category(id: $id) {
         name
         blogs(limit: $limit, start: $start, sort: "published_date") {
           slug
-          body
+          excerpt
           title
           author {
             name
@@ -88,11 +103,18 @@ export const query = graphql`
 
 interface categoryData {
   strapi: {
+    home: {
+      logo: {
+        url: string;
+        height: number;
+        width: number;
+      };
+    };
     category: {
       name: string;
       blogs: {
         slug: string;
-        body: string;
+        excerpt: string;
         title: string;
         author: {
           name: string;

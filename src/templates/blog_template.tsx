@@ -1,6 +1,6 @@
 import { graphql } from "gatsby";
-import React, { useEffect, useRef, useState } from "react";
-import ReactMarkdown, { ReactMarkdownProps } from "react-markdown";
+import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import Author from "../components/Author";
 import Layout from "../components/Layout";
 import { format } from "date-fns";
@@ -15,6 +15,7 @@ import {
   Blockquote,
   Link,
 } from "../components/Markdown";
+import SEO from "../components/seo";
 
 const Blog = ({ data }: { data: BlogData }) => {
   const blog = data.strapi.blog;
@@ -34,9 +35,21 @@ const Blog = ({ data }: { data: BlogData }) => {
     link: Link,
   };
 
+  const imageObj = {
+    url: blog.cover.url,
+    height: blog.cover.height,
+    width: blog.cover.width,
+  };
+
   return (
     <Layout>
-      {/* {console.log(ReactMarkdown.renderers)} */}
+      <SEO
+        title={blog.title}
+        blog={true}
+        description={blog.excerpt}
+        image={imageObj}
+        author={blog.author.name}
+      />
       <div className="flex flex-col items-center maindiv">
         <div className="container md:px-20 lg:px-48">
           <div className="pt-10 flex justify-center items-center">
@@ -121,6 +134,8 @@ export const query = graphql`
         }
         cover {
           url
+          width
+          height
           imageFile {
             childImageSharp {
               fluid {
@@ -137,6 +152,7 @@ export const query = graphql`
           name
         }
         body
+        excerpt
         published_date
         References {
           display_text
@@ -169,6 +185,9 @@ interface BlogData {
     blog: {
       title: string;
       cover: {
+        url: string;
+        height: number;
+        width: number;
         imageFile: {
           childImageSharp: {
             fluid: FluidObject;
@@ -176,6 +195,7 @@ interface BlogData {
         };
       };
       body: string;
+      excerpt: string;
       published_date: string;
       category: {
         name: string;
