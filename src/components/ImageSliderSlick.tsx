@@ -1,5 +1,4 @@
 import React from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import { BlogListDataNode } from "../templates/blog_list_template";
 import Img from "gatsby-image";
@@ -42,7 +41,7 @@ const ImageSliderSlick = ({
           category {
             name
           }
-          body
+          excerpt
           author {
             name
             pic {
@@ -109,7 +108,7 @@ const ImageSliderSlick = ({
                   <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
                   <h3 className="font-bold text-lg">{blog.title}</h3>
                   <p className="text-xs py-1">
-                    <ReactMarkdown children={`${blog.body.slice(0, 100)}...`} />
+                    <ReactMarkdown children={`${blog.excerpt}...`} />
                   </p>
                 </Link>
               </div>

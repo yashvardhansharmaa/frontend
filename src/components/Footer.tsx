@@ -18,6 +18,7 @@ interface FooterData {
       facebook_link: string;
       instagram_link: string;
       linkedin_link: string;
+      twitter_link?: string;
     };
     navbar: {
       logo: {
@@ -41,7 +42,7 @@ interface FooterData {
 }
 
 const Footer = () => {
-  const data: FooterData = useStaticQuery(graphql`
+  const data = useStaticQuery<FooterData>(graphql`
     query Footer {
       strapi {
         footerItems {
@@ -57,6 +58,7 @@ const Footer = () => {
           facebook_link
           instagram_link
           linkedin_link
+          twitter_link
         }
         navbar {
           logo {
@@ -94,9 +96,6 @@ const Footer = () => {
     }
   `);
 
-  // const footerItems = data.allStrapiFooterItem.edges;
-  // const { company, description } = data.allStrapiFooter.edges[0].node;
-  // const footer = data.allStrapiFooter.edges[0].node;
   const {
     footer: {
       company,
@@ -104,6 +103,7 @@ const Footer = () => {
       facebook_link,
       instagram_link,
       linkedin_link,
+      twitter_link,
     },
     footerItems,
     navbar: { logo, logo_black },
@@ -136,24 +136,17 @@ const Footer = () => {
   const { theme } = useTheme();
 
   return (
-    <footer className="text-white body-font bg-ft2 shadow-1dp">
+    <footer className="text-white body-font relative z-100 bg-ft2 shadow-1dp">
       <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <Link
             to="/"
             className="flex title-font font-medium items-center md:justify-start justify-center"
           >
-            {/* <img src={logo} style={{ height: "25px", width: "25px" }} alt="" /> */}
             {theme ? (
-              <Img
-                fixed={
-                  data.strapi.navbar.logo_black.imageFile.childImageSharp.fixed
-                }
-              />
+              <Img fixed={logo_black.imageFile.childImageSharp.fixed} />
             ) : (
-              <Img
-                fixed={data.strapi.navbar.logo.imageFile.childImageSharp.fixed}
-              />
+              <Img fixed={logo.imageFile.childImageSharp.fixed} />
             )}
             <span className="ml-3 text-xl">{company}</span>
           </Link>
@@ -164,7 +157,7 @@ const Footer = () => {
       <div className="bg-ft1 shadow-2dp">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
           <p className="text-gray-500 text-sm text-center sm:text-left">
-            © {new Date().getFullYear()} tidingsmedia
+            © {new Date().getFullYear()} {company}
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
             {/* FACEBOOK */}
@@ -181,18 +174,23 @@ const Footer = () => {
               </svg>
             </a>
             {/* TWITTER */}
-            {/* <a className="ml-3 text-gray-500">
-              <svg
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-              </svg>
-            </a> */}
+            {twitter_link ? (
+              <a href={twitter_link} className="ml-3 text-gray-500">
+                <svg
+                  fill="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                </svg>
+              </a>
+            ) : (
+              ""
+            )}
+
             {/* INSTAGRAM */}
             <a href={instagram_link} className="ml-3 text-gray-500">
               <svg

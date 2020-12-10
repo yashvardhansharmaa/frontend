@@ -1,5 +1,6 @@
 declare module "*.png";
 declare module "*.svg";
+
 declare module "react-dark-mode-toggle" {
   import React from "react";
   declare type Props = {
