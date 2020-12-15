@@ -1,7 +1,25 @@
 import React, { ReactNode } from "react";
 
 export const Paragraph = ({ children }: ParaProps) => {
-  return <p className="md:px-0 px-6 py-4">{children}</p>;
+  return <p className="md:px-0 text-2xl px-6 py-4">{children}</p>;
+};
+
+export const List = ({
+  children,
+  ordered,
+}: {
+  children: string;
+  ordered: boolean;
+}) => {
+  return (
+    <>
+      {ordered ? (
+        <ol className="text-2xl list-decimal ml-20">{children}</ol>
+      ) : (
+        <ul className="text-2xl list-disc ml-20">{children}</ul>
+      )}
+    </>
+  );
 };
 
 export const Image = ({ src, alt }: { src: string; alt: string }) => {
@@ -12,7 +30,7 @@ export const Image = ({ src, alt }: { src: string; alt: string }) => {
 
 export const Heading = ({ children, level }: HeadingProps) => (
   <h1
-    className={`font-heading md:px-0 px-6 pt-4 ${
+    className={`font-subheading tracking-tight md:px-0 px-6 pt-4 ${
       headings[level as keyof HeadingTypes]
     }`}
   >

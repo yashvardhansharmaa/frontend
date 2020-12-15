@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:ital,wght@0,400;0,700;1,400&display=swap");
+@import "./fonts.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 body {
   --bg: #fff;
@@ -27,6 +27,9 @@ body {
   --p25: #e0e0e0; /* 300 */
   --gray-btn: #4a5568;
   --gray-btn-hover: #718096;
+  --font-heading: "Radley", "Times New Roman", "Times", "serif";
+  --font-body: "Charter", "Times New Roman", "Times", "serif";
+  --font-subheading: "Montserrat", "sans-serif";
 }
 
 body.dark {

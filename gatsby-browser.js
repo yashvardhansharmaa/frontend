@@ -20,7 +20,7 @@ import ThemeProvider from "./src/components/ThemeProvider";
 // need to do this as it's not available as an option in the medium zoom plugin
 export const onClientEntry = () => {
   // const { zIndex } = { ...defaultOptions, ...pluginOptions };
-  const zIndex = 20;
+  const zIndex = 200;
 
   // Inject styles.
   const styles = `

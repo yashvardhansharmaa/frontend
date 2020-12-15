@@ -30,12 +30,14 @@ const Layout = ({
   `);
 
   return (
-    <div className={className}>
+    <div className={`relative ${className}`}>
       <Navbar />
       <div>
         <main>{children}</main>
       </div>
+      {/* <div className="relative"> */}
       <Footer />
+      {/* </div> */}
     </div>
   );
 };

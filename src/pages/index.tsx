@@ -15,134 +15,7 @@ import compareDates from "../utils/compareDates";
 import { useTheme } from "../components/ThemeProvider";
 import SEO from "../components/seo";
 
-const IndexPage: FC<PageProps> = () => {
-  const data = useStaticQuery<Data>(graphql`
-    query RecentQuery {
-      strapi {
-        home {
-          company
-          desciption
-          people_reached
-          countries_reached
-          articles_published
-          logo {
-            url
-            height
-            width
-            imageFile {
-              childImageSharp {
-                fluid {
-                  aspectRatio
-                  base64
-                  sizes
-                  src
-                  srcSet
-                }
-              }
-            }
-          }
-          logo_black {
-            url
-            imageFile {
-              childImageSharp {
-                fluid {
-                  aspectRatio
-                  base64
-                  sizes
-                  src
-                  srcSet
-                }
-              }
-            }
-          }
-          blogs(where: { status: "published" }, sort: "published_date") {
-            slug
-            title
-            published_at
-            cover {
-              url
-              imageFile {
-                childImageSharp {
-                  fluid {
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                  }
-                }
-              }
-            }
-            category {
-              name
-            }
-            body
-            published_date
-            author {
-              name
-              pic {
-                url
-                imageFile {
-                  childImageSharp {
-                    fluid(maxHeight: 80, maxWidth: 80) {
-                      aspectRatio
-                      base64
-                      sizes
-                      src
-                      srcSet
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        blogs(where: { status: "published" }) {
-          slug
-          title
-          published_at
-          cover {
-            url
-            imageFile {
-              childImageSharp {
-                fluid {
-                  aspectRatio
-                  base64
-                  sizes
-                  src
-                  srcSet
-                }
-              }
-            }
-          }
-          category {
-            name
-          }
-          body
-          published_date
-          author {
-            name
-            pic {
-              url
-              imageFile {
-                childImageSharp {
-                  fluid(maxHeight: 80, maxWidth: 80) {
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
-
+const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const { theme } = useTheme();
 
   const { url, height, width } = data.strapi.home.logo;
@@ -238,7 +111,7 @@ const IndexPage: FC<PageProps> = () => {
                   </Link>
                 </div>
               </div>
-              <div className="flex flex-col md:m-0 mb-4 justify-end justify-center items-center">
+              <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
                 <p
                   style={{ opacity: "0.6" }}
                   className="font-heading text-5xl md:text-6xl"
@@ -254,7 +127,7 @@ const IndexPage: FC<PageProps> = () => {
                   </Link>
                 </div>
               </div>
-              <div className="md:hidden flex justify-center mt-6 block">
+              <div className="md:hidden flex justify-center mt-6">
                 <Link to="/blog">
                   <button className="bg-primary py-2 px-4 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-lg">
                     Start Reading!
@@ -333,3 +206,130 @@ interface Data {
 }
 
 export default IndexPage;
+
+export const indexQuery = graphql`
+  query IndexQuery {
+    strapi {
+      home {
+        company
+        desciption
+        people_reached
+        countries_reached
+        articles_published
+        logo {
+          url
+          height
+          width
+          imageFile {
+            childImageSharp {
+              fluid {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
+              }
+            }
+          }
+        }
+        logo_black {
+          url
+          imageFile {
+            childImageSharp {
+              fluid {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
+              }
+            }
+          }
+        }
+        blogs(where: { status: "published" }, sort: "published_date") {
+          slug
+          title
+          published_at
+          cover {
+            url
+            imageFile {
+              childImageSharp {
+                fluid {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                }
+              }
+            }
+          }
+          category {
+            name
+          }
+          excerpt
+          published_date
+          author {
+            name
+            pic {
+              url
+              imageFile {
+                childImageSharp {
+                  fluid(maxHeight: 80, maxWidth: 80) {
+                    aspectRatio
+                    base64
+                    sizes
+                    src
+                    srcSet
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      blogs(where: { status: "published" }) {
+        slug
+        title
+        published_at
+        cover {
+          url
+          imageFile {
+            childImageSharp {
+              fluid {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
+              }
+            }
+          }
+        }
+        category {
+          name
+        }
+        excerpt
+        published_date
+        author {
+          name
+          pic {
+            url
+            imageFile {
+              childImageSharp {
+                fluid(maxHeight: 80, maxWidth: 80) {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

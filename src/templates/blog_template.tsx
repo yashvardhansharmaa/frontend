@@ -14,9 +14,22 @@ import {
   HorizontalRule,
   Blockquote,
   Link,
+  List,
 } from "../components/Markdown";
 import SEO from "../components/seo";
 import ShareButtons from "../components/ShareButtons";
+import { capitalize } from "../utils";
+
+// Custom Elements for React Markdown
+export const customRenderers = {
+  paragraph: Paragraph,
+  image: Image,
+  heading: Heading,
+  thematicBreak: HorizontalRule,
+  blockquote: Blockquote,
+  link: Link,
+  list: List,
+};
 
 const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
   const blog = data.strapi.blog;
@@ -28,16 +41,6 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
   useEffect(() => {
     setShouldRender(true);
   }, []);
-
-  // Custom Elements for React Markdown
-  const customRenderers = {
-    paragraph: Paragraph,
-    image: Image,
-    heading: Heading,
-    thematicBreak: HorizontalRule,
-    blockquote: Blockquote,
-    link: Link,
-  };
 
   const imageObj = {
     url: blog.cover.url,
@@ -54,15 +57,15 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
         image={imageObj}
         author={blog.author.name}
       />
+      <ShareButtons
+        url={location.href}
+        title={`Read this article by ${company} on ${blog.title}`}
+        tags={tagsList}
+        className="fixed xl:ml-32 ml-20 lg:flex hidden flex-col"
+        style={{ top: "40%", zIndex: 1 }}
+        childClassName="mb-4"
+      />
       <div className="maindiv relative">
-        <ShareButtons
-          url={location.href}
-          title={`Read this article by ${company} on ${blog.title}`}
-          tags={tagsList}
-          className="fixed z-10 xl:ml-32 ml-20 lg:flex hidden flex-col"
-          style={{ top: "40%" }}
-          childClassName="mb-4"
-        />
         <div className="flex flex-col items-center relative">
           <div className="container md:px-20 lg:px-48">
             <div className="pt-10 flex justify-center items-center">
@@ -73,7 +76,7 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
                 alt="Cover Image"
               />
             </div>
-            <div className="flex flex-col justify-center items-center my-10">
+            <div className="flex flex-col justify-center items-center mt-10 mb-5">
               <div
                 className="flex justify-start opacity-75 text-sm items-start w-full md:px-0 px-5"
                 style={{
@@ -82,7 +85,7 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
               >
                 {format(Date.parse(blog.published_date), "MMM d, Y")}
               </div>
-              <h1 className="md:text-6xl text-5xl mx-6 text-center md:mx-0 my-5 font-heading">
+              <h1 className="md:text-7xl text-5xl mx-6 text-center md:mx-0 mt-5 font-heading">
                 {blog.title}
               </h1>
             </div>
