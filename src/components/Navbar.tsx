@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import ThemeToggler from "./ThemeToggler";
 import { useTheme } from "./ThemeProvider";
+import NoImage from "./NoImage";
 
 const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -175,15 +176,27 @@ const Navbar: FC = () => {
     return (
       <a href="/">
         {theme ? (
-          <Img
-            fixed={
-              data.strapi.navbar.logo_black.imageFile.childImageSharp.fixed
-            }
-          />
+          <>
+            {data.strapi.navbar.logo_black.imageFile ? (
+              <Img
+                fixed={
+                  data.strapi.navbar.logo_black.imageFile.childImageSharp.fixed
+                }
+              />
+            ) : (
+              <NoImage />
+            )}
+          </>
         ) : (
-          <Img
-            fixed={data.strapi.navbar.logo.imageFile.childImageSharp.fixed}
-          />
+          <>
+            {data.strapi.navbar.logo.imageFile ? (
+              <Img
+                fixed={data.strapi.navbar.logo.imageFile.childImageSharp.fixed}
+              />
+            ) : (
+              <NoImage />
+            )}
+          </>
         )}
         <div className="md:flex hidden justify-center mx-3">
           <span className="bg-primary h-100" style={{ width: "2px" }}></span>

@@ -1,6 +1,7 @@
 import React from "react";
 import Img, { FixedObject } from "gatsby-image";
 import { Link } from "gatsby";
+import NoImage from "./NoImage";
 
 const Author = ({
   name,
@@ -22,11 +23,16 @@ const Author = ({
           width: "calc(100% - 40px)",
         }}
       >
-        <Img
-          fixed={pic}
-          className="rounded-full w-12 h-12 md:w-16 md:h-16"
-          alt={name}
-        />
+        {pic ? (
+          <Img
+            fixed={pic}
+            className="rounded-full w-12 h-12 md:w-16 md:h-16"
+            alt={name}
+          />
+        ) : (
+          <NoImage />
+        )}
+
         {/* </div> */}
         <div className="px-2 md:px-6">
           <p className="text-lg font-bold mb-2">{name}</p>

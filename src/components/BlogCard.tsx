@@ -7,6 +7,7 @@ import { BlogListDataNode } from "../templates/blog_list_template";
 import { capitalize } from "../utils";
 import MainFade from "./MainFade";
 import { cardCustomRenderers } from "./BigBlogCard";
+import NoImage from "./NoImage";
 
 const BlogCard = ({
   content: { author, category, cover, published_date, title, excerpt, slug },
@@ -34,11 +35,15 @@ const BlogCard = ({
           <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
         </p>
         <div className="flex mt-2">
-          <Img
-            className="h-8 w-8 rounded-full"
-            fluid={author.pic.imageFile.childImageSharp.fluid}
-            alt={author.name}
-          />
+          {author.pic.imageFile ? (
+            <Img
+              className="h-8 w-8 rounded-full"
+              fluid={author.pic.imageFile.childImageSharp.fluid}
+              alt={author.name}
+            />
+          ) : (
+            <NoImage />
+          )}
           <span className="mx-2 mt-1 font-semibold">{author.name}</span>
         </div>
       </Link>

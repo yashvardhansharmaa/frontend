@@ -19,6 +19,7 @@ import {
 import SEO from "../components/seo";
 import ShareButtons from "../components/ShareButtons";
 import { capitalize } from "../utils";
+import NoImage from "../components/NoImage";
 
 // Custom Elements for React Markdown
 export const customRenderers = {
@@ -69,12 +70,15 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
         <div className="flex flex-col items-center relative">
           <div className="container md:px-20 lg:px-48">
             <div className="pt-10 flex justify-center items-center">
-              {/* Gatsby Image */}
-              <Img
-                fluid={blog.cover.imageFile.childImageSharp.fluid}
-                className="md:w-1/2 w-full h-auto"
-                alt="Cover Image"
-              />
+              {blog.cover.imageFile ? (
+                <Img
+                  fluid={blog.cover.imageFile.childImageSharp.fluid}
+                  className="md:w-1/2 w-full h-auto"
+                  alt="Cover Image"
+                />
+              ) : (
+                <NoImage />
+              )}
             </div>
             <div className="flex flex-col justify-center items-center mt-10 mb-5">
               <div

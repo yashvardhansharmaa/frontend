@@ -9,6 +9,7 @@ import Slider, { ResponsiveObject } from "react-slick";
 import "../assets/slick/slick.css";
 import "../assets/slick/slick-theme.css";
 import ReactMarkdown from "react-markdown";
+import NoImage from "./NoImage";
 
 const ImageSliderSlick = ({
   shouldRender,
@@ -105,7 +106,11 @@ const ImageSliderSlick = ({
             return (
               <div key={i} className="md:px-5 px-2">
                 <Link className="" to={`/blog/${blog.slug}`}>
-                  <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
+                  {blog.cover.imageFile ? (
+                    <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
+                  ) : (
+                    <NoImage />
+                  )}
                   <h3 className="font-bold text-lg">{blog.title}</h3>
                   <p className="text-xs py-1">
                     <ReactMarkdown children={`${blog.excerpt}...`} />

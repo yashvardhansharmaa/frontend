@@ -2,6 +2,7 @@ import React from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import Img, { FixedObject } from "gatsby-image";
 import { useTheme } from "./ThemeProvider";
+import NoImage from "./NoImage";
 
 interface FooterData {
   strapi: {
@@ -144,9 +145,21 @@ const Footer = () => {
             className="flex title-font font-medium items-center md:justify-start justify-center"
           >
             {theme ? (
-              <Img fixed={logo_black.imageFile.childImageSharp.fixed} />
+              <>
+                {logo_black.imageFile ? (
+                  <Img fixed={logo_black.imageFile.childImageSharp.fixed} />
+                ) : (
+                  <NoImage />
+                )}
+              </>
             ) : (
-              <Img fixed={logo.imageFile.childImageSharp.fixed} />
+              <>
+                {logo.imageFile ? (
+                  <Img fixed={logo.imageFile.childImageSharp.fixed} />
+                ) : (
+                  <NoImage />
+                )}
+              </>
             )}
             <span className="ml-3 text-xl">{company}</span>
           </Link>

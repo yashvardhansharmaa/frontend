@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import compareDates from "../utils/compareDates";
 import { useTheme } from "../components/ThemeProvider";
 import SEO from "../components/seo";
+import NoImage from "../components/NoImage";
 
 const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const { theme } = useTheme();
@@ -56,17 +57,32 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
           <MainFade>
             <div className="md:w-1/5 w-1/4 mt-10">
               {theme ? (
-                <Img
-                  fluid={
-                    data.strapi.home.logo_black.imageFile.childImageSharp.fluid
-                  }
-                  className="w-full"
-                />
+                <>
+                  {data.strapi.home.logo_black.imageFile ? (
+                    <Img
+                      fluid={
+                        data.strapi.home.logo_black.imageFile.childImageSharp
+                          .fluid
+                      }
+                      className="w-full"
+                    />
+                  ) : (
+                    <NoImage />
+                  )}
+                </>
               ) : (
-                <Img
-                  fluid={data.strapi.home.logo.imageFile.childImageSharp.fluid}
-                  className="w-full"
-                />
+                <>
+                  {data.strapi.home.logo.imageFile ? (
+                    <Img
+                      fluid={
+                        data.strapi.home.logo.imageFile.childImageSharp.fluid
+                      }
+                      className="w-full"
+                    />
+                  ) : (
+                    <NoImage />
+                  )}
+                </>
               )}
             </div>
             <Heading className="">Tidings Media</Heading>
