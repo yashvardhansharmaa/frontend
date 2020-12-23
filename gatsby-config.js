@@ -36,9 +36,9 @@ module.exports = {
         fieldName: "strapi",
         // Url to query from
         url: `${STRAPI_BASEURL}/graphql`,
-        headers: {
-          Authorization: `Bearer ${STRAPI_JWT}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${STRAPI_JWT}`,
+        // },
       },
     },
     {

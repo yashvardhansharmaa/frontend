@@ -56,7 +56,7 @@ const Search = () => {
     setIsLoaded(false);
     setIsLoading(true);
     Axios.get(
-      `http://localhost:1337/blogs?${option.value}_contains=${searchQuery}`
+      `${process.env.GATSBY_STRAPI_BASEURL}/blogs?${option.value}_contains=${searchQuery}`
     ).then((res) => {
       if (res.status !== 200) {
         return Error(res.statusText);
