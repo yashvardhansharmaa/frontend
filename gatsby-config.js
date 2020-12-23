@@ -2,8 +2,6 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-const { STRAPI_BASEURL, STRAPI_JWT } = process.env;
-
 module.exports = {
   siteMetadata: {
     title: `Tidings Media`,
@@ -35,7 +33,7 @@ module.exports = {
         // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
         fieldName: "strapi",
         // Url to query from
-        url: `${STRAPI_BASEURL}/graphql`,
+        url: `${process.env.STRAPI_BASEURL}/graphql`,
         // headers: {
         //   Authorization: `Bearer ${STRAPI_JWT}`,
         // },
