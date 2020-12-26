@@ -134,16 +134,36 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
                 <h1 className="font-heading text-4xl text-center">
                   References
                 </h1>
-                <div className="w-1/2 p-2 flex flex-row justify-center mx-auto">
-                  <ul className="list-disc">
+                <div className="md:w-2/3 w-full p-2 flex flex-col justify-center mx-auto">
+                  <ul className="list-disc w-full">
                     {blog.References.map(({ display_text, url }) => (
-                      <li className="py-2">
-                        <a rel="noopener noreferrer" target="_blank" href={url}>
-                          {display_text}
+                      <li className="w-full my-2">
+                        <a
+                          style={{
+                            display: "block",
+                            wordWrap: "break-word",
+                          }}
+                          rel="noopener noreferrer"
+                          className="w-full h-full m-0"
+                          target="_blank"
+                          href={url}
+                        >
+                          <span>{display_text}</span>
                         </a>
                       </li>
                     ))}
                   </ul>
+                  {/* {blog.References.map(({ display_text, url }) => (
+                    <a
+                      style={{ display: "block", overflow: "hidden" }}
+                      rel="noopener noreferrer"
+                      className="w-full h-full m-0"
+                      target="_blank"
+                      href={url}
+                    >
+                      <span>{display_text}</span>
+                    </a>
+                  ))} */}
                 </div>
               </div>
             </div>
