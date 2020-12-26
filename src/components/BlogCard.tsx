@@ -18,11 +18,15 @@ const BlogCard = ({
     <MainFade>
       <Link to={`/blog/${slug}`}>
         <div className="overflow-hidden rounded-lg">
-          <Img
-            fluid={cover.imageFile.childImageSharp.fluid}
-            className="w-full bloghover"
-            alt={title}
-          />
+          {cover ? (
+            <Img
+              fluid={cover.imageFile.childImageSharp.fluid}
+              className="w-full bloghover"
+              alt={title}
+            />
+          ) : (
+            <NoImage className="w-full bloghover" />
+          )}
         </div>
         <div className="text-sm mt-1">
           <span className="font-semibold">{capitalize(category.name)} </span>|{" "}
@@ -35,14 +39,14 @@ const BlogCard = ({
           <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
         </p>
         <div className="flex mt-2">
-          {author.pic.imageFile ? (
+          {author.pic ? (
             <Img
               className="h-8 w-8 rounded-full"
               fluid={author.pic.imageFile.childImageSharp.fluid}
               alt={author.name}
             />
           ) : (
-            <NoImage />
+            <NoImage className="h-8 w-8 rounded-full" />
           )}
           <span className="mx-2 mt-1 font-semibold">{author.name}</span>
         </div>

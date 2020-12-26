@@ -4,7 +4,9 @@
  *
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
-
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false; /* eslint-disable import/first */
 import React, { ReactNode } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";

@@ -177,24 +177,24 @@ const Navbar: FC = () => {
       <a href="/">
         {theme ? (
           <>
-            {data.strapi.navbar.logo_black.imageFile ? (
+            {data.strapi.navbar.logo_black ? (
               <Img
                 fixed={
                   data.strapi.navbar.logo_black.imageFile.childImageSharp.fixed
                 }
               />
             ) : (
-              <NoImage />
+              <NoImage style={{ height: "50px", width: "50px" }} />
             )}
           </>
         ) : (
           <>
-            {data.strapi.navbar.logo.imageFile ? (
+            {data.strapi.navbar.logo ? (
               <Img
                 fixed={data.strapi.navbar.logo.imageFile.childImageSharp.fixed}
               />
             ) : (
-              <NoImage />
+              <NoImage style={{ height: "50px", width: "50px" }} />
             )}
           </>
         )}

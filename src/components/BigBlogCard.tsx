@@ -19,14 +19,14 @@ const BigBlogCard = ({
   <Link to={`/blog/${slug}`}>
     <div className="md:grid my-5 flex flex-col md:grid-cols-2">
       <div className="overflow-hidden rounded-lg">
-        {cover.imageFile ? (
+        {cover ? (
           <Img
             fluid={cover.imageFile.childImageSharp.fluid}
             className="w-full bloghover"
             alt={title}
           />
         ) : (
-          <NoImage />
+          <NoImage className="w-full bloghover" />
         )}
       </div>
       <div className="md:px-5 py-2 flex flex-col justify-between">
@@ -44,16 +44,15 @@ const BigBlogCard = ({
           </p>
         </div>
         <div className="mt-1 md:mt-0 flex">
-          {author.pic.imageFile ? (
+          {author.pic ? (
             <Img
               className="md:h-12 md:w-12 h-8 w-8 rounded-full"
               fluid={author.pic.imageFile.childImageSharp.fluid}
               alt={author.name}
             />
           ) : (
-            <NoImage />
+            <NoImage className="md:h-12 md:w-12 h-8 w-8 rounded-full" />
           )}
-
           <span className="mx-2 mt-1 font-semibold">{author.name}</span>
         </div>
       </div>

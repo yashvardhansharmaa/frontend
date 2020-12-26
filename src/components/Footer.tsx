@@ -146,18 +146,18 @@ const Footer = () => {
           >
             {theme ? (
               <>
-                {logo_black.imageFile ? (
+                {logo_black ? (
                   <Img fixed={logo_black.imageFile.childImageSharp.fixed} />
                 ) : (
-                  <NoImage />
+                  <NoImage style={{ height: "25px", width: "25px" }} />
                 )}
               </>
             ) : (
               <>
-                {logo.imageFile ? (
+                {logo ? (
                   <Img fixed={logo.imageFile.childImageSharp.fixed} />
                 ) : (
-                  <NoImage />
+                  <NoImage style={{ height: "25px", width: "25px" }} />
                 )}
               </>
             )}

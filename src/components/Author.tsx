@@ -3,13 +3,23 @@ import Img, { FixedObject } from "gatsby-image";
 import { Link } from "gatsby";
 import NoImage from "./NoImage";
 
+// .imageFile.childImageSharp.fixed
+
+interface PicType {
+  imageFile: {
+    childImageSharp: {
+      fixed: FixedObject;
+    };
+  };
+}
+
 const Author = ({
   name,
   pic,
   about,
 }: {
   name: string;
-  pic: FixedObject;
+  pic: PicType;
   about: string;
 }) => {
   return (
@@ -25,12 +35,12 @@ const Author = ({
       >
         {pic ? (
           <Img
-            fixed={pic}
+            fixed={pic.imageFile.childImageSharp.fixed}
             className="rounded-full w-12 h-12 md:w-16 md:h-16"
             alt={name}
           />
         ) : (
-          <NoImage />
+          <NoImage className="rounded-full w-12 h-12 md:w-16 md:h-16" />
         )}
 
         {/* </div> */}

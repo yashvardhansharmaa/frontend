@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { graphql, Link, PageProps, useStaticQuery } from "gatsby";
 import Container from "../components/Container";
 import { BlogListDataNode } from "../templates/blog_list_template";
@@ -15,6 +15,8 @@ import compareDates from "../utils/compareDates";
 import { useTheme } from "../components/ThemeProvider";
 import SEO from "../components/seo";
 import NoImage from "../components/NoImage";
+import CountUp from "react-countup";
+import TrackVisibility from "react-on-screen";
 
 const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const { theme } = useTheme();
@@ -24,6 +26,9 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const sortedBlogs = data.strapi.blogs
     .sort((a, b) => compareDates(a, b))
     .slice(0, 4);
+
+  const counterDuration = 6;
+  const [isActive, setIsActive] = useState(true);
 
   return (
     <Layout>
@@ -58,7 +63,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             <div className="md:w-1/5 w-1/4 mt-10">
               {theme ? (
                 <>
-                  {data.strapi.home.logo_black.imageFile ? (
+                  {data.strapi.home.logo_black ? (
                     <Img
                       fluid={
                         data.strapi.home.logo_black.imageFile.childImageSharp
@@ -67,12 +72,12 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                       className="w-full"
                     />
                   ) : (
-                    <NoImage />
+                    <NoImage className="w-full" />
                   )}
                 </>
               ) : (
                 <>
-                  {data.strapi.home.logo.imageFile ? (
+                  {data.strapi.home.logo ? (
                     <Img
                       fluid={
                         data.strapi.home.logo.imageFile.childImageSharp.fluid
@@ -80,7 +85,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                       className="w-full"
                     />
                   ) : (
-                    <NoImage />
+                    <NoImage className="w-full" />
                   )}
                 </>
               )}
@@ -99,7 +104,23 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                   style={{ opacity: "0.6" }}
                   className="font-heading text-5xl md:text-6xl"
                 >
-                  200+
+                  <CountUp
+                    end={parseInt(data.strapi.home.articles_published)}
+                    duration={counterDuration}
+                  >
+                    {({ countUpRef, start }) => (
+                      <TrackVisibility once partialVisibility tag="span">
+                        {({ isVisible }) => {
+                          if (isVisible && isActive) {
+                            start!();
+                            setIsActive(false);
+                          }
+                          return <span ref={countUpRef} />;
+                        }}
+                      </TrackVisibility>
+                    )}
+                  </CountUp>
+                  +
                 </p>
                 <p className="pb-2 uppercase text-lg">Articles Published</p>
                 <div className="hidden md:block">
@@ -115,7 +136,22 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                   style={{ opacity: "0.6" }}
                   className="font-heading text-5xl md:text-6xl"
                 >
-                  650,000+
+                  <CountUp
+                    end={parseInt(data.strapi.home.people_reached)}
+                    duration={counterDuration}
+                  >
+                    {({ countUpRef, start }) => (
+                      <TrackVisibility once partialVisibility tag="span">
+                        {({ isVisible }) => {
+                          if (isVisible && isActive) {
+                            start!();
+                          }
+                          return <span ref={countUpRef} />;
+                        }}
+                      </TrackVisibility>
+                    )}
+                  </CountUp>
+                  +
                 </p>
 
                 <p className="pb-2 uppercase text-lg">People Reached</p>
@@ -132,7 +168,22 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                   style={{ opacity: "0.6" }}
                   className="font-heading text-5xl md:text-6xl"
                 >
-                  150+
+                  <CountUp
+                    end={parseInt(data.strapi.home.countries_reached)}
+                    duration={counterDuration}
+                  >
+                    {({ countUpRef, start }) => (
+                      <TrackVisibility once partialVisibility tag="span">
+                        {({ isVisible }) => {
+                          if (isVisible && isActive) {
+                            start!();
+                          }
+                          return <span ref={countUpRef} />;
+                        }}
+                      </TrackVisibility>
+                    )}
+                  </CountUp>
+                  +
                 </p>
                 <p className="pb-2 uppercase text-lg">Countries Reached</p>
                 <div className="hidden md:block">

@@ -20,6 +20,7 @@ import SEO from "../components/seo";
 import ShareButtons from "../components/ShareButtons";
 import { capitalize } from "../utils";
 import NoImage from "../components/NoImage";
+import TrackVisibility from "react-on-screen";
 
 // Custom Elements for React Markdown
 export const customRenderers = {
@@ -43,10 +44,12 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
     setShouldRender(true);
   }, []);
 
+  const [shouldButtonsRender, setShouldButtonsRender] = useState(true);
+
   const imageObj = {
-    url: blog.cover.url,
-    height: blog.cover.height,
-    width: blog.cover.width,
+    url: blog.cover ? blog.cover.url : "../assets/images/noimage-white.png",
+    height: blog.cover ? blog.cover.height : 50,
+    width: blog.cover ? blog.cover.width : 50,
   };
 
   return (
@@ -62,7 +65,12 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
         url={location.href}
         title={`Read this article by ${company} on ${blog.title}`}
         tags={tagsList}
-        className="fixed xl:ml-32 ml-20 lg:flex hidden flex-col"
+        // className="fixed xl:ml-32 ml-20 lg:flex hidden flex-col"
+        className={
+          shouldButtonsRender
+            ? "fixed xl:ml-32 ml-20 lg:flex hidden flex-col"
+            : "fixed xl:ml-32 ml-20 hidden flex-col"
+        }
         style={{ top: "40%", zIndex: 1 }}
         childClassName="mb-4"
       />
@@ -70,14 +78,14 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
         <div className="flex flex-col items-center relative">
           <div className="container md:px-20 lg:px-48">
             <div className="pt-10 flex justify-center items-center">
-              {blog.cover.imageFile ? (
+              {blog.cover ? (
                 <Img
                   fluid={blog.cover.imageFile.childImageSharp.fluid}
                   className="md:w-1/2 w-full h-auto"
                   alt="Cover Image"
                 />
               ) : (
-                <NoImage />
+                <NoImage className="md:w-1/2 w-full h-auto" />
               )}
             </div>
             <div className="flex flex-col justify-center items-center mt-10 mb-5">
@@ -116,7 +124,7 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
               {/* AUTHOR */}
               <Author
                 name={blog.author.name}
-                pic={blog.author.pic.imageFile.childImageSharp.fixed}
+                pic={blog.author.pic}
                 about={blog.author.about}
               />
               <div
@@ -153,7 +161,12 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
             </div>
           </div>
         </div>
-        <ImageSliderSlick shouldRender={shouldRender} />
+        <TrackVisibility partialVisibility tag="div">
+          {({ isVisible }) => {
+            setShouldButtonsRender(!isVisible);
+            return <ImageSliderSlick shouldRender={shouldRender} />;
+          }}
+        </TrackVisibility>
       </div>
     </Layout>
   );

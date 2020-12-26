@@ -49,7 +49,7 @@ const ImageSliderSlick = ({
               url
               imageFile {
                 childImageSharp {
-                  fluid(maxHeight: 80, maxWidth: 80) {
+                  fluid(maxWidth: 80) {
                     aspectRatio
                     base64
                     sizes
@@ -106,7 +106,7 @@ const ImageSliderSlick = ({
             return (
               <div key={i} className="md:px-5 px-2">
                 <Link className="" to={`/blog/${blog.slug}`}>
-                  {blog.cover.imageFile ? (
+                  {blog.cover ? (
                     <Img fluid={blog.cover.imageFile.childImageSharp.fluid} />
                   ) : (
                     <NoImage />
