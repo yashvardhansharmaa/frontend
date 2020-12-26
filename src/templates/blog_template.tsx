@@ -18,7 +18,6 @@ import {
 } from "../components/Markdown";
 import SEO from "../components/seo";
 import ShareButtons from "../components/ShareButtons";
-import { capitalize } from "../utils";
 import NoImage from "../components/NoImage";
 import TrackVisibility from "react-on-screen";
 
@@ -97,7 +96,7 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
               >
                 {format(Date.parse(blog.published_date), "MMM d, Y")}
               </div>
-              <h1 className="md:text-7xl text-5xl mx-6 text-center md:mx-0 mt-5 font-heading">
+              <h1 className="md:text-6xl text-4xl mx-6 text-center md:mx-0 mt-5 font-heading">
                 {blog.title}
               </h1>
             </div>
@@ -134,17 +133,17 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
                 <h1 className="font-heading text-4xl text-center">
                   References
                 </h1>
-                <div className="md:w-2/3 w-full p-2 flex flex-col justify-center mx-auto">
+                <div className="md:w-4/5  w-full p-2 flex flex-col justify-center mx-auto">
                   <ul className="list-disc w-full">
                     {blog.References.map(({ display_text, url }) => (
-                      <li className="w-full my-2">
+                      <li className="w-full my-4">
                         <a
                           style={{
                             display: "block",
                             wordWrap: "break-word",
                           }}
                           rel="noopener noreferrer"
-                          className="w-full h-full m-0"
+                          className="h-full m-0"
                           target="_blank"
                           href={url}
                         >

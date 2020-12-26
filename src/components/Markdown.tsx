@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 
 export const Paragraph = ({ children }: ParaProps) => {
-  return <p className="md:px-0 text-2xl px-6 py-4">{children}</p>;
+  return <p className="md:px-0 text-xl px-6 py-4">{children}</p>;
 };
 
 export const List = ({
