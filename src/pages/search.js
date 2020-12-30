@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import Heading from "../components/Heading";
 import Layout from "../components/Layout";
@@ -20,6 +20,10 @@ const Search = () => {
     value: "",
     label: "",
   });
+
+  useEffect(() => {
+    setOption({ value: "title", label: "Title" });
+  }, []);
 
   // Options for select component
   const options = [
@@ -61,6 +65,7 @@ const Search = () => {
       if (res.status !== 200) {
         return Error(res.statusText);
       }
+      console.log(res.data);
       setSearchData(res.data);
       setIsLoading(false);
       setIsLoaded(true);
@@ -112,6 +117,9 @@ const Search = () => {
                 onChange={(opt) => {
                   setOption(opt);
                 }}
+                defaultValue={options.filter(
+                  (option) => option.label === "Title"
+                )}
                 className="md:w-1/5 w-auto h-10 md:mx-5"
                 styles={colorStyles}
                 theme={(theme) => ({
@@ -162,10 +170,10 @@ const Search = () => {
                     const data = {
                       author: {
                         name: author.name,
-                        pic: author.pic.formats.thumbnail.url,
+                        pic: author.pic ? author.pic.url : "",
                       },
                       category: category.name,
-                      cover: cover.url,
+                      cover: cover ? cover.url : "",
                       published_date: published_date,
                       title,
                       body,
