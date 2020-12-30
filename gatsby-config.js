@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: `Tidings Media`,
     description: `Where we discuss economics, history, and everything in between.`,
-    siteUrl: "http://localhost:8000",
+    siteUrl: "http://www.tidingsmedia.org/",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -37,6 +37,20 @@ module.exports = {
         // headers: {
         //   Authorization: `Bearer ${STRAPI_JWT}`,
         // },
+      },
+    },
+    {
+      resolve: `gatsby-source-rss-feed`,
+      options: {
+        url: `https://anchor.fm/s/d862a10/podcast/rss`,
+        name: `Podcast`,
+        // Optional
+        // Read parser document: https://github.com/bobby-brennan/rss-parser#readme
+        // parserOption: {
+        //   customFields: {
+        //     item: ['itunes:duration']
+        //   }
+        // }
       },
     },
     {

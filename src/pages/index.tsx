@@ -27,7 +27,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
     .sort((a, b) => compareDates(a, b))
     .slice(0, 4);
 
-  const counterDuration = 6;
+  const counterDuration = 3;
   const [isActive, setIsActive] = useState(true);
 
   return (

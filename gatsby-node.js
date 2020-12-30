@@ -130,7 +130,13 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 };
 
-exports.onCreateNode = async ({ node, actions, createNodeId }) => {
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode, createParentChildLink },
+  createNodeId,
+  store,
+  cache,
+}) => {
   const crypto = require(`crypto`);
 
   if (node.internal.type === "StrapiBlog") {
@@ -148,11 +154,27 @@ exports.onCreateNode = async ({ node, actions, createNodeId }) => {
           .digest("hex"),
       },
     };
-    actions.createNode(newNode);
-    actions.createParentChildLink({
+    createNode(newNode);
+    createParentChildLink({
       parent: node,
       child: newNode,
     });
+  }
+
+  if (node.internal.type === "FeedPodcastMeta" && node.image.url !== null) {
+    // console.log(node);
+    let fileNode = await createRemoteFileNode({
+      url: node.image.url, // string that points to the URL of the image
+      parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
+      createNode, // helper function in gatsby-node to generate the node
+      createNodeId, // helper function in gatsby-node to generate the node id
+      cache, // Gatsby's cache
+      store, // Gatsby's Redux store
+    });
+    // if the file was created, attach the new node to the parent node
+    if (fileNode) {
+      node.image___NODE = fileNode.id;
+    }
   }
 };
 
