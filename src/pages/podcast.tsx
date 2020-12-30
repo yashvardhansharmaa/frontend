@@ -4,62 +4,79 @@ import React, { FC, useEffect, useState } from "react";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
 import Img from "gatsby-image";
+import SpotifyButton from "../components/SpotifyButton";
+import PodcastShareButtons from "../components/PodcastShareButtons";
 
 const Podcast: FC<PageProps<Data>> = ({ data }) => {
+  const { allFeedPodcast, feedPodcastMeta } = data;
+
   const itemsList: string[] = [];
-  data.allFeedPodcast.edges.forEach(({ node: { link } }) => {
+  allFeedPodcast.edges.forEach(({ node: { link } }) => {
     const linkArr = link.split("/");
     linkArr?.splice(4, 0, "embed");
     const embedLink = linkArr?.join("/");
     if (embedLink) itemsList.push(embedLink);
   });
 
-  const { allFeedPodcast, feedPodcastMeta } = data;
-
   return (
     <Layout>
       <Container>
-        <div className="grid grid-cols-2 w-3/4 mx-auto">
-          <div className="">
-            {/* <img
-              src={feedPodcastMeta.image.url}
-              className="rounded-lg w-8/12 mx-auto "
-              alt=""
-            /> */}
-            <Img
-              fluid={feedPodcastMeta.image.childImageSharp.fluid}
-              className="rounded-lg w-8/12 mx-auto"
-            />
-          </div>
+        <div className="lg:grid lg:grid-cols-2 flex flex-row w-full lg:w-3/4 lg:mx-auto">
+          {/* <div className=""> */}
+          <Img
+            fluid={feedPodcastMeta.image.childImageSharp.fluid}
+            className="rounded-lg lg:w-8/12 w-full mx-auto"
+          />
+          {/* </div> */}
           <div className="flex flex-col">
             <h1 className=" font-heading text-4xl">
               {feedPodcastMeta.title.toUpperCase()}
             </h1>
             <p className="mt-2 text-sm">{feedPodcastMeta.description}</p>
+            <div className="w-full flex justify-center items-center mt-16">
+              <SpotifyButton />
+            </div>
           </div>
         </div>
-        <div className="w-3/4 mx-auto">
+        <div className="w-3/4 mt-10 mx-auto">
+          <div className="ml-20">
+            <h2 className="capitalize font-heading text-xl mb-2">
+              Where to listen
+            </h2>
+            <PodcastShareButtons />
+          </div>
+        </div>
+        <div className="w-3/4 my-10 mx-auto">
+          <h2 className="text-3xl mb-10 font-heading">Latest Episode</h2>
           <iframe
             src={itemsList[0]}
-            // height="102px"
-            // width="400px"
-            className="my-20 w-full h-auto"
+            className="w-full h-auto"
             frameBorder="0"
             scrolling="no"
             loading="lazy"
           ></iframe>
         </div>
-        {/* {itemsList.map((link) => (
-          <iframe
-            src={link}
-            height="102px"
-            width="400px"
-            className="my-20"
-            frameBorder="0"
-            scrolling="no"
-            loading="lazy"
-          ></iframe>
-        ))} */}
+        <div className="w-1/2 mx-auto my-20">
+          {itemsList.length > 1 ? (
+            <>
+              <h2 className="font-heading text-3xl mb-10">All Episodes</h2>
+              {itemsList.map((link, i) => {
+                if (i === 0) {
+                  return null;
+                }
+                return (
+                  <iframe
+                    src={link}
+                    className="w-full h-auto"
+                    frameBorder="0"
+                    scrolling="no"
+                    loading="lazy"
+                  ></iframe>
+                );
+              })}
+            </>
+          ) : null}
+        </div>
       </Container>
     </Layout>
   );
