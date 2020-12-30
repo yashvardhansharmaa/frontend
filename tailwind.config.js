@@ -35,7 +35,7 @@ module.exports = {
       fontFamily: {
         heading: ["Radley", "Times New Roman", "Times", "serif"],
         body: ["Charter", "Times New Roman", "Times", "serif"],
-        subheading: ["Montserrat", "sans-serif"],
+        subheading: ["Roboto", "sans-serif"],
       },
       height: {
         "10vh": "10vh",

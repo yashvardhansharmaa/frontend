@@ -57,7 +57,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
       </Container>
 
       {/* ABOUT */}
-      <div className="bg-section">
+      <div className="">
         <Container className="flex flex-col items-center">
           <MainFade>
             <div className="md:w-1/5 w-1/4 mt-10">

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 
 export const Paragraph = ({ children }: ParaProps) => {
-  return <p className="md:px-0 text-xl px-6 py-4">{children}</p>;
+  return <p className="md:px-0 px-6 py-4">{children}</p>;
 };
 
 export const List = ({
@@ -33,6 +33,9 @@ export const Heading = ({ children, level }: HeadingProps) => (
     className={`font-subheading tracking-tight md:px-0 px-6 pt-4 ${
       headings[level as keyof HeadingTypes]
     }`}
+    style={{
+      fontWeight: 500,
+    }}
   >
     {children}
   </h1>

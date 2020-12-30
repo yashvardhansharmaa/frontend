@@ -10,7 +10,6 @@ config.autoAddCss = false; /* eslint-disable import/first */
 import React, { ReactNode } from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
-import "./layout.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
