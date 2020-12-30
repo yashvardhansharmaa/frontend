@@ -64,7 +64,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const BlogListTemplate = require.resolve(
     "./src/templates/blog_list_template.tsx"
   );
-  const postsPerPage = 6;
+  const postsPerPage = 15;
   const numPages = Math.ceil(blogs.length / postsPerPage);
   Array.from({ length: numPages }).forEach((_, i) => {
     let start = blogs.length - (i + 1) * postsPerPage;
