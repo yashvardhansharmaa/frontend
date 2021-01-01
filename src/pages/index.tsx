@@ -336,7 +336,7 @@ export const indexQuery = graphql`
           }
           excerpt
           published_date
-          author {
+          authors {
             name
             pic {
               url
@@ -379,7 +379,7 @@ export const indexQuery = graphql`
         }
         excerpt
         published_date
-        author {
+        authors {
           name
           pic {
             url

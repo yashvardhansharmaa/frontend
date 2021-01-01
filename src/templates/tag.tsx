@@ -29,9 +29,9 @@ export const query = graphql`
         name
         blogs {
           slug
-          body
+          excerpt
           title
-          author {
+          authors {
             name
             pic {
               url
@@ -78,9 +78,9 @@ interface tagData {
       name: string;
       blogs: {
         slug: string;
-        body: string;
+        excerpt: string;
         title: string;
-        author: {
+        authors: {
           name: string;
           pic: {
             url: string;
@@ -90,7 +90,7 @@ interface tagData {
               };
             };
           };
-        };
+        }[];
         category: {
           name: string;
         };

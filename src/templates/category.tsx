@@ -60,7 +60,7 @@ export const query = graphql`
           slug
           excerpt
           title
-          author {
+          authors {
             name
             pic {
               url
@@ -116,7 +116,7 @@ interface categoryData {
         slug: string;
         excerpt: string;
         title: string;
-        author: {
+        authors: {
           name: string;
           pic: {
             url: string;
@@ -126,7 +126,7 @@ interface categoryData {
               };
             };
           };
-        };
+        }[];
         category: {
           name: string;
         };

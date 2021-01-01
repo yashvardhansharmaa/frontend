@@ -58,7 +58,7 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
         blog={true}
         description={blog.excerpt}
         image={imageObj}
-        author={blog.author.name}
+        authors={blog.authors.map((author) => author.name)}
       />
       <ShareButtons
         url={location.href}
@@ -121,11 +121,21 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
                 )}
               </div>
               {/* AUTHOR */}
-              <Author
-                name={blog.author.name}
-                pic={blog.author.pic}
-                about={blog.author.about}
-              />
+              <div
+                className="mt-12"
+                style={{
+                  borderBottom: "1px solid var(--author-border)",
+                  borderTop: "1px solid var(--author-border)",
+                }}
+              >
+                {blog.authors.map((author) => (
+                  <Author
+                    name={author.name}
+                    pic={author.pic}
+                    about={author.about}
+                  />
+                ))}
+              </div>
               <div
                 className="mx-5 mt-5 pb-5 blog"
                 style={{ borderBottom: "1px solid var(--author-border)" }}
@@ -227,7 +237,7 @@ export const query = graphql`
           display_text
           url
         }
-        author {
+        authors {
           name
           about
           pic {
@@ -272,7 +282,7 @@ interface BlogData {
       category: {
         name: string;
       };
-      author: {
+      authors: {
         name: string;
         about: string;
         pic: {
@@ -282,7 +292,7 @@ interface BlogData {
             };
           };
         };
-      };
+      }[];
       tags: {
         name: string;
       }[];

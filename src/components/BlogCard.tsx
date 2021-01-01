@@ -10,7 +10,7 @@ import { cardCustomRenderers } from "./BigBlogCard";
 import NoImage from "./NoImage";
 
 const BlogCard = ({
-  content: { author, category, cover, published_date, title, excerpt, slug },
+  content: { authors, category, cover, published_date, title, excerpt, slug },
 }: {
   content: BlogListDataNode;
 }) => (
@@ -38,18 +38,20 @@ const BlogCard = ({
         <p className="leading-relaxed">
           <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
         </p>
-        <div className="flex mt-2">
-          {author.pic ? (
-            <Img
-              className="h-8 w-8 rounded-full"
-              fluid={author.pic.imageFile.childImageSharp.fluid}
-              alt={author.name}
-            />
-          ) : (
-            <NoImage className="h-8 w-8 rounded-full" />
-          )}
-          <span className="mx-2 mt-1 font-semibold">{author.name}</span>
-        </div>
+        {authors.map((author) => (
+          <div className="flex mt-2">
+            {author.pic ? (
+              <Img
+                className="h-8 w-8 rounded-full"
+                fluid={author.pic.imageFile.childImageSharp.fluid}
+                alt={author.name}
+              />
+            ) : (
+              <NoImage className="h-8 w-8 rounded-full" />
+            )}
+            <span className="mx-2 mt-1 font-semibold">{author.name}</span>
+          </div>
+        ))}
       </Link>
     </MainFade>
   </div>

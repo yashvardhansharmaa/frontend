@@ -42,8 +42,8 @@ export const query = graphql`
           url
         }
         blogs(where: { status: "published" }) {
-          body
           slug
+          excerpt
           title
           cover {
             imageFile {
@@ -62,7 +62,7 @@ export const query = graphql`
           category {
             name
           }
-          author {
+          authors {
             name
             pic {
               imageFile {
@@ -97,9 +97,9 @@ interface authorData {
       };
       blogs: {
         slug: string;
-        body: string;
+        excerpt: string;
         title: string;
-        author: {
+        authors: {
           name: string;
           pic: {
             url: string;
@@ -109,7 +109,7 @@ interface authorData {
               };
             };
           };
-        };
+        }[];
         category: {
           name: string;
         };

@@ -159,7 +159,7 @@ const Search = () => {
               <PostListContainer>
                 {searchData.map(
                   ({
-                    author,
+                    authors,
                     category,
                     cover,
                     published_date,
@@ -168,10 +168,7 @@ const Search = () => {
                     slug,
                   }) => {
                     const data = {
-                      author: {
-                        name: author.name,
-                        pic: author.pic ? author.pic.url : "",
-                      },
+                      authors,
                       category: category.name,
                       cover: cover ? cover.url : "",
                       published_date: published_date,

@@ -26,10 +26,8 @@ const Author = ({
     <Link to={`/author/${name.toLowerCase()}`}>
       <div
         // className="py-5 my-12 mx-5 flex md:flex-row flex-col"
-        className="py-5 mt-12 mx-5 flex items-center"
+        className="py-5 mx-5 flex items-center"
         style={{
-          borderBottom: "1px solid var(--author-border)",
-          borderTop: "1px solid var(--author-border)",
           width: "calc(100% - 40px)",
         }}
       >

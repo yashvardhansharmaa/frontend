@@ -39,27 +39,7 @@ const ImageSliderSlick = ({
               }
             }
           }
-          category {
-            name
-          }
           excerpt
-          author {
-            name
-            pic {
-              url
-              imageFile {
-                childImageSharp {
-                  fluid(maxWidth: 80) {
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                  }
-                }
-              }
-            }
-          }
         }
       }
     }

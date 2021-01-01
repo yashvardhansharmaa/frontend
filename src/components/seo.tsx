@@ -3,7 +3,13 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "@reach/router";
 import { useStaticQuery, graphql } from "gatsby";
 
-const SEO = ({ title, description, image, blog = false, author }: SeoProps) => {
+const SEO = ({
+  title,
+  description,
+  image,
+  blog = false,
+  authors,
+}: SeoProps) => {
   const { pathname } = useLocation();
   const {
     site: { siteMetadata },
@@ -58,10 +64,6 @@ const SEO = ({ title, description, image, blog = false, author }: SeoProps) => {
           content: seo.type,
         },
         {
-          name: `twitter:creator`,
-          content: author,
-        },
-        {
           name: `twitter:title`,
           content: seo.title,
         },
@@ -96,7 +98,17 @@ const SEO = ({ title, description, image, blog = false, author }: SeoProps) => {
               },
             ]
       )}
-    ></Helmet>
+    >
+      {/* {
+          name: `twitter:creator`,
+          content: author,
+        }, */}
+
+      {authors &&
+        authors.map((author) => (
+          <meta name="twitter:creator" content={author} />
+        ))}
+    </Helmet>
   );
 };
 export default SEO;
@@ -127,7 +139,7 @@ interface SeoProps {
     width: number;
   };
   blog?: boolean;
-  author?: string;
+  authors?: string[];
 }
 
 const query = graphql`

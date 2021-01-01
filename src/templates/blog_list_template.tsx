@@ -44,7 +44,7 @@ export const blogListQuery = graphql`
         slug
         excerpt
         title
-        author {
+        authors {
           name
           pic {
             url
@@ -92,7 +92,7 @@ interface BlogListData {
 
 export interface BlogListDataNode {
   slug: string;
-  author: {
+  authors: {
     name: string;
     pic: {
       url: string;
@@ -102,7 +102,7 @@ export interface BlogListDataNode {
         };
       };
     };
-  };
+  }[];
   excerpt: string;
   category: {
     name: string;

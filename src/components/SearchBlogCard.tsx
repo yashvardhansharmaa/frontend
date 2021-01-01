@@ -6,7 +6,7 @@ import { capitalize } from "../utils";
 import NoImage from "./NoImage";
 
 const SearchBlogCard = ({
-  content: { author, category, cover, published_date, title, body, slug },
+  content: { authors, category, cover, published_date, title, body, slug },
 }: {
   content: Data;
 }) => (
@@ -28,28 +28,30 @@ const SearchBlogCard = ({
       <p className="leading-relaxed">
         <ReactMarkdown children={body.substring(0, 140)} />
       </p>
-      <div className="flex mt-2">
-        {author.pic ? (
-          <img
-            src={author.pic}
-            className="h-8 w-8 rounded-full"
-            alt={author.name}
-          />
-        ) : (
-          <NoImage className="h-8 w-8 rounded-full" />
-        )}
+      {authors.map((author) => (
+        <div className="flex mt-2">
+          {author.pic ? (
+            <img
+              src={author.pic}
+              className="h-8 w-8 rounded-full"
+              alt={author.name}
+            />
+          ) : (
+            <NoImage className="h-8 w-8 rounded-full" />
+          )}
 
-        <span className="mx-2 mt-1 font-semibold">{author.name}</span>
-      </div>
+          <span className="mx-2 mt-1 font-semibold">{author.name}</span>
+        </div>
+      ))}
     </Link>
   </div>
 );
 
 interface Data {
-  author: {
+  authors: {
     name: string;
     pic: string;
-  };
+  }[];
   category: string;
   cover: string;
   published_date: string;

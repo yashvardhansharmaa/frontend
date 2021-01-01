@@ -12,7 +12,7 @@ export const cardCustomRenderers = {
 };
 
 const BigBlogCard = ({
-  content: { author, category, cover, published_date, title, excerpt, slug },
+  content: { authors, category, cover, published_date, title, excerpt, slug },
 }: {
   content: BlogListDataNode;
 }) => (
@@ -43,18 +43,20 @@ const BigBlogCard = ({
             <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
           </p>
         </div>
-        <div className="mt-1 md:mt-0 flex">
-          {author.pic ? (
-            <Img
-              className="md:h-12 md:w-12 h-8 w-8 rounded-full"
-              fluid={author.pic.imageFile.childImageSharp.fluid}
-              alt={author.name}
-            />
-          ) : (
-            <NoImage className="md:h-12 md:w-12 h-8 w-8 rounded-full" />
-          )}
-          <span className="mx-2 mt-1 font-semibold">{author.name}</span>
-        </div>
+        {authors.map((author) => (
+          <div className="mt-1 md:mt-0 flex">
+            {author.pic ? (
+              <Img
+                className="md:h-12 md:w-12 h-8 w-8 rounded-full"
+                fluid={author.pic.imageFile.childImageSharp.fluid}
+                alt={author.name}
+              />
+            ) : (
+              <NoImage className="md:h-12 md:w-12 h-8 w-8 rounded-full" />
+            )}
+            <span className="mx-2 mt-1 font-semibold">{author.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   </Link>
