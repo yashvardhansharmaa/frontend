@@ -331,7 +331,7 @@ export const indexQuery = graphql`
               }
             }
           }
-          category {
+          categories {
             name
           }
           excerpt
@@ -374,7 +374,7 @@ export const indexQuery = graphql`
             }
           }
         }
-        category {
+        categories {
           name
         }
         excerpt

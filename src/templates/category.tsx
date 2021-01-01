@@ -77,7 +77,7 @@ export const query = graphql`
               }
             }
           }
-          category {
+          categories {
             name
           }
           published_date
@@ -127,9 +127,9 @@ interface categoryData {
             };
           };
         }[];
-        category: {
+        categories: {
           name: string;
-        };
+        }[];
         published_date: string;
         cover: {
           url: string;

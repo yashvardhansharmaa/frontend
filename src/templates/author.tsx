@@ -59,7 +59,7 @@ export const query = graphql`
             }
             url
           }
-          category {
+          categories {
             name
           }
           authors {
@@ -110,9 +110,9 @@ interface authorData {
             };
           };
         }[];
-        category: {
+        categories: {
           name: string;
-        };
+        }[];
         published_date: string;
         cover: {
           url: string;

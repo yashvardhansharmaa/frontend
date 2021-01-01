@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { BlogListDataNode } from "../templates/blog_list_template";
-import { capitalize } from "../utils";
+import RenderCategories from "./RenderCategories";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 import NoImage from "./NoImage";
@@ -12,7 +12,7 @@ export const cardCustomRenderers = {
 };
 
 const BigBlogCard = ({
-  content: { authors, category, cover, published_date, title, excerpt, slug },
+  content: { authors, categories, cover, published_date, title, excerpt, slug },
 }: {
   content: BlogListDataNode;
 }) => (
@@ -32,9 +32,9 @@ const BigBlogCard = ({
       <div className="md:px-5 py-2 flex flex-col justify-between">
         <div className="">
           <div className="text-sm">
-            <span className="font-semibold">{capitalize(category.name)} </span>|{" "}
+            <RenderCategories categories={categories} />
+
             <span className="opacity-75">
-              {" "}
               {format(Date.parse(published_date), "MMM d, Y")}{" "}
             </span>
           </div>

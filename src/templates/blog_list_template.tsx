@@ -61,7 +61,7 @@ export const blogListQuery = graphql`
             }
           }
         }
-        category {
+        categories {
           name
         }
         published_date
@@ -104,9 +104,9 @@ export interface BlogListDataNode {
     };
   }[];
   excerpt: string;
-  category: {
+  categories: {
     name: string;
-  };
+  }[];
   title: string;
   published_date: string;
   cover: {

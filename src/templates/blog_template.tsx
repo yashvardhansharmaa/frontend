@@ -227,7 +227,7 @@ export const query = graphql`
             }
           }
         }
-        category {
+        categories {
           name
         }
         body
@@ -279,9 +279,9 @@ interface BlogData {
       body: string;
       excerpt: string;
       published_date: string;
-      category: {
+      categories: {
         name: string;
-      };
+      }[];
       authors: {
         name: string;
         about: string;

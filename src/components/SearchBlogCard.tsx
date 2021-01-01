@@ -6,7 +6,7 @@ import { capitalize } from "../utils";
 import NoImage from "./NoImage";
 
 const SearchBlogCard = ({
-  content: { authors, category, cover, published_date, title, body, slug },
+  content: { authors, categories, cover, published_date, title, body, slug },
 }: {
   content: Data;
 }) => (
@@ -19,7 +19,9 @@ const SearchBlogCard = ({
       )}
 
       <div className="text-sm mt-1">
-        <span className="font-semibold">{capitalize(category)} </span>|{" "}
+        {categories.map((category) => (
+          <span className="font-semibold">{capitalize(category.name)} | </span>
+        ))}{" "}
         <span className="opacity-75">
           {format(Date.parse(published_date), "MMM d, Y")}
         </span>
@@ -52,7 +54,7 @@ interface Data {
     name: string;
     pic: string;
   }[];
-  category: string;
+  categories: { name: string }[];
   cover: string;
   published_date: string;
   title: string;

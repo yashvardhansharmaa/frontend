@@ -160,7 +160,7 @@ const Search = () => {
                 {searchData.map(
                   ({
                     authors,
-                    category,
+                    categories,
                     cover,
                     published_date,
                     title,
@@ -169,7 +169,7 @@ const Search = () => {
                   }) => {
                     const data = {
                       authors,
-                      category: category.name,
+                      categories,
                       cover: cover ? cover.url : "",
                       published_date: published_date,
                       title,

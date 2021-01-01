@@ -4,13 +4,13 @@ import ReactMarkdown from "react-markdown";
 import Img, { FluidObject } from "gatsby-image";
 import { Link } from "gatsby";
 import { BlogListDataNode } from "../templates/blog_list_template";
-import { capitalize } from "../utils";
+import RenderCategories from "./RenderCategories";
 import MainFade from "./MainFade";
 import { cardCustomRenderers } from "./BigBlogCard";
 import NoImage from "./NoImage";
 
 const BlogCard = ({
-  content: { authors, category, cover, published_date, title, excerpt, slug },
+  content: { authors, categories, cover, published_date, title, excerpt, slug },
 }: {
   content: BlogListDataNode;
 }) => (
@@ -29,7 +29,7 @@ const BlogCard = ({
           )}
         </div>
         <div className="text-sm mt-1">
-          <span className="font-semibold">{capitalize(category.name)} </span>|{" "}
+          <RenderCategories categories={categories} />
           <span className="opacity-75">
             {format(Date.parse(published_date), "MMM d, Y")}
           </span>
