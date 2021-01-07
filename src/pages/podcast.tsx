@@ -21,15 +21,15 @@ const Podcast: FC<PageProps<Data>> = ({ data }) => {
   return (
     <Layout>
       <Container>
-        <div className="lg:grid lg:grid-cols-2 flex flex-row w-full lg:w-3/4 lg:mx-auto">
+        <div className="lg:grid lg:grid-cols-2 flex flex-col w-full lg:w-3/4 mx-auto">
           {/* <div className=""> */}
           <Img
             fluid={feedPodcastMeta.image.childImageSharp.fluid}
-            className="rounded-lg lg:w-8/12 w-full mx-auto"
+            className="rounded-lg lg:w-8/12 w-10/12 mx-auto"
           />
           {/* </div> */}
-          <div className="flex flex-col">
-            <h1 className=" font-heading text-4xl">
+          <div className="flex flex-col lg:mt-0 text-center lg:text-left mt-4">
+            <h1 className=" font-heading text-2xl lg:text-4xl">
               {feedPodcastMeta.title.toUpperCase()}
             </h1>
             <p className="mt-2 text-sm">{feedPodcastMeta.description}</p>
@@ -38,15 +38,15 @@ const Podcast: FC<PageProps<Data>> = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="w-3/4 mt-10 mx-auto">
-          <div className="ml-20">
+        <div className="lg:w-3/4 w-full mt-10 mx-auto">
+          <div className="lg:ml-20">
             <h2 className="capitalize font-heading text-xl mb-2">
               Where to listen
             </h2>
             <PodcastShareButtons />
           </div>
         </div>
-        <div className="w-3/4 my-10 mx-auto">
+        <div className="lg:w-3/4 w-full my-10 mx-auto">
           <h2 className="text-3xl mb-10 font-heading">Latest Episode</h2>
           <iframe
             src={itemsList[0]}
