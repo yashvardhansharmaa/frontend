@@ -47,6 +47,7 @@ module.exports = {
         "3/2": "3fr 2fr",
         "2/1": "2fr 1fr",
         "1/7": "1fr 12fr",
+        "1/2": "1fr 2fr",
       },
       fontSize: {
         "7xl": "5rem",

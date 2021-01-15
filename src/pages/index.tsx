@@ -18,6 +18,14 @@ import NoImage from "../components/NoImage";
 import CountUp from "react-countup";
 import TrackVisibility from "react-on-screen";
 
+/**
+ * /static/5d484f953cd3205999e3dd3e2f93066f/ee604/undraw_conference_call_b0w6.png
+ * /static/b4585f0e39a259d0ab8f2fbdc9b8c5aa/ee604/undraw_publish_article_icso.png
+ * /static/c9a1f9e068f17d605933bcac791df1df/ee604/undraw_reading_time_gvg0.png
+ * /static/26ee3fea5ef43cae28629082ae7a54ec/ee604/undraw_shared_workspace_hwky.png
+ * /static/a9765fb4147f9eb4dfa10ac8cb8204d8/ee604/clip-education.png
+ */
+
 const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const { theme } = useTheme();
 
@@ -30,13 +38,45 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const counterDuration = 3;
   const [isActive, setIsActive] = useState(true);
 
+  const Logo = () => (
+    <>
+      {theme ? (
+        <>
+          {data.strapi.home.logo_black ? (
+            <Img
+              fluid={
+                data.strapi.home.logo_black.imageFile.childImageSharp.fluid
+              }
+              className="w-full"
+            />
+          ) : (
+            <NoImage className="w-full" />
+          )}
+        </>
+      ) : (
+        <>
+          {data.strapi.home.logo ? (
+            <Img
+              fluid={data.strapi.home.logo.imageFile.childImageSharp.fluid}
+              className="w-full"
+            />
+          ) : (
+            <NoImage className="w-full" />
+          )}
+        </>
+      )}
+    </>
+  );
+
   return (
     <Layout>
       <SEO title="Home" image={{ url, height, width }} />
       <Container>
         {/* RECENT */}
         <div>
-          <h1 className="font-heading text-5xl">Recent Articles</h1>
+          <h1 className="font-heading text-4xl text-center md:text-left md:text-5xl">
+            Recent Articles
+          </h1>
           <MainFade>
             <BigBlogCard content={sortedBlogs[0]} />
           </MainFade>
@@ -61,34 +101,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
         <Container className="flex flex-col items-center">
           <MainFade>
             <div className="md:w-1/5 w-1/4 mt-10">
-              {theme ? (
-                <>
-                  {data.strapi.home.logo_black ? (
-                    <Img
-                      fluid={
-                        data.strapi.home.logo_black.imageFile.childImageSharp
-                          .fluid
-                      }
-                      className="w-full"
-                    />
-                  ) : (
-                    <NoImage className="w-full" />
-                  )}
-                </>
-              ) : (
-                <>
-                  {data.strapi.home.logo ? (
-                    <Img
-                      fluid={
-                        data.strapi.home.logo.imageFile.childImageSharp.fluid
-                      }
-                      className="w-full"
-                    />
-                  ) : (
-                    <NoImage className="w-full" />
-                  )}
-                </>
-              )}
+              <Logo />
             </div>
             <Heading className="">Tidings Media</Heading>
             <p className="text-lg text-center">
@@ -205,20 +218,31 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
           </MainFade>
 
           {/* Our Mission */}
+          {/* Help students articulate and write better */}
           <MainFade>
             <h1
               style={{ opacity: 0.9 }}
-              className="font-heading mt-20 text-7xl border-b-3 border-primary"
+              className="font-heading mt-20 text-5xl md:text-7xl border-b-3 border-primary"
             >
               Our Mission
             </h1>
             <div className="flex w-full md:flex-row flex-col mt-32 mb-40 items-center md:justify-around">
-              <p className=" text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/4">
-                Educate the masses on economics and history
-              </p>
-              <p className=" text-2xl text-center w-3/4 mt-10 md:mt-0 md:w-1/4">
-                Help students articulate and write better
-              </p>
+              <div className="">
+                <div className="w-1/2 mx-auto mb-4">
+                  <Img fluid={data.educationPic.fluid} />
+                </div>
+                <p className="mx-auto text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/2">
+                  Educate the masses on economics and history
+                </p>
+              </div>
+              <div className="">
+                <div className="w-1/2 mx-auto mb-4">
+                  <Img fluid={data.readingTimePic.fluid} />
+                </div>
+                <p className="mx-auto text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/2">
+                  Help students articulate and write better
+                </p>
+              </div>
             </div>
           </MainFade>
         </Container>
@@ -227,7 +251,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
       {/* Featured Articles */}
       <Container className="mb-20">
         <MainFade>
-          <h1 className="font-heading mt-5 md:mt-0 text-5xl">
+          <h1 className="font-heading mt-5 md:mt-0 text-4xl text-center md:text-left md:text-5xl">
             Featured Articles
           </h1>
         </MainFade>
@@ -242,6 +266,12 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
 };
 
 interface Data {
+  educationPic: {
+    fluid: FluidObject;
+  };
+  readingTimePic: {
+    fluid: FluidObject;
+  };
   strapi: {
     blogs: BlogListDataNode[];
     home: {
@@ -276,6 +306,28 @@ export default IndexPage;
 
 export const indexQuery = graphql`
   query IndexQuery {
+    educationPic: imageSharp(
+      fluid: {
+        src: {
+          eq: "/static/a9765fb4147f9eb4dfa10ac8cb8204d8/ee604/clip-education.png"
+        }
+      }
+    ) {
+      fluid {
+        ...GatsbyImageSharpFluid
+      }
+    }
+    readingTimePic: imageSharp(
+      fluid: {
+        src: {
+          eq: "/static/c9a1f9e068f17d605933bcac791df1df/ee604/undraw_reading_time_gvg0.png"
+        }
+      }
+    ) {
+      fluid {
+        ...GatsbyImageSharpFluid
+      }
+    }
     strapi {
       home {
         company

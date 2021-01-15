@@ -4,8 +4,8 @@ import ReactMarkdown from "react-markdown";
 import Layout from "../components/Layout";
 import { customRenderers } from "../templates/blog_template";
 
-const About: FC<PageProps<Data>> = ({ data }) => {
-  const markdown = data.strapi.about.our_work;
+const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
+  const markdown = data.strapi.workWithUs.text;
   return (
     <Layout>
       <div className="maindiv mb-20">
@@ -24,22 +24,30 @@ const About: FC<PageProps<Data>> = ({ data }) => {
   );
 };
 
-interface Data {
-  strapi: {
-    about: {
-      our_work: string;
-    };
-  };
+export interface WorkWithUs {
+  text: string;
+}
+
+export interface Strapi {
+  workWithUs: WorkWithUs;
+}
+
+export interface Data {
+  strapi: Strapi;
+}
+
+export interface RootObject {
+  data: Data;
 }
 
 export const query = graphql`
-  query WorkQuery {
+  query WorkWithUsQuery {
     strapi {
-      about {
-        our_work
+      workWithUs {
+        text
       }
     }
   }
 `;
 
-export default About;
+export default WorkWithUs;

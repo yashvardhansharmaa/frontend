@@ -111,7 +111,7 @@ const Footer = () => {
   } = data.strapi;
 
   const FooterItems = () => (
-    <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+    <div className="flex flex-wrap md:pl-20 -mb-10 mr-5 md:mt-0 mt-10 md:text-left text-center">
       {footerItems.map((item, i: number) => {
         const { heading, sub_item } = item;
         return (
@@ -166,6 +166,9 @@ const Footer = () => {
           <p className="mt-2 text-sm">{description}</p>
         </div>
         {FooterItems()}
+        {/* <form action="">
+          <input type="text" />
+        </form> */}
       </div>
       <div className="bg-ft1 shadow-2dp">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
