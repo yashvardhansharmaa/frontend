@@ -15,7 +15,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
   return (
     <Layout>
       <div className="md:mt-24 container px-10 mx-auto lg:px-10">
-        <div className="w-2/4 mx-auto">
+        <div className="md:w-2/4 w-3/4 mx-auto">
           <Img fluid={data.confCall.fluid} />
         </div>
         <Heading>Our Team</Heading>

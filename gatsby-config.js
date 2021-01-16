@@ -24,6 +24,13 @@ module.exports = {
         path: `${__dirname}/src`,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [process.env.GOOGLE_GTAG],
+      },
+    },
     // Simple config, passing URL
     {
       resolve: "gatsby-source-graphql",
