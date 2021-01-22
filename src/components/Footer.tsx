@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import Img, { FixedObject } from "gatsby-image";
 import { useTheme } from "./ThemeProvider";
@@ -136,9 +136,11 @@ const Footer = () => {
 
   const { theme } = useTheme();
 
+  const [email, setEmail] = useState("");
+
   return (
     <footer className="text-white body-font relative z-100 bg-ft2 shadow-1dp">
-      <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
+      <div className="container px-5 py-10 md:py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-no-wrap flex-wrap flex-col">
         <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
           <Link
             to="/"
@@ -165,10 +167,72 @@ const Footer = () => {
           </Link>
           <p className="mt-2 text-sm">{description}</p>
         </div>
-        {FooterItems()}
-        {/* <form action="">
-          <input type="text" />
-        </form> */}
+        {/* {FooterItems()} */}
+        <form
+          action="https://thetidingsblog.us10.list-manage.com/subscribe/post"
+          method="POST"
+          id="mc-embedded-subscribe-form"
+          name="mc-embedded-subscribe-form"
+          className="validate w-100 mx-auto md:mt-0 mt-10"
+          target="_blank"
+          noValidate
+        >
+          <input type="hidden" name="u" value={process.env.GATSBY_MC_U} />
+          <input type="hidden" name="id" value={process.env.GATSBY_MC_ID} />
+          <label htmlFor="MERGE0"></label>
+          <div id="mc_embed_signup_scroll">
+            <h2 className="font-subheading text-center capitalize text-3xl">
+              Subscribe to our newsletter
+            </h2>
+            <p
+              className="text-center mt-2 mb-4 w-3/4 mx-auto"
+              style={{ opacity: 0.9 }}
+            >
+              Receive exclusive resources to become a better writer, economist,
+              and historian!
+            </p>
+            <div className="flex flex-col w-3/4 mx-auto justify-between mt-2">
+              <div className="mc-field-group">
+                <input
+                  type="email"
+                  value={email}
+                  placeholder="Email"
+                  name="EMAIL"
+                  className="required email text-black rounded-sm h-4 w-full py-4 px-2"
+                  id="mce-EMAIL"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div id="mce-responses" className="clear">
+                <div className="response hidden" id="mce-error-response"></div>
+                <div className="hidden" id="mce-success-response"></div>
+              </div>
+              {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */}
+              <div
+                className="absolute"
+                style={{ left: "-5000px" }}
+                aria-hidden="true"
+              >
+                <input
+                  type="text"
+                  name="b_577d9034d2d8256b3f70f21c9_9b783b9bb9"
+                  tabIndex={-1}
+                  value=""
+                />
+              </div>
+              <div className="clear">
+                <input
+                  type="submit"
+                  value="Subscribe"
+                  name="subscribe"
+                  id="mc-embedded-subscribe"
+                  className="button rounded-sm cursor-pointer text-black w-full mt-4 h-8"
+                  style={{ background: "#c43d34" }}
+                />
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div className="bg-ft1 shadow-2dp">
         <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">

@@ -17,6 +17,7 @@ import SEO from "../components/seo";
 import NoImage from "../components/NoImage";
 import CountUp from "react-countup";
 import TrackVisibility from "react-on-screen";
+import Testimonials, { TestimonialsData } from "../components/Testimonials";
 
 /**
  * /static/5d484f953cd3205999e3dd3e2f93066f/ee604/undraw_conference_call_b0w6.png
@@ -74,7 +75,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
       <Container>
         {/* RECENT */}
         <div>
-          <h1 className="font-heading text-4xl text-center md:text-left md:text-5xl">
+          <h1 className="font-subheading text-4xl text-center md:text-left md:text-5xl">
             Recent Articles
           </h1>
           <MainFade>
@@ -103,7 +104,10 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             <div className="md:w-1/5 w-1/4 mt-10">
               <Logo />
             </div>
-            <Heading className="">Tidings Media</Heading>
+            <h1 className="md:text-7xl text-6xl font-subheading text-center uppercase">
+              <span className="md:text-8xl text-7xl">T</span>idings{" "}
+              <span className="md:text-8xl text-7xl">M</span>edia
+            </h1>
             <p className="text-lg text-center">
               Where we discuss economics, history, and everything in between.
             </p>
@@ -114,8 +118,10 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             <div className="my-10 w-full flex md:flex-row flex-col justify-around">
               <div className="flex md:m-0 mb-4 flex-col justify-end items-center">
                 <p
-                  style={{ opacity: "0.6" }}
-                  className="font-heading text-5xl md:text-6xl"
+                  className="font-subheading text-5xl md:text-6xl"
+                  style={{
+                    fontWeight: 500,
+                  }}
                 >
                   <CountUp
                     end={parseInt(data.strapi.home.articles_published)}
@@ -146,8 +152,8 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
               </div>
               <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
                 <p
-                  style={{ opacity: "0.6" }}
-                  className="font-heading text-5xl md:text-6xl"
+                  style={{ fontWeight: 500 }}
+                  className="font-subheading text-5xl md:text-6xl"
                 >
                   <CountUp
                     end={parseInt(data.strapi.home.people_reached)}
@@ -178,8 +184,8 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
               </div>
               <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
                 <p
-                  style={{ opacity: "0.6" }}
-                  className="font-heading text-5xl md:text-6xl"
+                  style={{ fontWeight: 500 }}
+                  className="font-subheading text-5xl md:text-6xl"
                 >
                   <CountUp
                     end={parseInt(data.strapi.home.countries_reached)}
@@ -222,7 +228,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
           <MainFade>
             <h1
               style={{ opacity: 0.9 }}
-              className="font-heading mt-20 text-5xl md:text-7xl border-b-3 border-primary"
+              className="font-subheading mt-20 text-5xl md:text-7xl border-b-3 border-primary"
             >
               Our Mission
             </h1>
@@ -248,10 +254,12 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
         </Container>
       </div>
 
+      <Testimonials data={data.strapi.testimonials} />
+
       {/* Featured Articles */}
       <Container className="mb-20">
         <MainFade>
-          <h1 className="font-heading mt-5 md:mt-0 text-4xl text-center md:text-left md:text-5xl">
+          <h1 className="font-subheading mt-5 md:mt-0 text-4xl text-center md:text-left md:text-5xl">
             Featured Articles
           </h1>
         </MainFade>
@@ -273,6 +281,7 @@ interface Data {
     fluid: FluidObject;
   };
   strapi: {
+    testimonials: TestimonialsData[];
     blogs: BlogListDataNode[];
     home: {
       company: string;
@@ -329,6 +338,21 @@ export const indexQuery = graphql`
       }
     }
     strapi {
+      testimonials {
+        name
+        testimonial
+        userTitle
+        pic {
+          url
+          imageFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
       home {
         company
         desciption

@@ -25,6 +25,7 @@ module.exports = {
         p25: "var(--p25)",
         gbtn: "var(--gray-btn)",
         gbtnh: "var(--gray-btn-hover)",
+        tcard: "var(--t-card)",
       },
       boxShadow: {
         "1dp":
@@ -36,6 +37,7 @@ module.exports = {
         heading: ["Radley", "Times New Roman", "Times", "serif"],
         body: ["Charter", "Times New Roman", "Times", "serif"],
         subheading: ["Roboto", "sans-serif"],
+        mont: ["Montserrat", "sans-serif"],
       },
       height: {
         "10vh": "10vh",
@@ -51,6 +53,7 @@ module.exports = {
       },
       fontSize: {
         "7xl": "5rem",
+        "8xl": "6rem",
       },
       flex: {
         2: 2,

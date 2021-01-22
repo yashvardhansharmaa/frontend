@@ -233,7 +233,7 @@ const Navbar: FC = () => {
         ) : (
           <FullHeightNav menuItems={data.strapi.navbarItems} />
         )}
-        <span className="md:hidden flex items-center block">
+        <span className="md:hidden flex items-center">
           <Link to="/search">
             <FontAwesomeIcon className="mr-4" icon={faSearch} />
           </Link>

@@ -1,7 +1,6 @@
-import { layer } from "@fortawesome/fontawesome-svg-core";
 import { graphql, PageProps } from "gatsby";
 import Img, { FluidObject } from "gatsby-image";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import Container from "../../components/Container";
 import Heading from "../../components/Heading";
 import Layout from "../../components/Layout";
@@ -19,7 +18,6 @@ const OurPartners: FC<PageProps<Data>> = ({ data }) => {
             return (
               <div className="w-full flex mb-10">
                 <div className="w-1/3 mt-2">
-                  {/* <img src={user.avatar} alt="" className="w-2/3 mx-auto" /> */}
                   {pic ? (
                     <Img
                       fluid={pic.imageFile.childImageSharp.fluid}
@@ -30,7 +28,9 @@ const OurPartners: FC<PageProps<Data>> = ({ data }) => {
                   )}
                 </div>
                 <div className="w-2/3">
-                  <h3 className="font-heading text-3xl">{name}</h3>
+                  <h3 className="font-heading text-3xl">
+                    <a href={partner.link}>{name}</a>
+                  </h3>
                   <p className="mt-2 text-md tracking-wide pr-10">
                     {description}
                   </p>
@@ -48,6 +48,7 @@ export const partnersQuery = graphql`
   query PartnersQuery {
     strapi {
       partners {
+        link
         description
         name
         pic {
@@ -80,6 +81,7 @@ export interface Partner {
   description: string;
   name: string;
   pic?: Pic;
+  link: string;
 }
 
 export interface Strapi {
