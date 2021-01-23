@@ -1,5 +1,6 @@
 import Img, { FluidObject } from "gatsby-image";
 import React from "react";
+import NoImage from "./NoImage";
 
 const TestimonialCard = ({
   name,
@@ -10,7 +11,13 @@ const TestimonialCard = ({
   name: string;
   title: string;
   text: string;
-  pic: FluidObject;
+  pic: {
+    imageFile: {
+      childImageSharp: {
+        fluid: FluidObject;
+      };
+    };
+  };
 }) => {
   return (
     <div className="p-4 md:w-1/2 w-full">
@@ -25,15 +32,14 @@ const TestimonialCard = ({
         </svg>
         <p className="leading-relaxed mb-6">{text}</p>
         <a className="inline-flex items-center">
-          {/* <img
-            alt="testimonial"
-            src="https://dummyimage.com/106x106"
-            className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
-          /> */}
-          <Img
-            fluid={pic}
-            className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
-          />
+          {pic ? (
+            <Img
+              fluid={pic.imageFile.childImageSharp.fluid}
+              className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center"
+            />
+          ) : (
+            <NoImage className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center" />
+          )}
           <span className="flex-grow flex flex-col pl-4">
             <span className="title-font font-medium opacity-75">{name}</span>
             <span className="opacity-50 uppercase text-sm">{title}</span>
@@ -71,7 +77,7 @@ const Testimonials = ({ data }: { data: TestimonialsData[] }) => {
               name={name}
               text={testimonial}
               title={userTitle}
-              pic={pic.imageFile.childImageSharp.fluid}
+              pic={pic}
             />
           ))}
         </div>
