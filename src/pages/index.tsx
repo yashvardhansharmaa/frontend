@@ -97,6 +97,19 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
         </div>
       </Container>
 
+      <Container>
+        <div
+          style={{
+            borderLeft: "6px solid var(--primary)",
+          }}
+          className="w-full text-center pt-6 pb-6 bg-tcard rounded-md"
+        >
+          {/* <h2 className="font-subheading text-3xl">Note!</h2> */}
+          www.tidingsmedia was formerly known as thetidingsblog.com; please
+          check out the latter for all 200+ blog archived posts
+        </div>
+      </Container>
+
       {/* ABOUT */}
       <div className="">
         <Container className="flex flex-col items-center">

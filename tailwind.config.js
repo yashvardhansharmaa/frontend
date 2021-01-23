@@ -16,6 +16,7 @@ module.exports = {
         primary25: "var(--primary-25)",
         primary50: "var(--primary-50)",
         primary75: "var(--primary-75)",
+        primaryNote: "var(--primary-note)",
         section: "var(--section)",
         onPrimary: "var(--text-primary)",
         main: "var(--text)",
