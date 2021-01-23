@@ -102,7 +102,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
           style={{
             borderLeft: "6px solid var(--primary)",
           }}
-          className="w-full text-center pt-6 pb-6 bg-tcard rounded-md"
+          className="w-full text-center py-8 bg-tcard rounded-md"
         >
           {/* <h2 className="font-subheading text-3xl">Note!</h2> */}
           www.tidingsmedia was formerly known as thetidingsblog.com; please
