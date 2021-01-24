@@ -292,7 +292,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                   </p>
                   <p className="pb-2 uppercase text-lg">Countries Reached</p>
                   <div className="hidden md:block">
-                    <Link to="/about">
+                    <Link to="/about/story">
                       <button className="bg-gbtn py-1 px-3 text-bgc border-0 focus:outline-none hover:bg-gbtnh rounded text-lg">
                         Learn More
                       </button>

@@ -126,6 +126,7 @@ export const teamQuery = graphql`
         instagram
         linkedin
         name
+        calendly
         position
         twitter
         pic {
