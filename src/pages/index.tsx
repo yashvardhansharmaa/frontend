@@ -18,6 +18,8 @@ import NoImage from "../components/NoImage";
 import CountUp from "react-countup";
 import TrackVisibility from "react-on-screen";
 import Testimonials, { TestimonialsData } from "../components/Testimonials";
+import ReactMarkdown from "react-markdown";
+import Popup from "reactjs-popup";
 
 /**
  * /static/5d484f953cd3205999e3dd3e2f93066f/ee604/undraw_conference_call_b0w6.png
@@ -38,6 +40,9 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
 
   const counterDuration = 3;
   const [isActive, setIsActive] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isBlur, setIsBlur] = useState(false);
+  const [email, setEmail] = useState("");
 
   const Logo = () => (
     <>
@@ -70,124 +75,231 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   );
 
   return (
-    <Layout>
-      <SEO title="Home" image={{ url, height, width }} />
-      <Container>
-        {/* RECENT */}
-        <div>
-          <h1 className="font-subheading text-4xl text-center md:text-left md:text-5xl">
-            Recent Articles
-          </h1>
-          <MainFade>
-            <BigBlogCard content={sortedBlogs[0]} />
-          </MainFade>
-          <PostListContainer>
-            {sortedBlogs.map((blog, i) => {
-              if (i === 0) return "";
-              return <BlogCard key={i} content={blog} />;
-            })}
-          </PostListContainer>
-          <div className="mt-10 flex justify-end md:mb-0 mb-20">
-            <Link to="/blog">
-              <button className="bg-primary md:py-2 py-1 px-2 md:px-3 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
-                Read More <FontAwesomeIcon icon={faArrowRight} className="" />
-              </button>
-            </Link>
-          </div>
-        </div>
-      </Container>
-
-      <Container>
-        <div
-          style={{
-            borderLeft: "6px solid var(--primary)",
-          }}
-          className="w-full text-center py-8 bg-tcard rounded-md"
-        >
-          {/* <h2 className="font-subheading text-3xl">Note!</h2> */}
-          www.tidingsmedia was formerly known as thetidingsblog.com; please
-          check out the latter for all 200+ blog archived posts
-        </div>
-      </Container>
-
-      {/* ABOUT */}
-      <div className="">
-        <Container className="flex flex-col items-center">
-          <MainFade>
-            <div className="md:w-1/5 w-1/4 mt-10">
-              <Logo />
-            </div>
-            <h1 className="md:text-7xl text-6xl font-subheading text-center uppercase">
-              <span className="md:text-8xl text-7xl">T</span>idings{" "}
-              <span className="md:text-8xl text-7xl">M</span>edia
-            </h1>
-            <p className="text-lg text-center">
-              Where we discuss economics, history, and everything in between.
-            </p>
-          </MainFade>
-
-          {/* STATS */}
-          <MainFade>
-            <div className="my-10 w-full flex md:flex-row flex-col justify-around">
-              <div className="flex md:m-0 mb-4 flex-col justify-end items-center">
-                <p
-                  className="font-subheading text-5xl md:text-6xl"
-                  style={{
-                    fontWeight: 500,
-                  }}
+    <>
+      {/* <Popup
+        open={isModalOpen}
+        onClose={() => setIsBlur(false)}
+        position="top center"
+      >
+        <div className="w-full border-white border flex justify-center items-center flex-col mt-6 h-full">
+          <h2 className="text-center text-3xl">Subscribe to our newsletter</h2>
+          <form
+            action="https://thetidingsblog.us10.list-manage.com/subscribe/post"
+            method="POST"
+            id="mc-embedded-subscribe-form"
+            name="mc-embedded-subscribe-form"
+            className="validate w-100 mx-auto md:mt-0 mt-10"
+            target="_blank"
+            noValidate
+          >
+            <input type="hidden" name="u" value={process.env.GATSBY_MC_U} />
+            <input type="hidden" name="id" value={process.env.GATSBY_MC_ID} />
+            <label htmlFor="MERGE0"></label>
+            <div id="mc_embed_signup_scroll">
+              <div className="flex w-full justify-center items-center mt-2">
+                <div className="mc-field-group">
+                  <input
+                    type="email"
+                    value={email}
+                    placeholder="Email"
+                    name="EMAIL"
+                    className="required email text-black rounded-sm h-4 py-4 w-full px-2 mr-4"
+                    id="mce-EMAIL"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div id="mce-responses" className="clear">
+                  <div
+                    className="response hidden"
+                    id="mce-error-response"
+                  ></div>
+                  <div className="hidden" id="mce-success-response"></div>
+                </div>
+                <div
+                  className="absolute"
+                  style={{ left: "-5000px" }}
+                  aria-hidden="true"
                 >
-                  <CountUp
-                    end={parseInt(data.strapi.home.articles_published)}
-                    duration={counterDuration}
-                  >
-                    {({ countUpRef, start }) => (
-                      <TrackVisibility once partialVisibility tag="span">
-                        {({ isVisible }) => {
-                          if (isVisible && isActive) {
-                            start!();
-                            setIsActive(false);
-                          }
-                          return <span ref={countUpRef} />;
-                        }}
-                      </TrackVisibility>
-                    )}
-                  </CountUp>
-                  +
-                </p>
-                <p className="pb-2 uppercase text-lg">Articles Published</p>
-                <div className="hidden md:block">
-                  <Link to="/work-with-us">
-                    <button className="py-1 px-3 text-bgc border-0 bg-gbtn focus:outline-none hover:bg-gbtnh rounded text-lg">
-                      Join Us
-                    </button>
-                  </Link>
+                  <input
+                    type="text"
+                    name="b_577d9034d2d8256b3f70f21c9_9b783b9bb9"
+                    tabIndex={-1}
+                    value=""
+                  />
+                </div>
+                <div className="clear">
+                  <input
+                    type="submit"
+                    value="Subscribe"
+                    name="subscribe"
+                    id="mc-embedded-subscribe"
+                    className="button rounded-sm cursor-pointer text-black w-full px-2 h-8 ml-4"
+                    style={{ background: "#c43d34" }}
+                  />
                 </div>
               </div>
-              <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
-                <p
-                  style={{ fontWeight: 500 }}
-                  className="font-subheading text-5xl md:text-6xl"
-                >
-                  <CountUp
-                    end={parseInt(data.strapi.home.people_reached)}
-                    duration={counterDuration}
-                  >
-                    {({ countUpRef, start }) => (
-                      <TrackVisibility once partialVisibility tag="span">
-                        {({ isVisible }) => {
-                          if (isVisible && isActive) {
-                            start!();
-                          }
-                          return <span ref={countUpRef} />;
-                        }}
-                      </TrackVisibility>
-                    )}
-                  </CountUp>
-                  +
-                </p>
+            </div>
+          </form>
+        </div>
+      </Popup> */}
+      <Layout className={isBlur ? "blur" : ""}>
+        <SEO title="Home" image={{ url, height, width }} />
+        <Container>
+          {/* RECENT */}
+          <div>
+            <h1 className="font-subheading text-4xl text-center md:text-left md:text-5xl">
+              Recent Articles
+            </h1>
+            <MainFade>
+              <BigBlogCard content={sortedBlogs[0]} />
+            </MainFade>
+            <PostListContainer>
+              {sortedBlogs.map((blog, i) => {
+                if (i === 0) return "";
+                return <BlogCard key={i} content={blog} />;
+              })}
+            </PostListContainer>
+            <div className="mt-10 flex justify-end md:mb-0 mb-20">
+              <Link to="/blog">
+                <button className="bg-primary md:py-2 py-1 px-2 md:px-3 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
+                  Read More <FontAwesomeIcon icon={faArrowRight} className="" />
+                </button>
+              </Link>
+            </div>
+          </div>
+        </Container>
 
-                <p className="pb-2 uppercase text-lg">People Reached</p>
-                <div className="hidden md:block">
+        {data.strapi.redirect.show ? (
+          <Container>
+            <div
+              style={{
+                borderLeft: "6px solid var(--primary)",
+              }}
+              className="w-full text-center py-8 bg-tcard rounded-md note"
+            >
+              {/* <h2 className="font-subheading text-3xl">Note!</h2> */}
+              <ReactMarkdown children={data.strapi.redirect.text} />
+            </div>
+          </Container>
+        ) : null}
+
+        {/* ABOUT */}
+        <div className="">
+          <Container className="flex flex-col items-center">
+            <MainFade>
+              <div className="md:w-1/5 w-1/4 mt-10">
+                <Logo />
+              </div>
+              <h1 className="md:text-7xl text-6xl font-subheading text-center uppercase">
+                <span className="md:text-8xl text-7xl">T</span>idings{" "}
+                <span className="md:text-8xl text-7xl">M</span>edia
+              </h1>
+              <p className="text-lg text-center">
+                Where we discuss economics, history, and everything in between.
+              </p>
+            </MainFade>
+
+            {/* STATS */}
+            <MainFade>
+              <div className="my-10 w-full flex md:flex-row flex-col justify-around">
+                <div className="flex md:m-0 mb-4 flex-col justify-end items-center">
+                  <p
+                    className="font-subheading text-5xl md:text-6xl"
+                    style={{
+                      fontWeight: 500,
+                    }}
+                  >
+                    <CountUp
+                      end={parseInt(data.strapi.home.articles_published)}
+                      duration={counterDuration}
+                    >
+                      {({ countUpRef, start }) => (
+                        <TrackVisibility once partialVisibility tag="span">
+                          {({ isVisible }) => {
+                            if (isVisible && isActive) {
+                              start!();
+                              setIsActive(false);
+                            }
+                            return <span ref={countUpRef} />;
+                          }}
+                        </TrackVisibility>
+                      )}
+                    </CountUp>
+                    +
+                  </p>
+                  <p className="pb-2 uppercase text-lg">Articles Published</p>
+                  <div className="hidden md:block">
+                    <Link to="/work-with-us">
+                      <button className="py-1 px-3 text-bgc border-0 bg-gbtn focus:outline-none hover:bg-gbtnh rounded text-lg">
+                        Join Us
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
+                  <p
+                    style={{ fontWeight: 500 }}
+                    className="font-subheading text-5xl md:text-6xl"
+                  >
+                    <CountUp
+                      end={parseInt(data.strapi.home.people_reached)}
+                      duration={counterDuration}
+                    >
+                      {({ countUpRef, start }) => (
+                        <TrackVisibility once partialVisibility tag="span">
+                          {({ isVisible }) => {
+                            if (isVisible && isActive) {
+                              start!();
+                            }
+                            return <span ref={countUpRef} />;
+                          }}
+                        </TrackVisibility>
+                      )}
+                    </CountUp>
+                    +
+                  </p>
+
+                  <p className="pb-2 uppercase text-lg">People Reached</p>
+                  <div className="hidden md:block">
+                    <Link to="/blog">
+                      <button className="bg-primary py-2 px-4 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-lg">
+                        Start Reading!
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
+                  <p
+                    style={{ fontWeight: 500 }}
+                    className="font-subheading text-5xl md:text-6xl"
+                  >
+                    <CountUp
+                      end={parseInt(data.strapi.home.countries_reached)}
+                      duration={counterDuration}
+                    >
+                      {({ countUpRef, start }) => (
+                        <TrackVisibility once partialVisibility tag="span">
+                          {({ isVisible }) => {
+                            if (isVisible && isActive) {
+                              start!();
+                            }
+                            return <span ref={countUpRef} />;
+                          }}
+                        </TrackVisibility>
+                      )}
+                    </CountUp>
+                    +
+                  </p>
+                  <p className="pb-2 uppercase text-lg">Countries Reached</p>
+                  <div className="hidden md:block">
+                    <Link to="/about">
+                      <button className="bg-gbtn py-1 px-3 text-bgc border-0 focus:outline-none hover:bg-gbtnh rounded text-lg">
+                        Learn More
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+                <div className="md:hidden flex justify-center mt-6">
                   <Link to="/blog">
                     <button className="bg-primary py-2 px-4 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-lg">
                       Start Reading!
@@ -195,94 +307,56 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                   </Link>
                 </div>
               </div>
-              <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
-                <p
-                  style={{ fontWeight: 500 }}
-                  className="font-subheading text-5xl md:text-6xl"
-                >
-                  <CountUp
-                    end={parseInt(data.strapi.home.countries_reached)}
-                    duration={counterDuration}
-                  >
-                    {({ countUpRef, start }) => (
-                      <TrackVisibility once partialVisibility tag="span">
-                        {({ isVisible }) => {
-                          if (isVisible && isActive) {
-                            start!();
-                          }
-                          return <span ref={countUpRef} />;
-                        }}
-                      </TrackVisibility>
-                    )}
-                  </CountUp>
-                  +
-                </p>
-                <p className="pb-2 uppercase text-lg">Countries Reached</p>
-                <div className="hidden md:block">
-                  <Link to="/about">
-                    <button className="bg-gbtn py-1 px-3 text-bgc border-0 focus:outline-none hover:bg-gbtnh rounded text-lg">
-                      Learn More
-                    </button>
-                  </Link>
+            </MainFade>
+
+            {/* Our Mission */}
+            {/* Help students articulate and write better */}
+            <MainFade>
+              <h1
+                style={{ opacity: 0.9 }}
+                className="font-subheading mt-20 text-5xl md:text-7xl border-b-3 border-primary"
+              >
+                Our Mission
+              </h1>
+              <div className="flex w-full md:flex-row flex-col mt-32 mb-40 items-center md:justify-around">
+                <div className="">
+                  <div className="w-1/2 mx-auto mb-4">
+                    <Img fluid={data.educationPic.fluid} />
+                  </div>
+                  <p className="mx-auto text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/2">
+                    Educate the masses on economics and history
+                  </p>
+                </div>
+                <div className="">
+                  <div className="w-1/2 mx-auto mb-4">
+                    <Img fluid={data.readingTimePic.fluid} />
+                  </div>
+                  <p className="mx-auto text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/2">
+                    Help students articulate and write better
+                  </p>
                 </div>
               </div>
-              <div className="md:hidden flex justify-center mt-6">
-                <Link to="/blog">
-                  <button className="bg-primary py-2 px-4 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-lg">
-                    Start Reading!
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </MainFade>
+            </MainFade>
+          </Container>
+        </div>
 
-          {/* Our Mission */}
-          {/* Help students articulate and write better */}
+        <Testimonials data={data.strapi.testimonials} />
+
+        {/* Featured Articles */}
+        <Container className="mb-20">
           <MainFade>
-            <h1
-              style={{ opacity: 0.9 }}
-              className="font-subheading mt-20 text-5xl md:text-7xl border-b-3 border-primary"
-            >
-              Our Mission
+            <h1 className="font-subheading mt-5 md:mt-0 text-4xl text-center md:text-left md:text-5xl">
+              Featured Articles
             </h1>
-            <div className="flex w-full md:flex-row flex-col mt-32 mb-40 items-center md:justify-around">
-              <div className="">
-                <div className="w-1/2 mx-auto mb-4">
-                  <Img fluid={data.educationPic.fluid} />
-                </div>
-                <p className="mx-auto text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/2">
-                  Educate the masses on economics and history
-                </p>
-              </div>
-              <div className="">
-                <div className="w-1/2 mx-auto mb-4">
-                  <Img fluid={data.readingTimePic.fluid} />
-                </div>
-                <p className="mx-auto text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/2">
-                  Help students articulate and write better
-                </p>
-              </div>
-            </div>
           </MainFade>
+          <PostListContainer>
+            {featuredBlogs.map((blog, i) => {
+              return <BlogCard key={i} content={blog} />;
+            })}
+          </PostListContainer>
         </Container>
-      </div>
-
-      <Testimonials data={data.strapi.testimonials} />
-
-      {/* Featured Articles */}
-      <Container className="mb-20">
-        <MainFade>
-          <h1 className="font-subheading mt-5 md:mt-0 text-4xl text-center md:text-left md:text-5xl">
-            Featured Articles
-          </h1>
-        </MainFade>
-        <PostListContainer>
-          {featuredBlogs.map((blog, i) => {
-            return <BlogCard key={i} content={blog} />;
-          })}
-        </PostListContainer>
-      </Container>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 
@@ -294,6 +368,10 @@ interface Data {
     fluid: FluidObject;
   };
   strapi: {
+    redirect: {
+      show: boolean;
+      text: string;
+    };
     testimonials: TestimonialsData[];
     blogs: BlogListDataNode[];
     home: {
@@ -351,6 +429,10 @@ export const indexQuery = graphql`
       }
     }
     strapi {
+      redirect {
+        show
+        text
+      }
       testimonials {
         name
         testimonial

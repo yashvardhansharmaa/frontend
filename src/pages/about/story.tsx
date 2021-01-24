@@ -2,6 +2,7 @@ import { graphql, PageProps } from "gatsby";
 import Img, { FluidObject } from "gatsby-image";
 import React, { FC } from "react";
 import ReactMarkdown from "react-markdown";
+import Container from "../../components/Container";
 import Layout from "../../components/Layout";
 import { customRenderers } from "../../templates/blog_template";
 
@@ -9,21 +10,23 @@ const About: FC<PageProps<Data>> = ({ data }) => {
   const markdown = data.strapi.about.our_story;
   return (
     <Layout>
-      <div className="maindiv mb-20">
-        <div className="md:w-1/4 w-3/4 mx-auto">
-          <Img fluid={data.publishArticlePic.fluid} />
-        </div>
-        <h1 className="text-6xl font-heading text-center">Our Story</h1>
-        <div className="container md:px-20 lg:px-48 mx-auto">
-          <div className="text-lg leading-relaxed font-body">
-            <ReactMarkdown
-              children={markdown}
-              className="blog"
-              renderers={customRenderers}
-            />
+      <Container>
+        <div className="maindiv mb-20">
+          <div className="md:w-1/4 w-3/4 mx-auto">
+            <Img fluid={data.publishArticlePic.fluid} />
+          </div>
+          <h1 className="text-6xl font-heading text-center">Our Story</h1>
+          <div className="container md:px-20 lg:px-48 mx-auto">
+            <div className="text-lg leading-relaxed font-body">
+              <ReactMarkdown
+                children={markdown}
+                className="blog"
+                renderers={customRenderers}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
     </Layout>
   );
 };

@@ -136,6 +136,33 @@ blockquote p {
   background-color: var(--primary-75);
   color: var(--text-primary);
 }
+
+.note a {
+  border: 3px var(--t-card) solid;
+  border-bottom: 3px var(--primary-75) solid;
+  transition: background-color 0.4s, border 0.4s, color 0.4s;
+}
+
+.note a:hover {
+  border: 3px var(--primary-75) solid;
+  background-color: var(--primary-75);
+  color: var(--text-primary);
+}
+
+.blur {
+  filter: blur(5px);
+}
+
+.popup-content {
+  width: 100%;
+  position: absolute !important;
+  top: 0;
+  min-height: 30vh;
+  background-color: #2a2a2a;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
 /* 
 .box {
   width: 200px; height: 100px;

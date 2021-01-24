@@ -20,6 +20,7 @@ import SEO from "../components/seo";
 import ShareButtons from "../components/ShareButtons";
 import NoImage from "../components/NoImage";
 import TrackVisibility from "react-on-screen";
+import Container from "../components/Container";
 
 // Custom Elements for React Markdown
 export const customRenderers = {
@@ -73,96 +74,97 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
         style={{ top: "40%", zIndex: 1 }}
         childClassName="mb-4"
       />
-      <div className="maindiv relative">
-        <div className="flex flex-col items-center relative">
-          <div className="container md:px-20 lg:px-48">
-            <div className="pt-10 flex justify-center items-center">
-              {blog.cover ? (
-                <Img
-                  fluid={blog.cover.imageFile.childImageSharp.fluid}
-                  className="md:w-1/2 w-full h-auto"
-                  alt="Cover Image"
-                />
-              ) : (
-                <NoImage className="md:w-1/2 w-full h-auto" />
-              )}
-            </div>
-            <div className="flex flex-col justify-center items-center mt-10 mb-5">
-              <div
-                className="flex justify-start opacity-75 text-sm items-start w-full md:px-0 px-5"
-                style={{
-                  zIndex: -1,
-                }}
-              >
-                {format(Date.parse(blog.published_date), "MMM d, Y")}
-              </div>
-              <h1 className="md:text-7xl text-4xl mx-6 text-center md:mx-0 mt-5 font-heading">
-                {blog.title}
-              </h1>
-            </div>
-            <div className="text-lg leading-relaxed blog-body font-body">
-              <ReactMarkdown
-                children={blog.body}
-                allowDangerousHtml={true}
-                renderers={customRenderers}
-                className="blog"
-              />
-            </div>
-            <div className="md:px-0 px-6 py-8">
-              {/* TAGS */}
-              <div className="px-2 md:px-6">
-                <h2 className="text-3xl mb-2 font-heading">Tags:</h2>
-                {blog.tags && (
-                  <>
-                    {blog.tags.map((tag, i) => {
-                      return <Tag tagName={tag.name} />;
-                    })}
-                  </>
+      <div className="mt-24">
+        <div className="maindiv relative">
+          <div className="flex flex-col items-center relative">
+            <div className="container md:px-20 lg:px-48">
+              <div className="pt-10 flex justify-center items-center">
+                {blog.cover ? (
+                  <Img
+                    fluid={blog.cover.imageFile.childImageSharp.fluid}
+                    className="md:w-1/2 w-full h-auto"
+                    alt="Cover Image"
+                  />
+                ) : (
+                  <NoImage className="md:w-1/2 w-full h-auto" />
                 )}
               </div>
-              {/* AUTHOR */}
-              <div
-                className="mt-12"
-                style={{
-                  borderBottom: "1px solid var(--author-border)",
-                  borderTop: "1px solid var(--author-border)",
-                }}
-              >
-                {blog.authors.map((author) => (
-                  <Author
-                    name={author.name}
-                    pic={author.pic}
-                    about={author.about}
-                  />
-                ))}
-              </div>
-              <div
-                className="mx-5 mt-5 pb-5 blog"
-                style={{ borderBottom: "1px solid var(--author-border)" }}
-              >
-                <h1 className="font-heading text-4xl text-center">
-                  References
+              <div className="flex flex-col justify-center items-center mt-10 mb-5">
+                <div
+                  className="flex justify-start opacity-75 text-sm items-start w-full md:px-0 px-5"
+                  style={{
+                    zIndex: -1,
+                  }}
+                >
+                  {format(Date.parse(blog.published_date), "MMM d, Y")}
+                </div>
+                <h1 className="md:text-7xl text-4xl mx-6 text-center md:mx-0 mt-5 font-heading">
+                  {blog.title}
                 </h1>
-                <div className="md:w-4/5  w-full p-2 flex flex-col justify-center mx-auto">
-                  <ul className="list-disc w-full">
-                    {blog.References.map(({ display_text, url }) => (
-                      <li className="w-full my-4">
-                        <a
-                          style={{
-                            display: "block",
-                            wordWrap: "break-word",
-                          }}
-                          rel="noopener noreferrer"
-                          className="h-full m-0"
-                          target="_blank"
-                          href={url}
-                        >
-                          <span>{display_text}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                  {/* {blog.References.map(({ display_text, url }) => (
+              </div>
+              <div className="text-lg leading-relaxed blog-body font-body">
+                <ReactMarkdown
+                  children={blog.body}
+                  allowDangerousHtml={true}
+                  renderers={customRenderers}
+                  className="blog"
+                />
+              </div>
+              <div className="md:px-0 px-6 py-8">
+                {/* TAGS */}
+                <div className="px-2 md:px-6">
+                  <h2 className="text-3xl mb-2 font-heading">Tags:</h2>
+                  {blog.tags && (
+                    <>
+                      {blog.tags.map((tag, i) => {
+                        return <Tag tagName={tag.name} />;
+                      })}
+                    </>
+                  )}
+                </div>
+                {/* AUTHOR */}
+                <div
+                  className="mt-12"
+                  style={{
+                    borderBottom: "1px solid var(--author-border)",
+                    borderTop: "1px solid var(--author-border)",
+                  }}
+                >
+                  {blog.authors.map((author) => (
+                    <Author
+                      name={author.name}
+                      pic={author.pic}
+                      about={author.about}
+                    />
+                  ))}
+                </div>
+                <div
+                  className="mx-5 mt-5 pb-5 blog"
+                  style={{ borderBottom: "1px solid var(--author-border)" }}
+                >
+                  <h1 className="font-heading text-4xl text-center">
+                    References
+                  </h1>
+                  <div className="md:w-4/5  w-full p-2 flex flex-col justify-center mx-auto">
+                    <ul className="list-disc w-full">
+                      {blog.References.map(({ display_text, url }) => (
+                        <li className="w-full my-4">
+                          <a
+                            style={{
+                              display: "block",
+                              wordWrap: "break-word",
+                            }}
+                            rel="noopener noreferrer"
+                            className="h-full m-0"
+                            target="_blank"
+                            href={url}
+                          >
+                            <span>{display_text}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    {/* {blog.References.map(({ display_text, url }) => (
                     <a
                       style={{ display: "block", overflow: "hidden" }}
                       rel="noopener noreferrer"
@@ -173,29 +175,30 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
                       <span>{display_text}</span>
                     </a>
                   ))} */}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="my-12 block lg:hidden">
-            <p> If you found this article, please share it:</p>
-            <div className="flex justify-center">
-              <ShareButtons
-                url={location.href}
-                title={`Read this article by ${company} on ${blog.title}`}
-                tags={tagsList}
-                className="flex lg:hidden my-2"
-                childClassName="mr-2"
-              />
+            <div className="my-12 block lg:hidden">
+              <p> If you found this article, please share it:</p>
+              <div className="flex justify-center">
+                <ShareButtons
+                  url={location.href}
+                  title={`Read this article by ${company} on ${blog.title}`}
+                  tags={tagsList}
+                  className="flex lg:hidden my-2"
+                  childClassName="mr-2"
+                />
+              </div>
             </div>
           </div>
+          <TrackVisibility partialVisibility tag="div">
+            {({ isVisible }) => {
+              setShouldButtonsRender(!isVisible);
+              return <ImageSliderSlick shouldRender={shouldRender} />;
+            }}
+          </TrackVisibility>
         </div>
-        <TrackVisibility partialVisibility tag="div">
-          {({ isVisible }) => {
-            setShouldButtonsRender(!isVisible);
-            return <ImageSliderSlick shouldRender={shouldRender} />;
-          }}
-        </TrackVisibility>
       </div>
     </Layout>
   );

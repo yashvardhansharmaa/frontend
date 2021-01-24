@@ -5,6 +5,14 @@ module.exports = {
   },
   purge: ["./src/**/*.js", "./src/**/*.jsx", "./src/**/*.ts", "./src/**/*.tsx"],
   theme: {
+    filter: {
+      // defaults to {}
+      none: "none",
+      grayscale: "grayscale(1)",
+      invert: "invert(1)",
+      sepia: "sepia(1)",
+      myBlur: "blur(8px)",
+    },
     extend: {
       colors: {
         bgc: "var(--bg)",
@@ -65,5 +73,5 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [require("tailwindcss-filters")],
 };
