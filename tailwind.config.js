@@ -43,9 +43,9 @@ module.exports = {
           "0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20)",
       },
       fontFamily: {
-        heading: ["Radley", "Times New Roman", "Times", "serif"],
-        body: ["Charter", "Times New Roman", "Times", "serif"],
-        subheading: ["Roboto", "sans-serif"],
+        heading: ["Lato", "sans-serif"],
+        body: ["Poppins", "sans-serif"],
+        subheading: ["Poppins", "sans-serif"],
         mont: ["Montserrat", "sans-serif"],
       },
       height: {

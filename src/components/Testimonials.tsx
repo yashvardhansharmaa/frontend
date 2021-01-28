@@ -68,7 +68,7 @@ const Testimonials = ({ data }: { data: TestimonialsData[] }) => {
   return (
     <section className="body-font">
       <div className="container px-5 mx-auto">
-        <h1 className="font-subheading text-2xl text-center mb-12 md:text-5xl">
+        <h1 className="font-heading border-b-3 border-primary w-4/12 mx-auto text-5xl md:text-7xl text-center mb-12">
           Testimonials
         </h1>
         <div className="flex flex-wrap -m-4">

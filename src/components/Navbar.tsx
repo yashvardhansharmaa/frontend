@@ -207,7 +207,7 @@ const Navbar: FC = () => {
 
   const BrandTitle = () => (
     <a href="/">
-      <div className="mx-3 flex text-lg justify-center items-center">
+      <div className="mx-3 flex md:text-lg text-2xl justify-center items-center">
         {data.strapi.navbar.company}
       </div>
     </a>

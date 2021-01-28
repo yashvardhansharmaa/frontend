@@ -30,7 +30,7 @@ const Layout = ({
   `);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative font-body ${className}`}>
       <Navbar />
       <div>
         <main>{children}</main>

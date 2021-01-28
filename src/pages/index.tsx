@@ -147,7 +147,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
         <Container>
           {/* RECENT */}
           <div>
-            <h1 className="font-subheading text-4xl text-center md:text-left md:text-5xl">
+            <h1 className="font-heading text-4xl text-center md:text-left md:text-6xl">
               Recent Articles
             </h1>
             <MainFade>
@@ -190,7 +190,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
               <div className="md:w-1/5 w-1/4 mt-10">
                 <Logo />
               </div>
-              <h1 className="md:text-7xl text-6xl font-subheading text-center uppercase">
+              <h1 className="md:text-7xl text-6xl font-heading text-center uppercase">
                 <span className="md:text-8xl text-7xl">T</span>idings{" "}
                 <span className="md:text-8xl text-7xl">M</span>edia
               </h1>
@@ -314,7 +314,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             <MainFade>
               <h1
                 style={{ opacity: 0.9 }}
-                className="font-subheading mt-20 text-5xl md:text-7xl border-b-3 border-primary"
+                className="font-heading mt-20 text-5xl md:text-7xl border-b-3 border-primary"
               >
                 Our Mission
               </h1>
@@ -345,7 +345,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
         {/* Featured Articles */}
         <Container className="mb-20">
           <MainFade>
-            <h1 className="font-subheading mt-5 md:mt-0 text-4xl text-center md:text-left md:text-5xl">
+            <h1 className="font-heading mt-5 md:mt-0 text-4xl text-center md:text-left md:text-6xl">
               Featured Articles
             </h1>
           </MainFade>

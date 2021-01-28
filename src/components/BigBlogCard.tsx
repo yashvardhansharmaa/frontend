@@ -39,7 +39,7 @@ const BigBlogCard = ({
             </span>
           </div>
           <h1 className="text-4xl py-2 font-heading">{title}</h1>
-          <p className="leading-loose">
+          <p className="leading-loose font-body">
             <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
           </p>
         </div>

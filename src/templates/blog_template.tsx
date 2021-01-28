@@ -98,11 +98,11 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
                 >
                   {format(Date.parse(blog.published_date), "MMM d, Y")}
                 </div>
-                <h1 className="md:text-7xl text-4xl mx-6 text-center md:mx-0 mt-5 font-heading">
+                <h1 className="md:text-5xl leading-snug text-4xl mx-6 text-center md:mx-0 mt-5 heading">
                   {blog.title}
                 </h1>
               </div>
-              <div className="text-lg leading-relaxed blog-body font-body">
+              <div className="text-lg leading-relaxed blog-body">
                 <ReactMarkdown
                   children={blog.body}
                   allowDangerousHtml={true}

@@ -30,7 +30,7 @@ export const Image = ({ src, alt }: { src: string; alt: string }) => {
 
 export const Heading = ({ children, level }: HeadingProps) => (
   <h1
-    className={`font-subheading tracking-tight md:px-0 px-6 pt-4 ${
+    className={`subheading tracking-tight md:px-0 px-6 pt-4 ${
       headings[level as keyof HeadingTypes]
     }`}
     style={{

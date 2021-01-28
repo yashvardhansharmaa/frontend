@@ -35,7 +35,7 @@ const BlogCard = ({
           </span>
         </div>
         <h1 className="text-3xl py-2 font-heading">{title}</h1>
-        <p className="leading-relaxed">
+        <p className="leading-relaxed font-body">
           <ReactMarkdown renderers={cardCustomRenderers} children={excerpt} />
         </p>
         {authors.map((author) => (

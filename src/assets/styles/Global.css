@@ -1,6 +1,6 @@
 @import "./fonts.css";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap");
 
 body {
   --bg: #fff;
@@ -31,9 +31,9 @@ body {
   --t-card: #f3f3f3;
   --gray-btn: #4a5568;
   --gray-btn-hover: #718096;
-  --font-heading: "Radley", "Times New Roman", "Times", "serif";
-  --font-body: "Charter", "Times New Roman", "Times", "serif";
-  --font-subheading: "Roboto", "sans-serif";
+  --font-heading: "Lato", sans-serif;
+  --font-body: "Poppins", sans-serif;
+  --font-subheading: "Lato", sans-serif;
 }
 
 body.dark {
@@ -99,6 +99,16 @@ select:-webkit-autofill:focus {
   transition: all 0.5s ease;
 }
 
+.heading {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+}
+
+.subheading {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
 /* blockquote::before {
   font-family: Arial;
   content: "\201C";
@@ -123,6 +133,7 @@ blockquote p {
 
 .blog-body p {
   font-size: 1.15rem;
+  font-family: "Poppins", sans-serif;
 }
 
 .blog a {
