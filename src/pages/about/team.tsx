@@ -9,12 +9,14 @@ import Linkedin from "../../components/Linkedin";
 import Twitter from "../../components/Twitter";
 import Mail from "../../components/Mail";
 import Container from "../../components/Container";
+import SEO from "../../components/seo";
 
 const OurTeam: FC<PageProps<Data>> = ({ data }) => {
   const teamMembers = data.strapi.teams;
 
   return (
     <Layout>
+      <SEO title="Our Team" />
       <Container>
         <div className="md:mt-24 container px-10 mx-auto lg:px-10">
           <div className="md:w-2/4 w-3/4 mx-auto">

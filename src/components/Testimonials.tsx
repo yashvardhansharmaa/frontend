@@ -68,7 +68,10 @@ const Testimonials = ({ data }: { data: TestimonialsData[] }) => {
   return (
     <section className="body-font">
       <div className="container px-5 mx-auto">
-        <h1 className="font-heading border-b-3 border-primary w-4/12 mx-auto text-5xl md:text-7xl text-center mb-12">
+        <h1
+          className="font-heading border-b-3 border-primary md:w-5/12 w-10/12 mx-auto text-5xl md:text-7xl text-center mb-12"
+          // style={{ width: "80%" }}
+        >
           Testimonials
         </h1>
         <div className="flex flex-wrap -m-4">

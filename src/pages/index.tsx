@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import { graphql, Link, PageProps, useStaticQuery } from "gatsby";
 import Container from "../components/Container";
 import { BlogListDataNode } from "../templates/blog_list_template";
@@ -169,8 +169,9 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
           </div>
         </Container>
 
+        {/* =================REDIRECT============================== */}
         {data.strapi.redirect.show ? (
-          <Container>
+          <div className="md:px-20 md:mt-24 px-4">
             <div
               style={{
                 borderLeft: "6px solid var(--primary)",
@@ -178,21 +179,24 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
               className="w-full text-center py-8 bg-tcard rounded-md note"
             >
               {/* <h2 className="font-subheading text-3xl">Note!</h2> */}
-              <ReactMarkdown children={data.strapi.redirect.text} />
+              <ReactMarkdown
+                children={data.strapi.redirect.text}
+                className="px-2"
+              />
             </div>
-          </Container>
+          </div>
         ) : null}
 
         {/* ABOUT */}
         <div className="">
           <Container className="flex flex-col items-center">
             <MainFade>
-              <div className="md:w-1/5 w-1/4 mt-10">
+              <div className="md:w-1/5 w-1/4 md:mt-10">
                 <Logo />
               </div>
-              <h1 className="md:text-7xl text-6xl font-heading text-center uppercase">
-                <span className="md:text-8xl text-7xl">T</span>idings{" "}
-                <span className="md:text-8xl text-7xl">M</span>edia
+              <h1 className="md:text-7xl text-3xl mt-2 font-heading text-center uppercase">
+                <span className="md:text-8xl text-5xl">T</span>idings{" "}
+                <span className="md:text-8xl text-5xl">M</span>edia
               </h1>
               <p className="text-lg text-center">
                 Where we discuss economics, history, and everything in between.
@@ -318,7 +322,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
               >
                 Our Mission
               </h1>
-              <div className="flex w-full md:flex-row flex-col mt-32 mb-40 items-center md:justify-around">
+              <div className="flex w-full md:flex-row flex-col mt-32 md:mb-40 mb-20 items-center md:justify-around">
                 <div className="">
                   <div className="w-1/2 mx-auto mb-4">
                     <Img fluid={data.educationPic.fluid} />

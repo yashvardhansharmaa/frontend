@@ -5,11 +5,13 @@ import Container from "../../components/Container";
 import Heading from "../../components/Heading";
 import Layout from "../../components/Layout";
 import NoImage from "../../components/NoImage";
+import SEO from "../../components/seo";
 
 const OurPartners: FC<PageProps<Data>> = ({ data }) => {
   const partners = data.strapi.partners;
   return (
     <Layout>
+      <SEO title="Our Partners" />
       <Container>
         <Heading>Our Partners</Heading>
         <div className="mt-20 flex flex-col">

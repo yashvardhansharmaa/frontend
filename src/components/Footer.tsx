@@ -20,6 +20,14 @@ interface FooterData {
       instagram_link: string;
       linkedin_link: string;
       twitter_link?: string;
+      logo: {
+        url: string;
+        imageFile: {
+          childImageSharp: {
+            fixed: FixedObject;
+          };
+        };
+      };
     };
     navbar: {
       logo: {
@@ -46,13 +54,6 @@ const Footer = () => {
   const data = useStaticQuery<FooterData>(graphql`
     query Footer {
       strapi {
-        footerItems {
-          heading
-          sub_item {
-            link
-            name
-          }
-        }
         footer {
           company
           description
@@ -60,24 +61,7 @@ const Footer = () => {
           instagram_link
           linkedin_link
           twitter_link
-        }
-        navbar {
           logo {
-            url
-            imageFile {
-              childImageSharp {
-                fixed(width: 25, height: 25) {
-                  aspectRatio
-                  base64
-                  src
-                  srcSet
-                  width
-                  height
-                }
-              }
-            }
-          }
-          logo_black {
             url
             imageFile {
               childImageSharp {
@@ -105,9 +89,9 @@ const Footer = () => {
       instagram_link,
       linkedin_link,
       twitter_link,
+      logo,
     },
     footerItems,
-    navbar: { logo, logo_black },
   } = data.strapi;
 
   const FooterItems = () => (
@@ -146,22 +130,10 @@ const Footer = () => {
             to="/"
             className="flex title-font font-medium items-center md:justify-start justify-center"
           >
-            {theme ? (
-              <>
-                {logo_black ? (
-                  <Img fixed={logo_black.imageFile.childImageSharp.fixed} />
-                ) : (
-                  <NoImage style={{ height: "25px", width: "25px" }} />
-                )}
-              </>
+            {logo.imageFile ? (
+              <Img fixed={logo.imageFile.childImageSharp.fixed} />
             ) : (
-              <>
-                {logo ? (
-                  <Img fixed={logo.imageFile.childImageSharp.fixed} />
-                ) : (
-                  <NoImage style={{ height: "25px", width: "25px" }} />
-                )}
-              </>
+              <NoImage style={{ height: "25px", width: "25px" }} />
             )}
             <span className="ml-3 text-xl">{company}</span>
           </Link>

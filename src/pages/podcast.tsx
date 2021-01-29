@@ -6,6 +6,7 @@ import Layout from "../components/Layout";
 import Img from "gatsby-image";
 import SpotifyButton from "../components/SpotifyButton";
 import PodcastShareButtons from "../components/PodcastShareButtons";
+import SEO from "../components/seo";
 
 const Podcast: FC<PageProps<Data>> = ({ data }) => {
   const { allFeedPodcast, feedPodcastMeta } = data;
@@ -20,6 +21,7 @@ const Podcast: FC<PageProps<Data>> = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title="Podcast" />
       <Container>
         <div className="lg:grid lg:grid-cols-2 flex flex-col w-full lg:w-3/4 mx-auto">
           {/* <div className=""> */}

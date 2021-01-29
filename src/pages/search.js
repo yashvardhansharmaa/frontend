@@ -9,6 +9,7 @@ import SearchBlogCard from "../components/SearchBlogCard";
 import PostListContainer from "../components/PostListContainer";
 import Container from "../components/Container";
 import LoadingSpinner from "../assets/Rolling-1s-200px-t.svg";
+import SEO from "../components/seo";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -78,6 +79,7 @@ const Search = () => {
 
   return (
     <Layout>
+      <SEO title="Search" />
       <div className="mt-20 container mx-auto">
         <Heading>Search</Heading>
         <div

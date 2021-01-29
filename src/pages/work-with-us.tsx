@@ -6,11 +6,13 @@ import Layout from "../components/Layout";
 import { customRenderers } from "../templates/blog_template";
 import WorkTimeSvg from "../assets/images/undraw_Work_time.svg";
 import DocsSvg from "../assets/images/undraw_Reviewed_docs.svg";
+import SEO from "../components/seo";
 
 const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
   const markdown = data.strapi.workWithUs.text;
   return (
     <Layout>
+      <SEO title="Work With Us" />
       <Container>
         <div className="maindiv mb-40">
           <h1 className="text-6xl font-heading text-center">Work With Us</h1>
