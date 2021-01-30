@@ -207,7 +207,7 @@ const Navbar: FC = () => {
 
   const BrandTitle = () => (
     <a href="/">
-      <div className="mx-3 flex md:text-lg text-2xl justify-center items-center">
+      <div className="mx-3 flex md:text-lg text-xl justify-center items-center">
         {data.strapi.navbar.company}
       </div>
     </a>
@@ -225,7 +225,7 @@ const Navbar: FC = () => {
       }}
     >
       {/* {console.log(data)} */}
-      <div className="container relative justify-between md:justify-start mx-auto flex p-5 flex-row items-center">
+      <div className="container relative justify-between md:justify-start mx-auto flex px-5 md:py-5 py-2 flex-row items-center">
         <BrandLogo />
         <BrandTitle />
         {!isOpen ? (

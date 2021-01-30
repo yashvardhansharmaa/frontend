@@ -1,15 +1,82 @@
 import { graphql, PageProps } from "gatsby";
 import React, { FC } from "react";
-import ReactMarkdown from "react-markdown";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
-import { customRenderers } from "../templates/blog_template";
 import WorkTimeSvg from "../assets/images/undraw_Work_time.svg";
 import DocsSvg from "../assets/images/undraw_Reviewed_docs.svg";
 import SEO from "../components/seo";
+import Img, { FluidObject } from "gatsby-image";
+import NoImage from "../components/NoImage";
 
 const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
-  const markdown = data.strapi.workWithUs.text;
+  const workWithUs = data.strapi.workWithUs;
+
+  const leftImagePart = (section: Section) => {
+    const { button_link, description, title, pic } = section;
+    return (
+      <div className="md:grid md:grid-cols-2 flex flex-col">
+        <div className="w-3/4 mx-auto">
+          {/* <img src={WorkTimeSvg} alt="" /> */}
+          {pic.imageFile ? (
+            <>
+              {pic.ext.includes("svg") ? (
+                <img src={pic.imageFile.publicURL} alt="" />
+              ) : (
+                <Img fluid={pic.imageFile.childImageSharp.fluid} />
+              )}
+            </>
+          ) : (
+            <NoImage />
+          )}
+        </div>
+        <div className="">
+          <h2 className="font-subheading text-5xl text-center">{title}</h2>
+          <p className="text-center w-3/4 mx-auto mt-2">{description}</p>
+          <div className="w-full flex justify-center mt-4">
+            <a href={button_link}>
+              <button className="bg-primary md:py-1 py-1 px-2 md:px-6 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
+                Apply
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const rightImagePart = (section: Section) => {
+    const { button_link, description, title, pic } = section;
+
+    return (
+      <div className="md:grid md:grid-cols-2 mt-40 flex flex-col">
+        <div className="md:order-1 order-2">
+          <h2 className="font-subheading text-5xl text-center">{title}</h2>
+          <p className="text-center w-3/4 mx-auto mt-2">{description}</p>
+          <div className="w-full flex justify-center mt-4">
+            <a href={button_link}>
+              <button className="bg-primary md:py-1 py-1 px-2 md:px-6 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
+                Apply
+              </button>
+            </a>
+          </div>
+        </div>
+        <div className="w-3/4 md:order-2 order-1 mx-auto">
+          {pic.imageFile ? (
+            <>
+              {pic.ext.includes("svg") ? (
+                <img src={pic.imageFile.publicURL} alt="" />
+              ) : (
+                <Img fluid={pic.imageFile.childImageSharp.fluid} />
+              )}
+            </>
+          ) : (
+            <NoImage />
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Layout>
       <SEO title="Work With Us" />
@@ -22,97 +89,21 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
             working with you!
           </h3>
           <div className="mt-40">
-            <div className="md:grid md:grid-cols-2 flex flex-col">
-              <div className="w-3/4 mx-auto">
-                <img src={WorkTimeSvg} alt="" />
-              </div>
-              <div className="">
-                <h2 className="font-subheading text-5xl text-center">
-                  Internships
-                </h2>
-                <p className="text-center w-3/4 mx-auto mt-2">
-                  We, at Tidings, offer internships to high school and college
-                  students for a period of 12 weeks for various works such as
-                  content writing, marketing, and graphic designing. A
-                  certificate, letter of recommendation, liberty to choose your
-                  topics of articles, guidance in article writing, an
-                  opportunity to network amongst like-minded peers, and flexible
-                  deadlines are some of the reasons to work with us. ​
-                  Interested applicants may fill the form below.
-                </p>
-                <div className="w-full flex justify-center mt-4">
-                  <a href="https://docs.google.com/forms/d/1iT-Zof9AATWVZ_W-7cXZ6f29IJmW_pmtSzGzB89esyo/edit">
-                    <button className="bg-primary md:py-1 py-1 px-2 md:px-6 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
-                      Apply
-                    </button>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="md:grid md:grid-cols-2 mt-40 flex flex-col">
-              <div className="md:order-1 order-2">
-                <h2 className="font-subheading text-5xl text-center">
-                  Editorial Board
-                </h2>
-                <p className="text-center w-3/4 mx-auto mt-2">
-                  If you're a student with excellent grammar, a good
-                  understanding of either history or economics, and have
-                  significant experience in writing- apply to be a part of our
-                  editorial board below!
-                </p>
-                <div className="w-full flex justify-center mt-4">
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZAkMrkH5vITUccTdG0qrjNASPTRa94HNdr2aPTkob_ypmKA/viewform?usp=sf_link">
-                    <button className="bg-primary md:py-1 py-1 px-2 md:px-6 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
-                      Apply
-                    </button>
-                  </a>
-                </div>
-              </div>
-              <div className="w-3/4 md:order-2 order-1 mx-auto">
-                <img src={DocsSvg} alt="" />
-              </div>
-            </div>
+            {workWithUs.section.map((section) => (
+              <>
+                {!section.is_image_right ? (
+                  <>{leftImagePart(section)}</>
+                ) : (
+                  <>{rightImagePart(section)}</>
+                )}
+              </>
+            ))}
           </div>
-          <div className="md:grid md:grid-cols-2 mt-40 flex flex-col">
-            <div className="w-3/4 mx-auto">
-              <img src={WorkTimeSvg} alt="" />
-            </div>
-            <div className="">
-              <h2 className="font-subheading text-5xl text-center">
-                Submit a One Time Article
-              </h2>
-              <p className="text-center w-3/4 mx-auto mt-2">
-                If you know a lot about some topic, but cannot devote time to
-                our internship program, you may submit your article to be
-                published!
-              </p>
-              <div className="w-full flex justify-center mt-4">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSffukPpV1qvI3QpJ9oJGYFZH6TcZWpu4Dzfh1g9zEWaW1tD-Q/viewform?usp=sf_link">
-                  <button className="bg-primary md:py-1 py-1 px-2 md:px-6 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
-                    Apply
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-          {/* <div className="md:px-20 lg:px-48 mx-auto">
-            <div className="text-lg leading-relaxed font-body">
-              <ReactMarkdown
-                children={markdown}
-                className="blog"
-                renderers={customRenderers}
-              />
-            </div>
-          </div> */}
         </div>
       </Container>
     </Layout>
   );
 };
-
-export interface WorkWithUs {
-  text: string;
-}
 
 export interface Strapi {
   workWithUs: WorkWithUs;
@@ -126,11 +117,53 @@ export interface RootObject {
   data: Data;
 }
 
+export interface Section {
+  button_link: string;
+  description: string;
+  id: string;
+  is_image_right: boolean;
+  title: string;
+  pic: {
+    url: string;
+    ext: string;
+    imageFile: {
+      childImageSharp: {
+        fluid: FluidObject;
+      };
+      publicURL: string;
+    };
+  };
+}
+
+export interface WorkWithUs {
+  section: Section[];
+  mainDescription: string;
+}
+
 export const query = graphql`
-  query WorkWithUsQuery {
+  query workwithusquery {
     strapi {
       workWithUs {
-        text
+        section {
+          button_link
+          description
+          id
+          is_image_right
+          title
+          pic {
+            url
+            ext
+            imageFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+              publicURL
+            }
+          }
+        }
+        mainDescription
       }
     }
   }

@@ -1,8 +1,6 @@
 import { graphql, PageProps } from "gatsby";
 import Img, { FluidObject } from "gatsby-image";
 import React, { FC } from "react";
-import Container from "../../components/Container";
-import Heading from "../../components/Heading";
 import Layout from "../../components/Layout";
 import NoImage from "../../components/NoImage";
 import SEO from "../../components/seo";
@@ -12,8 +10,10 @@ const OurPartners: FC<PageProps<Data>> = ({ data }) => {
   return (
     <Layout>
       <SEO title="Our Partners" />
-      <Container>
-        <Heading>Our Partners</Heading>
+      <div className="mt-24 container mx-auto px-2 md:px-20 lg:px-10">
+        <h1 className="md:text-7xl text-5xl font-heading text-center">
+          Our Partners
+        </h1>
         <div className="mt-20 flex flex-col">
           {partners.map((partner) => {
             const { description, name, pic } = partner;
@@ -41,7 +41,7 @@ const OurPartners: FC<PageProps<Data>> = ({ data }) => {
             );
           })}
         </div>
-      </Container>
+      </div>
     </Layout>
   );
 };

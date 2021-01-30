@@ -20,7 +20,6 @@ import SEO from "../components/seo";
 import ShareButtons from "../components/ShareButtons";
 import NoImage from "../components/NoImage";
 import TrackVisibility from "react-on-screen";
-import Container from "../components/Container";
 
 // Custom Elements for React Markdown
 export const customRenderers = {

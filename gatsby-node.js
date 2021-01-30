@@ -208,6 +208,16 @@ exports.createResolvers = ({
   });
 };
 
+// exports.sourceNodes = ({ actions }) => {
+//   const { createTypes } = actions
+//   const typeDefs = `
+//     type StrapiWorkWithUs implements Node {
+//       title: String
+//     }
+//   `
+//   createTypes(typeDefs)
+// }
+
 // debug splide window undefined
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
