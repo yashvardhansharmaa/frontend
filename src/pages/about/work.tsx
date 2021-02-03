@@ -3,6 +3,7 @@ import Img, { FluidObject } from "gatsby-image";
 import React, { FC } from "react";
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/Layout";
+import NoImage from "../../components/NoImage";
 import { customRenderers } from "../../templates/blog_template";
 
 const OurWork: FC<PageProps<Data>> = ({ data }) => {
@@ -10,7 +11,8 @@ const OurWork: FC<PageProps<Data>> = ({ data }) => {
 
   const ImageComp = ({ pic, caption }: { pic: ImageFile; caption: string }) => (
     <div className="h-full md:w-full w-1/2 mx-6 flex flex-col">
-      <Img fluid={pic.childImageSharp.fluid} />
+      {pic ? <Img fluid={pic.childImageSharp.fluid} /> : <NoImage />}
+
       <span className="mx-auto">{caption}</span>
     </div>
   );
@@ -20,7 +22,11 @@ const OurWork: FC<PageProps<Data>> = ({ data }) => {
       <div className="mt-24 container mx-auto px-4 md:px-8">
         <div className="maindiv mb-20 w-full">
           <div className="md:w-1/4 w-3/4 mx-auto">
-            <Img fluid={mainpic.imageFile.childImageSharp.fluid} />
+            {mainpic.imageFile ? (
+              <Img fluid={mainpic.imageFile.childImageSharp.fluid} />
+            ) : (
+              <NoImage />
+            )}
           </div>
           <h1 className="text-6xl font-heading text-center">Our Work</h1>
           <div className="container md:px-20 lg:px-48 mx-auto">

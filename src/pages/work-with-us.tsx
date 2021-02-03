@@ -2,8 +2,6 @@ import { graphql, PageProps } from "gatsby";
 import React, { FC } from "react";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
-import WorkTimeSvg from "../assets/images/undraw_Work_time.svg";
-import DocsSvg from "../assets/images/undraw_Reviewed_docs.svg";
 import SEO from "../components/seo";
 import Img, { FluidObject } from "gatsby-image";
 import NoImage from "../components/NoImage";
@@ -14,7 +12,7 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
   const leftImagePart = (section: Section) => {
     const { button_link, description, title, pic } = section;
     return (
-      <div className="md:grid md:grid-cols-2 flex flex-col">
+      <div className="md:grid md:grid-cols-2 my-20 flex flex-col">
         <div className="w-3/4 mx-auto">
           {/* <img src={WorkTimeSvg} alt="" /> */}
           {pic.imageFile ? (
@@ -48,7 +46,7 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
     const { button_link, description, title, pic } = section;
 
     return (
-      <div className="md:grid md:grid-cols-2 mt-40 flex flex-col">
+      <div className="md:grid md:grid-cols-2 my-20 flex flex-col">
         <div className="md:order-1 order-2">
           <h2 className="font-subheading text-5xl text-center">{title}</h2>
           <p className="text-center w-3/4 mx-auto mt-2">{description}</p>
@@ -83,7 +81,7 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
       <Container>
         <div className="maindiv mb-40">
           <h1 className="text-6xl font-heading text-center">Work With Us</h1>
-          <h3 className="md:w-1/2 text-center mx-auto">
+          <h3 className="md:w-1/2 text-center mx-auto mb-20">
             Tidings is a student-led run blog. We're always open to recruiting
             more team members and expanding our community. We look forward to
             working with you!
