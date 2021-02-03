@@ -10,6 +10,7 @@ import Twitter from "../../components/Twitter";
 import Mail from "../../components/Mail";
 import Container from "../../components/Container";
 import SEO from "../../components/seo";
+import { openPopupWidget } from "react-calendly";
 
 const OurTeam: FC<PageProps<Data>> = ({ data }) => {
   const teamMembers = data.strapi.teams;
@@ -56,12 +57,17 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                       {twitter && <Twitter link={twitter} />}
                       {email && <Mail link={email} />}
                       {calendly && (
-                        <a
-                          href={calendly}
-                          className="leading-none hover:underline ml-2"
+                        // <a
+                        //   href={calendly}
+                        //   className="leading-none hover:underline ml-2"
+                        // >
+                        //   Calendly
+                        // </a>
+                        <button
+                          onClick={() => openPopupWidget({ url: calendly })}
                         >
                           Calendly
-                        </a>
+                        </button>
                       )}
                     </div>
                   </div>

@@ -84,10 +84,9 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
         <MainFade>
           <div className="md:w-1/3 w-full md:pr-0 pr-4 mt-6 flex justify-end mx-auto">
             {/* <span>x</span> */}
-            <button>
+            <button className="outline-none focus:outline-none">
               <FontAwesomeIcon
                 icon={faTimes}
-                className="outline-none"
                 onClick={() => {
                   setIsBlur(false);
                   setIsModalOpen(false);
