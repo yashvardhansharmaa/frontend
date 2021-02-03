@@ -1,0 +1,4 @@
+- [x] Centering of teams page
+- [x] margintop of teams page
+- [ ] popup
+- [x] reduce font size of blog

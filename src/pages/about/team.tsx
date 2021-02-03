@@ -18,7 +18,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
     <Layout>
       <SEO title="Our Team" />
       {/* <div className="mt-24 container mx-auto px-2 md:px-20 lg:px-10"> */}
-      <div className="md:mt-24 container px-4 mx-auto lg:px-10">
+      <div className="mt-24 container px-4 mx-auto lg:px-10">
         <div className="md:w-2/4 w-3/4 mx-auto">
           <Img fluid={data.confCall.fluid} />
         </div>
@@ -40,7 +40,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                     )}
                   </div>
                   {/* TEXT SECTION */}
-                  <div className="md:w-2/3 w-full text-center">
+                  <div className="md:w-2/3 w-full text-justify">
                     <h3 className="font-heading text-2xl">{user.name}</h3>
                     <h4 className="text-xs mt-2 font-heading tracking-wider">
                       {user.position.toUpperCase()}
@@ -75,7 +75,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                 return null;
               }
               return (
-                <div className="flex lg:w-1/2 flex-col md:flex-row w-full mb-20">
+                <div className="flex lg:w-1/2 flex-col items-center md:flex-row w-full mb-20">
                   {/* IMAGE SECTION */}
                   <div className="md:w-1/3 w-1/2 mr-5 mt-2 mb-5 md:mb-0">
                     {user.pic ? (
@@ -85,7 +85,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                     )}
                   </div>
                   {/* TEXT SECTION */}
-                  <div className="md:w-2/3 w-full">
+                  <div className="md:w-2/3 w-full md:text-left text-justify">
                     <h3 className="font-heading text-2xl">{user.name}</h3>
                     <h4 className="text-xs mt-2 font-heading tracking-wider">
                       {user.position.toUpperCase()}
@@ -93,7 +93,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                     <p className="mt-2 text-sm tracking-wide pr-10">
                       {user.description}
                     </p>
-                    <div className="flex mt-2">
+                    <div className="flex mt-2 md:justify-start justify-center">
                       {instagram && <Instagram link={instagram} />}
                       {linkedin && <Linkedin link={linkedin} />}
                       {twitter && <Twitter link={twitter} />}
