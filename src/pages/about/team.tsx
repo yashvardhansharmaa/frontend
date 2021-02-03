@@ -41,14 +41,16 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                   </div>
                   {/* TEXT SECTION */}
                   <div className="md:w-2/3 w-full text-justify">
-                    <h3 className="font-heading text-2xl">{user.name}</h3>
-                    <h4 className="text-xs mt-2 font-heading tracking-wider">
+                    <h3 className="font-heading md:text-left text-center text-2xl">
+                      {user.name}
+                    </h3>
+                    <h4 className="text-xs mt-2 font-heading tracking-wider md:text-left text-center">
                       {user.position.toUpperCase()}
                     </h4>
-                    <p className="mt-2 text-sm tracking-wide pr-10">
+                    <p className="mt-2 text-sm tracking-wide md:pr-10">
                       {user.description}
                     </p>
-                    <div className="flex mt-2 justify-center">
+                    <div className="flex mt-4 justify-center">
                       {instagram && <Instagram link={instagram} />}
                       {linkedin && <Linkedin link={linkedin} />}
                       {twitter && <Twitter link={twitter} />}
@@ -86,14 +88,16 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                   </div>
                   {/* TEXT SECTION */}
                   <div className="md:w-2/3 w-full md:text-left text-justify">
-                    <h3 className="font-heading text-2xl">{user.name}</h3>
-                    <h4 className="text-xs mt-2 font-heading tracking-wider">
+                    <h3 className="font-heading text-2xl md:text-left text-center">
+                      {user.name}
+                    </h3>
+                    <h4 className="text-xs mt-2 font-heading tracking-wider md:text-left text-center">
                       {user.position.toUpperCase()}
                     </h4>
-                    <p className="mt-2 text-sm tracking-wide pr-10">
+                    <p className="mt-2 text-sm tracking-wide md:pr-10">
                       {user.description}
                     </p>
-                    <div className="flex mt-2 md:justify-start justify-center">
+                    <div className="flex mt-4 md:justify-start justify-center">
                       {instagram && <Instagram link={instagram} />}
                       {linkedin && <Linkedin link={linkedin} />}
                       {twitter && <Twitter link={twitter} />}
