@@ -4,7 +4,7 @@ import Img, { FixedObject } from "gatsby-image";
 import DarkLightSwitch from "./DarkLightSwitch";
 import Hamburger from "hamburger-react";
 import "../assets/styles/navbar.scss";
-import NavLink from "./NavLink";
+import { NavLink, HomeNavLink } from "./NavLink";
 import { FluidObject } from "gatsby-image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -84,12 +84,23 @@ const Navbar: FC = () => {
                   }
                 >
                   {menuItem.link ? (
-                    <NavLink
-                      to={menuItem.link}
-                      className="dropbtn focus:outline-none"
-                    >
-                      {menuItem.name}
-                    </NavLink>
+                    <>
+                      {menuItem.link === "/" ? (
+                        <HomeNavLink
+                          to={menuItem.link}
+                          className="dropbtn focus:outline-none"
+                        >
+                          {menuItem.name}
+                        </HomeNavLink>
+                      ) : (
+                        <NavLink
+                          to={menuItem.link}
+                          className="dropbtn focus:outline-none"
+                        >
+                          {menuItem.name}
+                        </NavLink>
+                      )}
+                    </>
                   ) : (
                     <p className="dropbtn focus:outline-none cursor-pointer">
                       {menuItem.name}
