@@ -1,6 +1,24 @@
-import React, { useContext, createContext, ReactNode } from "react";
+import React, { useContext, createContext, ReactNode, useState } from "react";
 import { ThemeToggler } from "gatsby-plugin-dark-mode";
 const ThemeContext = createContext({ theme: false, toggleTheme: () => {} });
+const VisitedContext = createContext({
+  timesVisited: 0,
+  increaseTimesVisited: () => {},
+});
+
+const VisitedProvider = ({ children }: { children: ReactNode | string }) => {
+  const [timesVisited, setTimesVisited] = useState(0);
+  const increaseTimes = () => {
+    setTimesVisited((val) => val + 1);
+  };
+  return (
+    <VisitedContext.Provider
+      value={{ timesVisited, increaseTimesVisited: increaseTimes }}
+    >
+      {children}
+    </VisitedContext.Provider>
+  );
+};
 
 const ThemeProvider = ({ children }: { children: ReactNode | string }) => {
   return (
@@ -29,7 +47,11 @@ interface ThemeProps {
 }
 
 export const useTheme = () => useContext(ThemeContext);
+export const useTimesVisited = () => useContext(VisitedContext);
 
 export default ({ element }: { element: ReactNode }) => (
-  <ThemeProvider>{element}</ThemeProvider>
+  <VisitedProvider>
+    {" "}
+    <ThemeProvider>{element}</ThemeProvider>
+  </VisitedProvider>
 );

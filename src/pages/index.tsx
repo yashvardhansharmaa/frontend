@@ -1,18 +1,17 @@
-import React, { FC, ReactNode, useState } from "react";
-import { graphql, Link, PageProps, useStaticQuery } from "gatsby";
+import React, { FC, useState } from "react";
+import { graphql, Link, PageProps } from "gatsby";
 import Container from "../components/Container";
 import { BlogListDataNode } from "../templates/blog_list_template";
 import BigBlogCard from "../components/BigBlogCard";
 import BlogCard from "../components/BlogCard";
 import PostListContainer from "../components/PostListContainer";
 import Layout from "../components/Layout";
-import Heading from "../components/Heading";
 import MainFade from "../components/MainFade";
 import Img, { FluidObject } from "gatsby-image";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import compareDates from "../utils/compareDates";
-import { useTheme } from "../components/ThemeProvider";
+import { useTheme, useTimesVisited } from "../components/ThemeProvider";
 import SEO from "../components/seo";
 import NoImage from "../components/NoImage";
 import CountUp from "react-countup";
@@ -20,14 +19,6 @@ import TrackVisibility from "react-on-screen";
 import Testimonials, { TestimonialsData } from "../components/Testimonials";
 import ReactMarkdown from "react-markdown";
 import Popup from "reactjs-popup";
-
-/**
- * /static/5d484f953cd3205999e3dd3e2f93066f/ee604/undraw_conference_call_b0w6.png
- * /static/b4585f0e39a259d0ab8f2fbdc9b8c5aa/ee604/undraw_publish_article_icso.png
- * /static/c9a1f9e068f17d605933bcac791df1df/ee604/undraw_reading_time_gvg0.png
- * /static/26ee3fea5ef43cae28629082ae7a54ec/ee604/undraw_shared_workspace_hwky.png
- * /static/a9765fb4147f9eb4dfa10ac8cb8204d8/ee604/clip-education.png
- */
 
 const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const { theme } = useTheme();
@@ -40,9 +31,18 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
 
   const counterDuration = 3;
   const [isActive, setIsActive] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isBlur, setIsBlur] = useState(false);
   const [email, setEmail] = useState("");
+  const { timesVisited, increaseTimesVisited } = useTimesVisited();
+
+  setTimeout(() => {
+    if (timesVisited < 1) {
+      setIsModalOpen(true);
+      setIsBlur(true);
+      increaseTimesVisited();
+    }
+  }, 5000);
 
   const Logo = () => (
     <>
@@ -76,72 +76,89 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
 
   return (
     <>
-      {/* <Popup
+      <Popup
         open={isModalOpen}
         onClose={() => setIsBlur(false)}
         position="top center"
       >
-        <div className="w-full border-white border flex justify-center items-center flex-col mt-6 h-full">
-          <h2 className="text-center text-3xl">Subscribe to our newsletter</h2>
-          <form
-            action="https://thetidingsblog.us10.list-manage.com/subscribe/post"
-            method="POST"
-            id="mc-embedded-subscribe-form"
-            name="mc-embedded-subscribe-form"
-            className="validate w-100 mx-auto md:mt-0 mt-10"
-            target="_blank"
-            noValidate
-          >
-            <input type="hidden" name="u" value={process.env.GATSBY_MC_U} />
-            <input type="hidden" name="id" value={process.env.GATSBY_MC_ID} />
-            <label htmlFor="MERGE0"></label>
-            <div id="mc_embed_signup_scroll">
-              <div className="flex w-full justify-center items-center mt-2">
-                <div className="mc-field-group">
-                  <input
-                    type="email"
-                    value={email}
-                    placeholder="Email"
-                    name="EMAIL"
-                    className="required email text-black rounded-sm h-4 py-4 w-full px-2 mr-4"
-                    id="mce-EMAIL"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div id="mce-responses" className="clear">
+        <MainFade>
+          <div className="md:w-1/3 w-full md:pr-0 pr-4 mt-6 flex justify-end mx-auto">
+            {/* <span>x</span> */}
+            <button>
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="outline-none"
+                onClick={() => {
+                  setIsBlur(false);
+                  setIsModalOpen(false);
+                }}
+              />
+            </button>
+          </div>
+          <div className="w-full flex pt-4 pb-4 justify-center items-center flex-col">
+            <h2 className="text-center md:text-3xl text-2xl">
+              Subscribe to our newsletter
+            </h2>
+            <form
+              action="https://thetidingsblog.us10.list-manage.com/subscribe/post"
+              method="POST"
+              id="mc-embedded-subscribe-form"
+              name="mc-embedded-subscribe-form"
+              className="validate w-100 mx-auto md:mt-0 mt-6"
+              target="_blank"
+              noValidate
+            >
+              <input type="hidden" name="u" value={process.env.GATSBY_MC_U} />
+              <input type="hidden" name="id" value={process.env.GATSBY_MC_ID} />
+              <label htmlFor="MERGE0"></label>
+              <div id="mc_embed_signup_scroll">
+                <div className="flex w-full justify-center items-center md:mt-2">
+                  <div className="mc-field-group">
+                    <input
+                      type="email"
+                      value={email}
+                      placeholder="Email"
+                      name="EMAIL"
+                      className="required email text-black rounded-sm h-4 py-4 w-full px-2 mr-4"
+                      id="mce-EMAIL"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div id="mce-responses" className="clear">
+                    <div
+                      className="response hidden"
+                      id="mce-error-response"
+                    ></div>
+                    <div className="hidden" id="mce-success-response"></div>
+                  </div>
                   <div
-                    className="response hidden"
-                    id="mce-error-response"
-                  ></div>
-                  <div className="hidden" id="mce-success-response"></div>
-                </div>
-                <div
-                  className="absolute"
-                  style={{ left: "-5000px" }}
-                  aria-hidden="true"
-                >
-                  <input
-                    type="text"
-                    name="b_577d9034d2d8256b3f70f21c9_9b783b9bb9"
-                    tabIndex={-1}
-                    value=""
-                  />
-                </div>
-                <div className="clear">
-                  <input
-                    type="submit"
-                    value="Subscribe"
-                    name="subscribe"
-                    id="mc-embedded-subscribe"
-                    className="button rounded-sm cursor-pointer text-black w-full px-2 h-8 ml-4"
-                    style={{ background: "#c43d34" }}
-                  />
+                    className="absolute"
+                    style={{ left: "-5000px" }}
+                    aria-hidden="true"
+                  >
+                    <input
+                      type="text"
+                      name="b_577d9034d2d8256b3f70f21c9_9b783b9bb9"
+                      tabIndex={-1}
+                      value=""
+                    />
+                  </div>
+                  <div className="clear">
+                    <input
+                      type="submit"
+                      value="Subscribe"
+                      name="subscribe"
+                      id="mc-embedded-subscribe"
+                      className="button rounded-sm cursor-pointer text-black w-full px-2 h-8 ml-4"
+                      style={{ background: "#c43d34" }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
-        </div>
-      </Popup> */}
+            </form>
+          </div>
+        </MainFade>
+      </Popup>
       <Layout className={isBlur ? "blur" : ""}>
         <SEO title="Home" image={{ url, height, width }} />
         <Container>

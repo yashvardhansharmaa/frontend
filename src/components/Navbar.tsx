@@ -185,7 +185,7 @@ const Navbar: FC = () => {
   const BrandLogo = () => {
     const { theme } = useTheme();
     return (
-      <a href="/">
+      <Link to="/">
         {theme ? (
           <>
             {data.strapi.navbar.logo_black ? (
@@ -212,7 +212,7 @@ const Navbar: FC = () => {
         <div className="md:flex hidden justify-center mx-3">
           <span className="bg-primary h-100" style={{ width: "2px" }}></span>
         </div>
-      </a>
+      </Link>
     );
   };
 

@@ -169,10 +169,11 @@ blockquote p {
   position: absolute !important;
   top: 0;
   min-height: 30vh;
-  background-color: #2a2a2a;
+  background-color: #1e1e1e;
   display: flex;
-  justify-items: center;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-items: center;
+  justify-content: center; */
 }
 /* 
 .box {
