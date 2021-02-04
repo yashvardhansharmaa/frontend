@@ -16,8 +16,8 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
   const teamMembers = data.strapi.teams;
 
   teamMembers.sort((a, b) => {
-    if(!a.order || !b.order) {
-      return 0
+    if (!a.order || !b.order) {
+      return 0;
     }
     return a.order - b.order;
   });
@@ -27,18 +27,20 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
       <SEO title="Our Team" />
       {/* <div className="mt-24 container mx-auto px-2 md:px-20 lg:px-10"> */}
       <div className="mt-24 container px-4 mx-auto lg:px-10">
-        <div className="md:w-2/4 w-3/4 mx-auto">
-          <Img fluid={data.confCall.fluid} />
+        <div className="flex md:flex-row flex-col items-center">
+          <div className="md:w-2/4 w-3/4 mx-auto">
+            <Img fluid={data.confCall.fluid} />
+          </div>
+          <h1 className="md:text-8xl text-5xl font-heading text-center">
+            Our Team
+          </h1>
         </div>
-        <h1 className="md:text-7xl text-5xl font-heading text-center">
-          Our Team
-        </h1>
         {teamMembers &&
           teamMembers.map((user) => {
             if (user.name.toLowerCase() === "yashvardhan sharma") {
               const { instagram, twitter, linkedin, email, calendly } = user;
               return (
-                <div className="flex lg:w-1/2 mx-auto justify-center items-center flex-col md:flex-row w-full mb-20">
+                <div className="flex lg:w-1/2 mx-auto justify-center items-start flex-col md:flex-row w-full mb-20">
                   {/* IMAGE SECTION */}
                   <div className="md:w-1/3 w-1/2 mr-5 mt-2 mb-5 md:mb-0">
                     {user.pic ? (
@@ -90,7 +92,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
                 return null;
               }
               return (
-                <div className="flex lg:w-1/2 flex-col items-center md:flex-row w-full mb-20">
+                <div className="flex lg:w-1/2 flex-col items-start md:flex-row w-full mb-20">
                   {/* IMAGE SECTION */}
                   <div className="md:w-1/3 w-1/2 mr-5 mt-2 mb-5 md:mb-0">
                     {user.pic ? (
