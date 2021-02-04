@@ -82,9 +82,8 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
         position="top center"
       >
         <MainFade>
-          <div className="md:w-1/3 w-full md:pr-0 pr-4 mt-6 flex justify-end mx-auto">
-            {/* <span>x</span> */}
-            <button className="outline-none focus:outline-none">
+          <div className="md:w-1/2 w-full md:pr-0 pr-4 mt-6 flex justify-end mx-auto">
+            <button className="outline-none focus:outline-none text-white w-4 h-4">
               <FontAwesomeIcon
                 icon={faTimes}
                 onClick={() => {
@@ -94,64 +93,62 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
               />
             </button>
           </div>
-          <div className="w-full flex pt-4 pb-4 justify-center items-center flex-col">
-            <h2 className="text-center md:text-3xl text-2xl">
-              Subscribe to our newsletter
+          <div className="w-full flex pt-6 pb-4 justify-center items-center flex-col">
+            <h2 className="text-center text-white md:text-4xl text-2xl uppercase font-heading">
+              Subscribe to our mailing list!
             </h2>
             <form
               action="https://thetidingsblog.us10.list-manage.com/subscribe/post"
               method="POST"
               id="mc-embedded-subscribe-form"
               name="mc-embedded-subscribe-form"
-              className="validate w-100 mx-auto md:mt-0 mt-6"
+              className="validate w-full justify-center items-center mx-auto md:mt-4 mt-6"
               target="_blank"
               noValidate
             >
               <input type="hidden" name="u" value={process.env.GATSBY_MC_U} />
               <input type="hidden" name="id" value={process.env.GATSBY_MC_ID} />
               <label htmlFor="MERGE0"></label>
-              <div id="mc_embed_signup_scroll">
-                <div className="flex w-full justify-center items-center md:mt-2">
-                  <div className="mc-field-group">
-                    <input
-                      type="email"
-                      value={email}
-                      placeholder="Email"
-                      name="EMAIL"
-                      className="required email text-black rounded-sm h-4 py-4 w-full px-2 mr-4"
-                      id="mce-EMAIL"
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div id="mce-responses" className="clear">
-                    <div
-                      className="response hidden"
-                      id="mce-error-response"
-                    ></div>
-                    <div className="hidden" id="mce-success-response"></div>
-                  </div>
+              <div className="flex w-full justify-center items-center md:mt-2">
+                <div className="w-1/5">
+                  <input
+                    type="email"
+                    value={email}
+                    placeholder="Email"
+                    name="EMAIL"
+                    className="required email text-black rounded-sm h-4 py-4 w-full px-4 mr-4 font-body"
+                    id="mce-EMAIL"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div id="mce-responses" className="clear">
                   <div
-                    className="absolute"
-                    style={{ left: "-5000px" }}
-                    aria-hidden="true"
-                  >
-                    <input
-                      type="text"
-                      name="b_577d9034d2d8256b3f70f21c9_9b783b9bb9"
-                      tabIndex={-1}
-                      value=""
-                    />
-                  </div>
-                  <div className="clear">
-                    <input
-                      type="submit"
-                      value="Subscribe"
-                      name="subscribe"
-                      id="mc-embedded-subscribe"
-                      className="button rounded-sm cursor-pointer text-black w-full px-2 h-8 ml-4"
-                      style={{ background: "#c43d34" }}
-                    />
-                  </div>
+                    className="response hidden"
+                    id="mce-error-response"
+                  ></div>
+                  <div className="hidden" id="mce-success-response"></div>
+                </div>
+                <div
+                  className="absolute"
+                  style={{ left: "-5000px" }}
+                  aria-hidden="true"
+                >
+                  <input
+                    type="text"
+                    name="b_577d9034d2d8256b3f70f21c9_9b783b9bb9"
+                    tabIndex={-1}
+                    value=""
+                  />
+                </div>
+                <div className="clear">
+                  <input
+                    type="submit"
+                    value="Subscribe"
+                    name="subscribe"
+                    id="mc-embedded-subscribe"
+                    className="button rounded-sm cursor-pointer text-black w-full px-2 h-8 ml-4"
+                    style={{ background: "#c43d34" }}
+                  />
                 </div>
               </div>
             </form>

@@ -15,6 +15,13 @@ import { openPopupWidget } from "react-calendly";
 const OurTeam: FC<PageProps<Data>> = ({ data }) => {
   const teamMembers = data.strapi.teams;
 
+  teamMembers.sort((a, b) => {
+    if(!a.order || !b.order) {
+      return 0
+    }
+    return a.order - b.order;
+  });
+
   return (
     <Layout>
       <SEO title="Our Team" />
@@ -143,6 +150,7 @@ export const teamQuery = graphql`
         calendly
         position
         twitter
+        order
         pic {
           url
           imageFile {
@@ -165,6 +173,7 @@ export interface Team {
   linkedin?: string;
   name: string;
   position: string;
+  order?: number;
   twitter?: string;
   calendly?: string;
   pic?: {
