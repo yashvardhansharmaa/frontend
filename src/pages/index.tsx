@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { graphql, Link, PageProps } from "gatsby";
 import Container from "../components/Container";
 import { BlogListDataNode } from "../templates/blog_list_template";
@@ -36,13 +36,15 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const [email, setEmail] = useState("");
   const { timesVisited, increaseTimesVisited } = useTimesVisited();
 
-  setTimeout(() => {
-    if (timesVisited < 1) {
-      setIsModalOpen(true);
-      setIsBlur(true);
-      increaseTimesVisited();
-    }
-  }, 5000);
+  useEffect(() => {
+    setTimeout(() => {
+      if (timesVisited < 1) {
+        setIsModalOpen(true);
+        setIsBlur(true);
+        increaseTimesVisited();
+      }
+    }, 5000);
+  }, [])
 
   const Logo = () => (
     <>
