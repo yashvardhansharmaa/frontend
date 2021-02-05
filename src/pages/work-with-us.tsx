@@ -43,7 +43,7 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
   };
 
   const rightImagePart = (section: Section) => {
-    const { button_link, description, title, pic } = section;
+    const { button_link, description, title, pic, button_text } = section;
 
     return (
       <div className="md:grid md:grid-cols-2 my-20 flex flex-col">
@@ -53,7 +53,7 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
           <div className="w-full flex justify-center mt-4">
             <a href={button_link}>
               <button className="bg-primary md:py-1 py-1 px-2 md:px-6 text-bgc border-0 focus:outline-none hover:opacity-75 rounded text-md md:text-lg">
-                Apply
+                {button_text}
               </button>
             </a>
           </div>
@@ -117,6 +117,7 @@ export interface RootObject {
 
 export interface Section {
   button_link: string;
+  button_text: string;
   description: string;
   id: string;
   is_image_right: boolean;
@@ -144,6 +145,7 @@ export const query = graphql`
       workWithUs {
         section {
           button_link
+          button_text
           description
           id
           is_image_right

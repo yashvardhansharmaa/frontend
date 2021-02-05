@@ -29,7 +29,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
       <div className="mt-24 container px-4 mx-auto lg:px-10">
         <div className="flex md:flex-row flex-col items-center">
           <div className="md:w-2/4 w-3/4 mx-auto">
-            <Img fluid={data.confCall.fluid} />
+            <Img fluid={data.ourTeamPic.fluid} />
           </div>
           <h1 className="md:text-8xl text-5xl font-heading text-center">
             Our Team
@@ -40,7 +40,7 @@ const OurTeam: FC<PageProps<Data>> = ({ data }) => {
             if (user.name.toLowerCase() === "yashvardhan sharma") {
               const { instagram, twitter, linkedin, email, calendly } = user;
               return (
-                <div className="flex lg:w-1/2 mx-auto justify-center items-start flex-col md:flex-row w-full mb-20">
+                <div className="flex lg:w-1/2 mx-auto mt-10 justify-center md:items-center items-start flex-col md:flex-row w-full mb-20">
                   {/* IMAGE SECTION */}
                   <div className="md:w-1/3 w-1/2 mr-5 mt-2 mb-5 md:mb-0">
                     {user.pic ? (
@@ -142,6 +142,17 @@ export const teamQuery = graphql`
         ...GatsbyImageSharpFluid
       }
     }
+    ourTeamPic: imageSharp(
+      fluid: {
+        src: {
+          eq: "/static/d74199840c3c65e593dcf09d761a1294/ee604/Our%20Team.png"
+        }
+      }
+    ) {
+      fluid {
+        ...GatsbyImageSharpFluid
+      }
+    }
     strapi {
       teams {
         description
@@ -194,6 +205,9 @@ export interface Strapi {
 
 export interface Data {
   confCall: {
+    fluid: FluidObject;
+  };
+  ourTeamPic: {
     fluid: FluidObject;
   };
   strapi: Strapi;

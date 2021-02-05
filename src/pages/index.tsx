@@ -346,7 +346,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                 </div>
                 <div className="">
                   <div className="w-1/2 mx-auto mb-4">
-                    <Img fluid={data.readingTimePic.fluid} />
+                    <Img fluid={data.writingPic.fluid} />
                   </div>
                   <p className="mx-auto text-2xl text-center mb-10 md:mb-0 w-3/4 md:w-1/2">
                     Help students articulate and write better
@@ -382,6 +382,9 @@ interface Data {
     fluid: FluidObject;
   };
   readingTimePic: {
+    fluid: FluidObject;
+  };
+  writingPic: {
     fluid: FluidObject;
   };
   strapi: {
@@ -420,7 +423,7 @@ interface Data {
 }
 
 export default IndexPage;
-
+// "/static/53badbe2e7860c4d02a38a73c0e4a39e/71b75/Write.png"
 export const indexQuery = graphql`
   query IndexQuery {
     educationPic: imageSharp(
@@ -438,6 +441,17 @@ export const indexQuery = graphql`
       fluid: {
         src: {
           eq: "/static/c9a1f9e068f17d605933bcac791df1df/ee604/undraw_reading_time_gvg0.png"
+        }
+      }
+    ) {
+      fluid {
+        ...GatsbyImageSharpFluid
+      }
+    }
+    writingPic: imageSharp(
+      fluid: {
+        src: {
+          eq: "/static/53badbe2e7860c4d02a38a73c0e4a39e/71b75/Write.png"
         }
       }
     ) {

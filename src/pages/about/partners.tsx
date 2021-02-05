@@ -7,6 +7,13 @@ import SEO from "../../components/seo";
 
 const OurPartners: FC<PageProps<Data>> = ({ data }) => {
   const partners = data.strapi.partners;
+
+  partners.sort((a, b) => {
+    if (!a.order || !b.order) {
+      return 0;
+    }
+    return a.order - b.order;
+  });
   return (
     <Layout>
       <SEO title="Our Partners" />
@@ -52,6 +59,7 @@ export const partnersQuery = graphql`
       partners {
         link
         description
+        order
         name
         pic {
           url
@@ -81,6 +89,7 @@ export interface Pic {
 
 export interface Partner {
   description: string;
+  order?: number;
   name: string;
   pic?: Pic;
   link: string;
