@@ -37,13 +37,13 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
   const { timesVisited, increaseTimesVisited } = useTimesVisited();
 
   useEffect(() => {
-    setTimeout(() => {
-      if (timesVisited < 1) {
-        setIsModalOpen(true);
-        setIsBlur(true);
-        increaseTimesVisited();
-      }
-    }, 5000);
+    // setTimeout(() => {
+    //   if (timesVisited < 1) {
+    //     setIsModalOpen(true);
+    //     setIsBlur(true);
+    //     increaseTimesVisited();
+    //   }
+    // }, 5000);
   }, [])
 
   const Logo = () => (
@@ -78,7 +78,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
 
   return (
     <>
-      <Popup
+      {/* <Popup
         open={isModalOpen}
         onClose={() => setIsBlur(false)}
         position="top center"
@@ -156,7 +156,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             </form>
           </div>
         </MainFade>
-      </Popup>
+      </Popup> */}
       <Layout className={isBlur ? "blur" : ""}>
         <SEO title="Home" image={{ url, height, width }} />
         <Container>
@@ -165,9 +165,9 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             <h1 className="font-heading text-4xl text-center md:text-left md:text-6xl">
               Recent Articles
             </h1>
-            <MainFade>
+            {/* <MainFade> */}
               <BigBlogCard content={sortedBlogs[0]} />
-            </MainFade>
+            {/* </MainFade> */}
             <PostListContainer>
               {sortedBlogs.map((blog, i) => {
                 if (i === 0) return "";

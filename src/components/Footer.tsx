@@ -165,6 +165,9 @@ const Footer = () => {
             </p>
             <div className="flex flex-col w-3/4 mx-auto justify-between mt-2">
               <div className="mc-field-group">
+                <label htmlFor="mce-EMAIL" className="hidden">
+                  Email
+                </label>
                 <input
                   type="email"
                   value={email}
@@ -193,6 +196,9 @@ const Footer = () => {
                 />
               </div>
               <div className="clear">
+                <label htmlFor="mc-embedded-subscribe" className="hidden">
+                  Subscribe to newsletter
+                </label>
                 <input
                   type="submit"
                   value="Subscribe"
