@@ -171,7 +171,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             <PostListContainer>
               {sortedBlogs.map((blog, i) => {
                 if (i === 0) return "";
-                return <BlogCard key={i} content={blog} />;
+                return <BlogCard key={i} content={blog} fade={false} />;
               })}
             </PostListContainer>
             <div className="mt-10 flex justify-end md:mb-0 mb-20">

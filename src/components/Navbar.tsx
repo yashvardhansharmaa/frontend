@@ -248,14 +248,14 @@ const Navbar: FC = () => {
           <Link to="/search">
             <FontAwesomeIcon className="mr-4" icon={faSearch} />
           </Link>
-          <div aria-label="Toggle Navbar" className="">
+          <button aria-label="Toggle Navbar" className="">
             <Hamburger
               toggled={isOpen}
               toggle={handleMenuClick}
               direction="right"
               size={26}
             />
-          </div>
+          </button>
         </span>
       </div>
     </header>
