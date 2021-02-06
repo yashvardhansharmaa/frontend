@@ -31,12 +31,12 @@ const Author = ({
       //   width: "calc(100% - 40px)",
       // }}
     >
-      <div className="">
+      <div className="h-full">
         {pic ? (
           <Img
             fixed={pic.imageFile.childImageSharp.fixed}
-            // className="rounded-full w-12 h-12 md:w-16 md:h-16"
-            className="rounded-full h-full w-full"
+            className="rounded-full w-12 h-12 md:w-16 md:h-16"
+            // className="rounded-full h-full w-full"
             alt={name}
           />
         ) : (
