@@ -6,6 +6,7 @@ import RenderCategories from "./RenderCategories";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
 import NoImage from "./NoImage";
+import NoPersonImage from "./NoPersonImage";
 
 export const cardCustomRenderers = {
   image: () => null,
@@ -53,7 +54,8 @@ const BigBlogCard = ({
                   alt={author.name}
                 />
               ) : (
-                <NoImage className="md:h-12 md:w-12 h-8 w-8 rounded-full" />
+                // <NoImage className="md:h-12 md:w-12 h-8 w-8 rounded-full" />
+                <NoPersonImage className="md:h-10 mb-2 md:w-10 h-8 w-8 rounded-full" />
               )}
               <span className="mx-2 mt-1 font-semibold">{author.name}</span>
             </div>

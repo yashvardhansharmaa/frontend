@@ -165,9 +165,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
             <h1 className="font-heading text-4xl text-center md:text-left md:text-6xl">
               Recent Articles
             </h1>
-            {/* <MainFade> */}
               <BigBlogCard content={sortedBlogs[0]} />
-            {/* </MainFade> */}
             <PostListContainer>
               {sortedBlogs.map((blog, i) => {
                 if (i === 0) return "";

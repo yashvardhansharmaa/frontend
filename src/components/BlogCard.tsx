@@ -8,6 +8,7 @@ import RenderCategories from "./RenderCategories";
 import MainFade from "./MainFade";
 import { cardCustomRenderers } from "./BigBlogCard";
 import NoImage from "./NoImage";
+import NoPersonImage from "./NoPersonImage";
 
 const BlogCard = ({
   content: { authors, categories, cover, published_date, title, excerpt, slug },
@@ -50,7 +51,8 @@ const BlogCard = ({
                   alt={author.name}
                 />
               ) : (
-                <NoImage className="h-8 w-8 rounded-full" />
+                // <NoImage className="h-8 w-8 rounded-full" />
+                <NoPersonImage className="h-8 w-8 rounded-full" />
               )}
               <span className="mx-2 mt-1 font-semibold">{author.name}</span>
             </div>
@@ -89,7 +91,8 @@ const BlogCard = ({
                 alt={author.name}
               />
             ) : (
-              <NoImage className="h-8 w-8 rounded-full" />
+              // <NoImage className="h-8 w-8 rounded-full" />
+              <NoPersonImage className="h-8 w-8 rounded-full" />
             )}
             <span className="mx-2 mt-1 font-semibold">{author.name}</span>
           </div>
