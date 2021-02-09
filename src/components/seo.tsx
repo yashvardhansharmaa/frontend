@@ -9,6 +9,7 @@ const SEO = ({
   image,
   blog = false,
   authors,
+  keywords,
 }: SeoProps) => {
   const { pathname } = useLocation();
   const {
@@ -99,10 +100,9 @@ const SEO = ({
             ]
       )}
     >
-      {/* {
-          name: `twitter:creator`,
-          content: author,
-        }, */}
+      {keywords && keywords.length && (
+        <meta name="keywords" content={keywords.join(",")} />
+      )}
 
       {authors &&
         authors.map((author) => (
@@ -140,6 +140,7 @@ interface SeoProps {
   };
   blog?: boolean;
   authors?: string[];
+  keywords?: string[];
 }
 
 const query = graphql`

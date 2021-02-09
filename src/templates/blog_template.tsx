@@ -59,6 +59,7 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
         description={blog.excerpt}
         image={imageObj}
         authors={blog.authors.map((author) => author.name)}
+        keywords={data.strapi.blog.keywords_list?.map(k => k.keyword)}
       />
       <ShareButtons
         url={location.href}
@@ -213,6 +214,9 @@ export const query = graphql`
         tags {
           name
         }
+        keywords_list {
+          keyword
+        }
         cover {
           url
           width
@@ -278,6 +282,9 @@ interface BlogData {
           };
         };
       };
+      keywords_list?: {
+        keyword: string
+      }[]
       body: string;
       excerpt: string;
       published_date: string;

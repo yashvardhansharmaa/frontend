@@ -5,11 +5,13 @@ import BlogCard from "../components/BlogCard";
 import Container from "../components/Container";
 import Layout from "../components/Layout";
 import PostListContainer from "../components/PostListContainer";
+import SEO from "../components/seo";
 
 const author = ({ data }: { data: authorData }) => {
   const { name, pic, blogs } = data.strapi.author;
   return (
     <Layout>
+      <SEO title={name} />
       <Container>
         <h1 className="md:text-6xl text-5xl font-heading">{name}</h1>
         <PostListContainer>
