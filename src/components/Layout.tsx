@@ -11,6 +11,7 @@ import React, { ReactNode } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { Helmet } from "react-helmet";
 
 const Layout = ({
   children,
@@ -31,6 +32,12 @@ const Layout = ({
 
   return (
     <div className={`relative font-body ${className}`}>
+      <Helmet>
+        <meta
+          name="google-site-verification"
+          content="DLp1apA8li4Ua6cjM6bUBG43tQrmo__qHwRr9Bim3rI"
+        />
+      </Helmet>
       <Navbar />
       <div>
         <main>{children}</main>
