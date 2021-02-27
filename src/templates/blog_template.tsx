@@ -77,7 +77,7 @@ const Blog: FC<PageProps<BlogData>> = ({ data, location }) => {
       <div className="mt-24">
         <div className="maindiv relative">
           <div className="flex flex-col items-center relative">
-            <div className="container md:px-20 lg:px-48">
+            <div className="container md:px-56 lg:px-56">
               <div className="pt-10 flex justify-center items-center">
                 {blog.cover ? (
                   <Img
