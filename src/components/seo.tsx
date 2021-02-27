@@ -37,14 +37,6 @@ const SEO = ({
       titleTemplate={`%s | ${defaultTitle}`}
       meta={[
         {
-          name: `description`,
-          content: seo.description,
-        },
-        {
-          name: `description`,
-          content: seo.description,
-        },
-        {
           property: `og:title`,
           content: seo.title,
         },
@@ -103,6 +95,8 @@ const SEO = ({
       {keywords && keywords.length && (
         <meta name="keywords" content={keywords.join(",")} />
       )}
+
+      <meta name="description" content={seo.description} />
 
       {authors &&
         authors.map((author) => (
