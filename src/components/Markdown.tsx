@@ -34,7 +34,7 @@ export const Heading = ({ children, level }: HeadingProps) => (
       headings[level as keyof HeadingTypes]
     }`}
     style={{
-      fontWeight: 500,
+      fontWeight: 700,
     }}
   >
     {children}

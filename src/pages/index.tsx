@@ -223,7 +223,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                   <p
                     className="font-subheading text-5xl md:text-6xl"
                     style={{
-                      fontWeight: 500,
+                      fontWeight: 700,
                     }}
                   >
                     <CountUp
@@ -255,7 +255,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                 </div>
                 <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
                   <p
-                    style={{ fontWeight: 500 }}
+                    style={{ fontWeight: 700 }}
                     className="font-subheading text-5xl md:text-6xl"
                   >
                     <CountUp
@@ -287,7 +287,7 @@ const IndexPage: FC<PageProps<Data>> = ({ data }) => {
                 </div>
                 <div className="flex flex-col md:m-0 mb-4 justify-center items-center">
                   <p
-                    style={{ fontWeight: 500 }}
+                    style={{ fontWeight: 700 }}
                     className="font-subheading text-5xl md:text-6xl"
                   >
                     <CountUp
