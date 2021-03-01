@@ -28,6 +28,63 @@ const SEO = ({
     type: blog ? "blog" : "website",
   };
 
+  const metaTags = [
+    {
+      property: `og:title`,
+      content: seo.title,
+    },
+    {
+      property: `og:description`,
+      content: seo.description,
+    },
+    {
+      property: `og:url`,
+      content: seo.url,
+    },
+    {
+      property: `og:type`,
+      content: seo.type,
+    },
+    {
+      property: `og:type`,
+      content: seo.type,
+    },
+    {
+      name: `twitter:title`,
+      content: seo.title,
+    },
+    {
+      name: `twitter:description`,
+      content: seo.title,
+    },
+  ].concat(
+    image
+      ? [
+          {
+            property: "og:image",
+            content: image.url,
+          },
+          {
+            property: "og:image:width",
+            content: image.width.toString(),
+          },
+          {
+            property: "og:image:height",
+            content: image.height.toString(),
+          },
+          {
+            name: "twitter:card",
+            content: "summary_large_image",
+          },
+        ]
+      : [
+          {
+            name: "twitter:card",
+            content: "summary",
+          },
+        ]
+  );
+
   return (
     <Helmet
       htmlAttributes={{
@@ -35,63 +92,10 @@ const SEO = ({
       }}
       title={seo.title}
       titleTemplate={`%s | ${defaultTitle}`}
-      meta={[
-        {
-          property: `og:title`,
-          content: seo.title,
-        },
-        {
-          property: `og:description`,
-          content: seo.description,
-        },
-        {
-          property: `og:url`,
-          content: seo.url,
-        },
-        {
-          property: `og:type`,
-          content: seo.type,
-        },
-        {
-          property: `og:type`,
-          content: seo.type,
-        },
-        {
-          name: `twitter:title`,
-          content: seo.title,
-        },
-        {
-          name: `twitter:description`,
-          content: seo.title,
-        },
-      ].concat(
-        image
-          ? [
-              {
-                property: "og:image",
-                content: image.url,
-              },
-              {
-                property: "og:image:width",
-                content: image.width.toString(),
-              },
-              {
-                property: "og:image:height",
-                content: image.height.toString(),
-              },
-              {
-                name: "twitter:card",
-                content: "summary_large_image",
-              },
-            ]
-          : [
-              {
-                name: "twitter:card",
-                content: "summary",
-              },
-            ]
-      )}
     >
+      {metaTags.map((tag) => (
+        <meta name={tag.name} content={tag.content} />
+      ))}
       {keywords && keywords.length && (
         <meta name="keywords" content={keywords.join(",")} />
       )}

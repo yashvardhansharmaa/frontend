@@ -1,7 +1,5 @@
-@import "./fonts.css";
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
 
 
 body {
@@ -34,7 +32,7 @@ body {
   --gray-btn: #4a5568;
   --gray-btn-hover: #718096;
   --font-heading: "Lato", sans-serif;
-  --font-body: "Poppins", sans-serif;
+  --font-body: "Merriweather", serif;
   --font-subheading: "Lato", sans-serif;
 }
 
@@ -107,20 +105,9 @@ select:-webkit-autofill:focus {
 }
 
 .subheading {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
 }
-
-/* blockquote::before {
-  font-family: Arial;
-  content: "\201C";
-  color: var(--primary);
-  font-size: 15em;
-  position: absolute;
-  left: 0;
-  top: -100px;
-  opacity: 0.2;
-} */
 
 blockquote {
   border-left: 6px var(--primary) solid;
@@ -135,8 +122,7 @@ blockquote p {
 
 .blog-body p {
   font-size: 1.1rem;
-  font-family: "Poppins", sans-serif;
-  /* font-family: 'Merriweather', serif; */
+  font-family: 'Merriweather', serif;
 }
 
 .blog a {

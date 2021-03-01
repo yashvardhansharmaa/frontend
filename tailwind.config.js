@@ -44,8 +44,8 @@ module.exports = {
       },
       fontFamily: {
         heading: ["Lato", "sans-serif"],
-        body: ["Poppins", "sans-serif"],
-        subheading: ["Poppins", "sans-serif"],
+        body: ["Merriweather", "serif"],
+        subheading: ["Merriweather", "serif"],
         mont: ["Montserrat", "sans-serif"],
       },
       height: {

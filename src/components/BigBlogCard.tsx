@@ -46,7 +46,7 @@ const BigBlogCard = ({
         </div>
         <div className="mt-5">
           {authors.map((author) => (
-            <div className="mt-1 md:mt-0 flex">
+            <div className="mt-2 flex">
               {author.pic ? (
                 <Img
                   className="md:h-12 md:w-12 h-8 w-8 rounded-full"

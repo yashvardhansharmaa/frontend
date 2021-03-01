@@ -28,7 +28,7 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
           )}
         </div>
         <div className="">
-          <h2 className="font-subheading text-5xl text-center">{title}</h2>
+          <h2 className="font-heading text-5xl text-center">{title}</h2>
           <p className="text-center w-3/4 mx-auto mt-2">{description}</p>
           <div className="w-full flex justify-center mt-4">
             <a href={button_link}>
@@ -48,7 +48,7 @@ const WorkWithUs: FC<PageProps<Data>> = ({ data }) => {
     return (
       <div className="md:grid md:grid-cols-2 my-20 flex flex-col">
         <div className="md:order-1 order-2">
-          <h2 className="font-subheading text-5xl text-center">{title}</h2>
+          <h2 className="font-heading text-5xl text-center">{title}</h2>
           <p className="text-center w-3/4 mx-auto mt-2">{description}</p>
           <div className="w-full flex justify-center mt-4">
             <a href={button_link}>
