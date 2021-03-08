@@ -112,13 +112,14 @@ select:-webkit-autofill:focus {
 blockquote {
   border-left: 6px var(--primary) solid;
   background-color: var(--fg2);
-}
-
-blockquote p {
-  margin-left: 2rem;
   font-style: italic;
   font-size: 1.1rem !important;
+  padding-left: 2rem;
 }
+
+/* blockquote p {
+  margin-left: 2rem;
+} */
 
 .blog-body p {
   font-size: 1.1rem;
