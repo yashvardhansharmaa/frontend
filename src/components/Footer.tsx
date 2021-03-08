@@ -153,7 +153,7 @@ const Footer = () => {
           <input type="hidden" name="id" value={process.env.GATSBY_MC_ID} />
           <label htmlFor="MERGE0"></label>
           <div id="mc_embed_signup_scroll">
-            <h2 style={{fontWeight: 700}} className="font-subheading text-center capitalize text-3xl">
+            <h2 style={{fontWeight: 600}} className="font-subheading text-center capitalize text-3xl">
               Subscribe to our newsletter
             </h2>
             <p
