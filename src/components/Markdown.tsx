@@ -14,9 +14,13 @@ export const List = ({
   return (
     <>
       {ordered ? (
-        <ol className="text-2xl list-decimal ml-20">{children}</ol>
+        <ol style={{ fontSize: "1.1rem" }} className="list-decimal ml-20">
+          {children}
+        </ol>
       ) : (
-        <ul className="text-2xl list-disc ml-20">{children}</ul>
+        <ul style={{ fontSize: "1.1rem" }} className="list-disc ml-20">
+          {children}
+        </ul>
       )}
     </>
   );
