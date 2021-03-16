@@ -105,8 +105,8 @@ select:-webkit-autofill:focus {
 }
 
 .subheading {
-  font-family: "Merriweather", serif;
-  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 blockquote {
@@ -123,7 +123,7 @@ blockquote {
 
 .blog-body p {
   font-size: 1.1rem;
-  font-family: 'Merriweather', serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
 }
 
