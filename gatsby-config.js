@@ -106,6 +106,7 @@ const plugins = [
   `gatsby-plugin-sharp`,
   `gatsby-plugin-sass`,
   `gatsby-plugin-dark-mode`,
+  `gatsby-plugin-remove-serviceworker`,
   `gatsby-plugin-postcss`,
   `gatsby-plugin-advanced-sitemap`,
   `gatsby-plugin-robots-txt`,
