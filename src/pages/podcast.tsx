@@ -58,7 +58,7 @@ const Podcast: FC<PageProps<Data>> = ({ data }) => {
             loading="lazy"
           ></iframe>
         </div>
-        <div className="w-1/2 mx-auto my-20">
+        <div className="lg:w-1/2 w-full mx-auto my-20">
           {itemsList.length > 1 ? (
             <>
               <h2 className="font-heading text-3xl mb-10">All Episodes</h2>
