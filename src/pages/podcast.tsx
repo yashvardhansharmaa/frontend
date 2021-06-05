@@ -12,7 +12,7 @@ const Podcast: FC<PageProps<Data>> = ({ data }) => {
   const { allFeedPodcast, feedPodcastMeta } = data;
 
   const itemsList: string[] = [];
-  allFeedPodcast.edges.forEach(({ node: { link } }) => {
+  allFeedPodcast.edges.sort((a, b) => +new Date(b.node.pubDate) - +new Date(a.node.pubDate)).forEach(({ node: { link } }) => {
     const linkArr = link.split("/");
     linkArr?.splice(4, 0, "embed");
     const embedLink = linkArr?.join("/");
